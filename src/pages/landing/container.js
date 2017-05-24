@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { pick } from 'ramda' //eslint-disable-line
 import Landing from './main'
-import { LockThunk, OnAuthFunction } from '../../core/thunks'
+import { LockThunk, OnAuthFunction } from '../../core/sideeffects'
 
 const mapDispatchToProps = dispatch => ({
   showLogin: () => dispatch(LockThunk()),

@@ -28,16 +28,13 @@ export class LandingView extends Component {
         <Box>
           <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated}
             profile={this.props.profile} />
-          <LandingHero
-            image={HeroImage}
+          <LandingHero image={HeroImage}
             grommetColor='grey-1-a'
-            heading='An exam prep platform for Personal Vocabulary Management.'
+            heading='Giving your vocabulary preparation awesome super powers!'
             desc='Whether youʼre an English major or appearing for exams with English sections like
             SAT, GMAT, GRE, LSAT etc or any other Entrance Exam,
-            building vocabulary is the first step and the most important.'
-            getStarted={this.props.epicWorking && 'Get Started'}
-            cardColor='grey-1' label='Mission Admission' justify='end'
-          />
+            building vocabulary is the first step and also the most important.'
+            getStarted='Get Started' cardColor='grey-1' label='Mission Admission' justify='end' />
         </Box>
         <Box pad='medium' colorIndex='grey-1-a'>
           <Tiles size='medium' justify='center' pad='large'>
