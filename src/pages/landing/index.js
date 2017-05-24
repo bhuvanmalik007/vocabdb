@@ -16,6 +16,6 @@ export default(store) => ({
       /*  Return getComponent   */
       cb(null, container)
       /* Webpack named bundle   */
-    }, 'login')
+    }, 'landing')
   }
 })

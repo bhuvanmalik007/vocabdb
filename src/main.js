@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import CoreProvider from './core/coreprovider'
 import '../node_modules/grommet/grommet-hpinc.min.css'
+import './main.css'
 // ========================================================
 // Store Instantiation
 // ========================================================

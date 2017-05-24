@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types' //eslint-disable-line
 import GrommetApp from 'grommet/components/App'
 import LandingHeader from '../../components/landingheader'
 import HeroImage from '../../static/hero.jpg'
@@ -18,13 +18,26 @@ import FeatureShow from '../../components/featureshow'
 
 export class LandingView extends Component {
 
+  componentDidMount () {
+    this.props.prepareLockAuth()
+  }
+
   render () {
     return (
       <GrommetApp centered={false}>
         <Box>
-          <LandingHeader />
-          <LandingHero image={HeroImage} grommetColor='grey-1-a' heading='An exam prep platform for Personal Vocabulary Management.' desc='Whether youʼre an English major or appearing for exams with English sections like SAT, GMAT, GRE, LSAT etc or any other Entrance Exam,
-            building vocabulary is the first step and the most important.' getStarted='Get Started' cardColor='grey-1' label='Mission Admission' justify='end' />
+          <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated}
+            profile={this.props.profile} />
+          <LandingHero
+            image={HeroImage}
+            grommetColor='grey-1-a'
+            heading='An exam prep platform for Personal Vocabulary Management.'
+            desc='Whether youʼre an English major or appearing for exams with English sections like
+            SAT, GMAT, GRE, LSAT etc or any other Entrance Exam,
+            building vocabulary is the first step and the most important.'
+            getStarted={this.props.epicWorking && 'Get Started'}
+            cardColor='grey-1' label='Mission Admission' justify='end'
+          />
         </Box>
         <Box pad='medium' colorIndex='grey-1-a'>
           <Tiles size='medium' justify='center' pad='large'>
@@ -32,18 +45,24 @@ export class LandingView extends Component {
               pronunciation & personal notes!' />
             <FeatureCard heading='Your Words' para='Segregate your words into lists' />
             <FeatureCard heading='Games' para='Play word games' />
-            <FeatureCard heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
+            <FeatureCard heading='Starter Words'
+              para='Sample word pack with the most recurring words to get you up and running' />
             <FeatureCard heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
-        <LandingHero image={Free} grommetColor='light-1' heading='Try it for free today!' getStarted='Get Started' justify='center' />
-        <Box pad='large' align="center">
+        <LandingHero image={Free} grommetColor='light-1'
+          heading='Try it for free today!' getStarted='Get Started' justify='center' />
+        <Box pad='large' align='center'>
           <Tiles size='medium' justify='center' pad='large'>
-            <FeatureShow icon={<ChapterAdd colorIndex='brand' size='large' />} heading='Flashcards' para='Store words as flashcards with meaning, example sentences, pronunciation & personal notes!'/>
-            <FeatureShow icon={<Apps colorIndex='brand' size='large' />} heading='Your Words' para='Segregate your words into lists'/>
-            <FeatureShow icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games'/>
-            <FeatureShow icon={<Book colorIndex='brand' size='large' />} heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running'/>
-            <FeatureShow icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites'/>
+            <FeatureShow icon={<ChapterAdd colorIndex='brand' size='large' />}
+              heading='Flashcards'
+              para='Store words as flashcards with meaning, example sentences, pronunciation & personal notes!' />
+            <FeatureShow icon={<Apps colorIndex='brand' size='large' />}
+              heading='Your Words' para='Segregate your words into lists' />
+            <FeatureShow icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games' />
+            <FeatureShow icon={<Book colorIndex='brand' size='large' />}
+              heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
+            <FeatureShow icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
         <LandingFooter />
@@ -53,7 +72,12 @@ export class LandingView extends Component {
 }
 
 LandingView.propTypes = {
-
+  emitAction: PropTypes.func,
+  epicWorking: PropTypes.bool,
+  authenticated:PropTypes.bool,
+  profile:PropTypes.object,
+  showLogin: PropTypes.func,
+  prepareLockAuth:PropTypes.func
 }
 
 export default LandingView

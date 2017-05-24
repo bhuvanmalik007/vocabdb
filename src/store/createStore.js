@@ -1,19 +1,22 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-// import { browserHistory } from 'react-router'
-import { hashHistory } from 'react-router'
+import { browserHistory } from 'react-router'
+// import { hashHistory } from 'react-router'
 import makeRootReducer from './reducers'
-import CoreSaga from '../core/coresagas'
+import createRootEpic from './epics'
+import thunk from 'redux-thunk'
 import { updateLocation } from './location'
-import createSagaMiddleware from 'redux-saga'
+import { createEpicMiddleware } from 'redux-observable'
 import persistState from 'redux-localstorage'
+import 'rxjs'
 
-const sagaMiddleware = createSagaMiddleware()
+const epicMiddleware = createEpicMiddleware(createRootEpic())
 export default(initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
   const middleware = [
-    sagaMiddleware
+    epicMiddleware,
+    thunk
   ]
 
   // ======================================================
@@ -44,13 +47,12 @@ export default(initialState = {}) => {
     )
   )
 
-  sagaMiddleware.run(CoreSaga)
+  store.replaceEpic = epicMiddleware.replaceEpic
 
   store.asyncReducers = {}
-  store.runSaga = sagaMiddleware.run
   // store.sagas = []
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = hashHistory.listen(updateLocation(store))
+  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
