@@ -2,7 +2,7 @@
 *.log
 
 node_modules
-
+src/credentials.js
 dist
 coverage
 
