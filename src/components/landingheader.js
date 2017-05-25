@@ -6,7 +6,7 @@ import Menu from 'grommet/components/Menu'
 import Title from 'grommet/components/Title'
 import PropTypes from 'prop-types'
 import Pulse from 'grommet/components/icons/Pulse'
-import LinkNext from 'grommet/components/icons/base/LinkNext'
+import { Image } from 'semantic-ui-react'
 
 const LandingHeader = props =>
   <Header justify='center' colorIndex='grey-1'>
@@ -19,7 +19,7 @@ const LandingHeader = props =>
       </Menu>}
       {!!props.authenticated && <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'>
         <Anchor onClick={() => props.showLogin()}>Go to Dashboard, {props.profile.nickname}</Anchor>
-        <Pulse icon={<LinkNext size='small' />} />
+        <Pulse icon={<Image src={props.profile.picture} avatar />} />
       </Menu>}
     </Box>
   </Header>
