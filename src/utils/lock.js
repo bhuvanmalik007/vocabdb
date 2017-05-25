@@ -1,9 +1,9 @@
 import Lock from 'auth0-lock'
 import { ClientId, Domain } from '../credentials'
-import Logo from '../static/final.png'
+import Logo from '../static/ship.png'
 
 export default new Lock(ClientId, Domain, {
-  allowedConnections: ['Username-Password-Authentication'],
+  allowedConnections: ['Username-Password-Authentication', 'google-oauth2'],
   auth: {
     redirect: false
   },

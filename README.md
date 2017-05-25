@@ -13,4 +13,7 @@ Run and Deployment
 * `yarn deploy:prod` To Deploy to production
 * `yarn start` to run project locally
 
+Built With
+
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+<img src="https://jwt.io/assets/logo.svg" width="110">

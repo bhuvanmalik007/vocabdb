@@ -1,3 +1,15 @@
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom{
   display: none;
 }
+
+.auth0-lock.auth0-lock .auth0-lock-header{
+  color: #fff !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-header-bg{
+  background: #000 !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-widget{
+  width: 450px !important;
+}
