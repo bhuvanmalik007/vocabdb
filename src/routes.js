@@ -1,18 +1,20 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from './core/corelayout'
 import Landing from './pages/landing'
+import MyFlashcards from './pages/myflashcards'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
 export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
+  path: '/',
+  component: CoreLayout(store),
   indexRoute: {
     onEnter: (nextState, replace) => replace('/landing')
   },
-  childRoutes : [
-    Landing(store)
+  childRoutes: [
+    Landing(store),
+    MyFlashcards(store)
   ]
 })
 
