@@ -5,7 +5,7 @@ const EpicCheck = action$ => action$.ofType('EPICCHECK').delay(3000).map(() => (
 const goHome = action$ =>
   action$.ofType('AUTHENTICATED')
   .map(() => ({
-    type: 'AUTHENTICATED',
+    type: 'LOCATION_CHANGE',
     payload: '/myflashcards'
   }))
 
