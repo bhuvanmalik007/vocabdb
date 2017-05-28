@@ -1,14 +1,15 @@
 import Reducer from '../../futils/reducecreator'
+import initialState from './initialstate'
 
 const actionHandlers = {
-  INIT_STATE: (state, action) => Object.assign({}, state, {
-    wordsArray: action.data,
-    filteredArray: action.data,
+  INIT_WORDS: (state, action) => Object.assign({}, state, {
+    wordsArray: action.payload,
+    filteredArray: action.payload,
     isLoading: false,
-    total: action.data.length
+    total: action.payload.length
   }),
-  ADD_WORD: (state, action) => Object.assign({}, state, {
-    wordsArray: [action.wordObj, ...state.wordsArray],
+  SET_FLASHCARD: (state, action) => Object.assign({}, state, {
+    wordsArray: [action.payload, ...state.wordsArray],
     total: state.total + 1
   }),
   DELETE_WORD: (state, action) => Object.assign({}, state, {
@@ -17,8 +18,8 @@ const actionHandlers = {
     total: state.total - 1
   }),
   FILTER_WORDS: (state, action) => Object.assign({}, state, {
-    filteredArray: state.wordsArray.filter(element => element.word.search(action.searchString) > -1),
-    searchString: action.searchString
+    filteredArray: state.wordsArray.filter(element => element.word.word.search(action.payload) > -1),
+    searchString: action.payload
   }),
   ADD_MULTIPLE_WORDS: (state, action) => Object.assign({}, state, {
     wordsArray: [...action.wordsArray, ...state.wordsArray],
@@ -40,4 +41,4 @@ const actionHandlers = {
 
 }
 
-export default Reducer({}, actionHandlers)
+export default Reducer(initialState, actionHandlers)

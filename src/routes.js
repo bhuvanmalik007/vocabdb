@@ -2,6 +2,7 @@
 import CoreLayout from './core/corelayout'
 import Landing from './pages/landing'
 import MyFlashcards from './pages/myflashcards'
+import Explore from './pages/explore'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -14,7 +15,8 @@ export const createRoutes = (store) => ({
   },
   childRoutes: [
     Landing(store),
-    MyFlashcards(store)
+    MyFlashcards(store),
+    Explore(store)
   ]
 })
 

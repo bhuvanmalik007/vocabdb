@@ -13,3 +13,15 @@
 .auth0-lock.auth0-lock .auth0-lock-widget{
   width: 450px !important;
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#root {
+  background-color: #2C3E50;
+  min-height: 100vh;
+}

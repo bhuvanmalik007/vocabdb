@@ -9,4 +9,8 @@ const goHome = action$ =>
     payload: '/myflashcards'
   }))
 
+// const filterWords = action$ =>
+//   action$.ofType('SET_FLASHCARD')
+//   .map(() => ({ type: 'FILTER_WORDS' }))
+
 export default [EpicCheck, goHome]

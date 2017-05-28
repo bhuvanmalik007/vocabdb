@@ -3,12 +3,12 @@ import { pick } from 'ramda' //eslint-disable-line
 import HomePage from './main'
 
 const mapDispatchToProps = dispatch => ({
-  // showLogin: () => dispatch(LockThunk()),
-  // prepareLockAuth: () => dispatch(OnAuthFunction())
+  initState: () => dispatch({ type: 'INIT_MYFLASHCARDS' }),
+  filterWords: (payload) => dispatch({ type: 'FILTER_WORDS', payload })
 })
 
 const mapStateToProps = state => ({
-  // ...pick(['authenticated', 'profile'], state.core)
+  ...pick(['wordsArray', 'isLoading', 'multipleSelect', 'searchString', 'filteredArray'], state.wordsState)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
