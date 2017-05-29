@@ -1,7 +1,7 @@
-export default data =>
+export default fn =>
   new Promise((resolve, reject) => {
     try {
-      resolve(data)
+      resolve(fn())
     } catch (e) {
       reject(e)
     }
