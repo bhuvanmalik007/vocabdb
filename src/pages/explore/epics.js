@@ -1,19 +1,18 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 import IP from '../../futils/identitypromise'
-import request, { withAuthuntication, withCatch } from '../../futils/requestutil'
+import request, { withAuthentication } from '../../futils/requestutil'
 
-const postWord = (wordObj, state) => {
-  withCatch(state)(withAuthuntication(state)(
+const postWord = (wordObj, store) => {
+  return Observable.from(withAuthentication(store.getState())(
     request,
-    'https://dbinterceptor-f.now.sh/addword/' + state.core.profile.identities[0].user_id,
+    'https://dbinterceptor-f.now.sh/addword/' + store.getState().core.profile.identities[0].user_id,
     'POST',
     JSON.stringify(wordObj)))
-  return IP(() => wordObj)
 }
 
-const fetchWord = (word, state) => {
+const fetchWord = (word, store) => {
   if (word.trim() === '') return IP(() => ({ words: [] }))
-  return Observable.from(withCatch(state)(withAuthuntication(state)(
+  return Observable.from((withAuthentication(store.getState())(
     request,
     'https://madoxford-f.now.sh/search/' + word,
     'GET'
@@ -30,13 +29,17 @@ const search = (action$, store) =>
   action$.ofType('SEARCH')
   .debounceTime(1000)
   .mergeMap(action =>
-    fetchWord(action.payload, store.getState()))
-  .flatMap((results) => ([loaded(), setResults(results)]))
+    fetchWord(action.payload, store)
+    .flatMap((results) => ([loaded(), setResults(results)]))
+    .catch(payload => Observable.of({ type:'API_ERROR', payload }))
+  )
 
 const sendWord = (action$, store) =>
   action$.ofType('ADD_WORD')
   .mergeMap(action =>
-    postWord(action.payload, store.getState()))
-  .map((payload) => ({ type: 'SET_FLASHCARD', payload }))
+    postWord(action.payload, store)
+    .map((payload) => ({ type: 'SUCCESS' }))
+    .catch(payload => Observable.of({ type:'API_ERROR', payload }))
+  )
 
 export default [search, sendWord]
