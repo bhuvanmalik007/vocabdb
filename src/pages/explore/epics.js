@@ -13,12 +13,11 @@ const postWord = (wordObj, state) => {
 
 const fetchWord = (word, state) => {
   if (word.trim() === '') return IP(() => ({ words: [] }))
-  return Observable.from(fetch('https://madoxford-f.now.sh/search/' + word, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + state.core.idToken
-    }
-  }))
+  return Observable.from(withCatch(state)(withAuthuntication(state)(
+    request,
+    'https://madoxford-f.now.sh/search/' + word,
+    'GET'
+  )))
 }
 
 const loaded = () => ({ type: 'IS_LOADING', bool: false })

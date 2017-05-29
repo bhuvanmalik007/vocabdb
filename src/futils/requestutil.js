@@ -22,7 +22,7 @@ export const withAuthuntication = state => (promise, args, method, body) => prom
   body
 })
 
-export const withCatch = state => promise => promise.catch(e => e.response)
+export const withCatch = store => promise => promise.catch(e => console.log(e.response.status))
 
 export default function request (url, options) {
   return fetch(url, options)
