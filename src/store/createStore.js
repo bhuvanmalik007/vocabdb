@@ -9,7 +9,10 @@ import { createEpicMiddleware } from 'redux-observable'
 import persistState from 'redux-localstorage'
 import 'rxjs'
 
-const epicMiddleware = createEpicMiddleware(createRootEpic())
+const epicMiddleware = createEpicMiddleware(createRootEpic(), {
+  dependencies: { history:browserHistory }
+})
+
 export default(initialState = {}) => {
   // ======================================================
   // Middleware Configuration

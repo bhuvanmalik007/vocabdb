@@ -15,6 +15,7 @@ import Gamepad from 'grommet/components/icons/base/Gamepad'
 import Book from 'grommet/components/icons/base/Book'
 import Star from 'grommet/components/icons/base/Star'
 import FeatureShow from '../../components/featureshow'
+import Image from 'grommet/components/Image'
 
 export class LandingView extends Component {
 
@@ -28,7 +29,7 @@ export class LandingView extends Component {
         <Box>
           <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated}
             profile={this.props.profile} />
-          <LandingHero image={HeroImage}
+          <LandingHero image={<Image src={HeroImage} fit='cover' full />}
             grommetColor='grey-1-a'
             heading='Giving your vocabulary preparation awesome super powers!'
             desc='Whether youʼre an English major or appearing for exams with English sections like
@@ -47,7 +48,8 @@ export class LandingView extends Component {
             <FeatureCard heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
-        <LandingHero image={Free} grommetColor='light-1'
+        <LandingHero image={<Image src={Free} fit='cover' full />}
+          grommetColor='light-1'
           heading='Try it for free today!' getStarted='Get Started' justify='center' />
         <Box pad='large' align='center'>
           <Tiles size='medium' justify='center' pad='large'>
