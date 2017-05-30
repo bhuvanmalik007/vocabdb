@@ -8,12 +8,13 @@ const mapDispatchToProps = dispatch => ({
   deleteWords: (payload) => dispatch({ type: 'DELETE_WORDS', payload }),
   toggleMultipleSelect: () => dispatch({ type: 'TOGGLE_MULTIPLE_SELECT' }),
   select: (index) => dispatch({ type: 'SELECT', index }),
-  transformToSenses: () => dispatch({ type: 'TRANSFORM_TO_SENSES' })
+  transformToSenses: () => dispatch({ type: 'TRANSFORM_TO_SENSES' }),
+  sort: () => dispatch({ type: 'SORT_WORDS' })
 })
 
 const mapStateToProps = state => ({
   ...pick(['wordsArray', 'isLoading', 'multipleSelect', 'searchString',
-    'filteredArray', 'multipleSelect'], state.wordsState)
+    'filteredArray', 'multipleSelect', 'sorted'], state.wordsState)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

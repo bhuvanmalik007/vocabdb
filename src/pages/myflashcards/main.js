@@ -46,6 +46,9 @@ export default class MyFlashcards extends Component {
         <Button toggle active={this.props.multipleSelect} onClick={this.props.toggleMultipleSelect}>
           Select Multiple
         </Button>
+        {!this.props.multipleSelect && <Button toggle active={this.props.sorted} onClick={this.props.sort}>
+          A-Z
+        </Button>}
         {this.props.multipleSelect && <Button onClick={this.props.transformToSenses}>
           Delete
         </Button>}

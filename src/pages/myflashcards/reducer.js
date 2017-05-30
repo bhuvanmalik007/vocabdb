@@ -3,8 +3,8 @@ import initialState from './initialstate'
 
 const actionHandlers = {
   INIT_WORDS: (state, action) => Object.assign({}, state, {
-    wordsArray: action.payload,
-    filteredArray: action.payload,
+    wordsArray: action.payload.data,
+    filteredArray: [...action.payload.data],
     isLoading: false,
     total: action.payload.length
   }),
@@ -20,6 +20,12 @@ const actionHandlers = {
   FILTER_WORDS: (state, action) => Object.assign({}, state, {
     filteredArray: state.wordsArray.filter(element => element.word.word.search(action.payload) > -1),
     searchString: action.payload
+  }),
+  SORT_WORDS: (state, action) => Object.assign({}, state, {
+    filteredArray: state.sorted
+      ? [...state.wordsArray.filter(element => element.word.word.search(state.searchString) > -1)]
+      : [...state.filteredArray.sort((a, b) => a.word.word > b.word.word ? 1 : -1)],
+    sorted: !state.sorted
   }),
   ADD_MULTIPLE_WORDS: (state, action) => Object.assign({}, state, {
     wordsArray: [...action.wordsArray, ...state.wordsArray],

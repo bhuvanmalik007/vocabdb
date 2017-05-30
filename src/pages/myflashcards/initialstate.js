@@ -4,5 +4,6 @@ export default {
   searchString: '',
   isLoading: true,
   total: 0,
-  multipleSelect: false
+  multipleSelect: false,
+  sorted: false
 }
