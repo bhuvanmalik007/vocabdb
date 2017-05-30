@@ -6,9 +6,9 @@ const searchGoogle = (word) => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
 }
 
-const CardsMaker = ({ deleteWords, wordsArray, multipleSelect, select }) =>
+const CardsMaker = ({ deleteWords, filteredArray, multipleSelect, select }) =>
   <Card.Group itemsPerRow={4}>
-    {wordsArray.map((element, index) =>
+    {filteredArray.map((element, index) =>
       <Card key={index} className='animated fadeIn' link={multipleSelect} >
         <Card.Content onClick={() => { multipleSelect && select(index) }}>
           <Image floated='right'>
@@ -35,6 +35,13 @@ const CardsMaker = ({ deleteWords, wordsArray, multipleSelect, select }) =>
       </Card>)}
   </Card.Group>
 
+CardsMaker.propTypes = {
+  deleteWords: PropTypes.func,
+  filteredArray: PropTypes.array,
+  multipleSelect: PropTypes.bool,
+  select: PropTypes.func
+}
+
 export default class MyFlashcards extends Component {
   componentDidMount () {
     this.props.initState()
@@ -49,12 +56,12 @@ export default class MyFlashcards extends Component {
         {!this.props.multipleSelect && <Button toggle active={this.props.sorted} onClick={this.props.sort}>
           A-Z
         </Button>}
-        {this.props.multipleSelect && <Button onClick={this.props.transformToSenses}>
+        {this.props.multipleSelect && <Button onClick={this.props.multipleDeleteTransformer}>
           Delete
         </Button>}
         <Search
           size='big'
-          onSearchChange={(e,v) => this.handleSearchChange(e, v, this)}
+          onSearchChange={(e, v) => this.handleSearchChange(e, v, this)}
           open={false}
           icon='filter'
           placeholder='Search your words..'
@@ -63,15 +70,24 @@ export default class MyFlashcards extends Component {
         />
         { this.props.isLoading && <Icon loading size='huge' name='rocket' /> }
         <Segment basic>
-          <CardsMaker wordsArray={this.props.filteredArray} deleteWords={this.props.deleteWords}
+          <CardsMaker filteredArray={this.props.filteredArray} deleteWords={this.props.deleteWords}
             multipleSelect={this.props.multipleSelect} select={this.props.select} />
         </Segment>
       </div>
-
     )
   }
 }
 
 MyFlashcards.propTypes = {
-  initState: PropTypes.func
+  initState: PropTypes.func,
+  multipleSelect: PropTypes.bool,
+  toggleMultipleSelect: PropTypes.func,
+  sorted: PropTypes.bool,
+  sort: PropTypes.func,
+  multipleDeleteTransformer: PropTypes.func,
+  searchString: PropTypes.string,
+  isLoading: PropTypes.bool,
+  filteredArray: PropTypes.array,
+  deleteWords: PropTypes.func,
+  select: PropTypes.func
 }

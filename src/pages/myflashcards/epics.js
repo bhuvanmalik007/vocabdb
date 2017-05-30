@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 import request, { withAuthentication } from '../../futils/requestutil'
+import reduceToSenseIds from '../../futils/senseidreducer'
 
 const fetchWords = store => {
   return Observable.from(
@@ -38,12 +39,11 @@ const deleteWords = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-const transformToSenses = (action$, store) =>
-  action$.ofType('TRANSFORM_TO_SENSES')
+const multipleDeleteTransformer = (action$, store) =>
+  action$.ofType('DELETE_MULTIPLE_TRANSFORM')
   .map((action) => ({
     type: 'DELETE_WORDS',
-    payload: store.getState().wordsState.filteredArray.reduce((acc, wordObj) =>
-     wordObj.selected ? [wordObj.word.id, ...acc] : acc, [])
+    payload: reduceToSenseIds(store.getState().wordsState.filteredArray)
   }))
 
-export default [fetchMyFlashcards, deleteWords, transformToSenses]
+export default [fetchMyFlashcards, deleteWords, multipleDeleteTransformer]

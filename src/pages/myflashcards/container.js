@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
   deleteWords: (payload) => dispatch({ type: 'DELETE_WORDS', payload }),
   toggleMultipleSelect: () => dispatch({ type: 'TOGGLE_MULTIPLE_SELECT' }),
   select: (index) => dispatch({ type: 'SELECT', index }),
-  transformToSenses: () => dispatch({ type: 'TRANSFORM_TO_SENSES' }),
+  multipleDeleteTransformer: () => dispatch({ type: 'DELETE_MULTIPLE_TRANSFORM' }),
   sort: () => dispatch({ type: 'SORT_WORDS' })
 })
 
