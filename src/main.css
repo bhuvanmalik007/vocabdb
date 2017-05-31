@@ -25,3 +25,13 @@
   background-color: #2C3E50;
   min-height: 100vh;
 }
+
+.menu-items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.align-center {
+  align-self: center;
+}

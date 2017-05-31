@@ -12,7 +12,7 @@ function checkStatus (response) {
   throw error
 }
 
-export const withAuthuntication = state => (promise, args, method, body) => promise(args, {
+export const withAuthentication = state => (promise, args, method, body) => promise(args, {
   method,
   headers: {
     'Content-Type': 'application/json',

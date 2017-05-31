@@ -3,23 +3,29 @@ import initialState from './initialstate'
 
 const actionHandlers = {
   INIT_WORDS: (state, action) => Object.assign({}, state, {
-    wordsArray: action.payload,
-    filteredArray: action.payload,
+    wordsArray: action.payload.data,
+    filteredArray: [...action.payload.data],
     isLoading: false,
     total: action.payload.length
   }),
-  SET_FLASHCARD: (state, action) => Object.assign({}, state, {
+  ADD_WORD: (state, action) => Object.assign({}, state, {
     wordsArray: [action.payload, ...state.wordsArray],
     total: state.total + 1
   }),
-  DELETE_WORD: (state, action) => Object.assign({}, state, {
-    wordsArray: state.wordsArray.filter(wordObj => wordObj._id !== action.id),
-    filteredArray: state.filteredArray.filter(wordObj => wordObj._id !== action.id),
+  DELETE_WORDS: (state, action) => Object.assign({}, state, {
+    wordsArray: state.wordsArray.filter(wordObj => !action.payload.find(senseId => wordObj.word.id === senseId)),
+    filteredArray: state.filteredArray.filter(wordObj => !action.payload.find(senseId => wordObj.word.id === senseId)),
     total: state.total - 1
   }),
   FILTER_WORDS: (state, action) => Object.assign({}, state, {
     filteredArray: state.wordsArray.filter(element => element.word.word.search(action.payload) > -1),
     searchString: action.payload
+  }),
+  SORT_WORDS: (state, action) => Object.assign({}, state, {
+    filteredArray: state.sorted
+      ? [...state.wordsArray.filter(element => element.word.word.search(state.searchString) > -1)]
+      : [...state.filteredArray.sort((a, b) => a.word.word > b.word.word ? 1 : -1)],
+    sorted: !state.sorted
   }),
   ADD_MULTIPLE_WORDS: (state, action) => Object.assign({}, state, {
     wordsArray: [...action.wordsArray, ...state.wordsArray],

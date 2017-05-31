@@ -1,16 +1,10 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
-import request, { withAuthuntication } from '../../futils/requestutil'
+import request, { withAuthentication } from '../../futils/requestutil'
+import reduceToSenseIds from '../../futils/senseidreducer'
 
 const fetchWords = store => {
-  // const request = fetch('https://dbinterceptor-f.now.sh/user/' + state.core.profile.identities[0].user_id, {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer ' + state.core.idToken
-  //   }
-  // })
-  // .then(response => response.json())
   return Observable.from(
-      withAuthuntication(store.getState())(
+    withAuthentication(store.getState())(
       request,
       'https://dbinterceptor-f.now.sh/user/' + store.getState().core.profile.identities[0].user_id,
       'GET'
@@ -20,7 +14,36 @@ const fetchWords = store => {
 
 const fetchMyFlashcards = (action$, store) =>
   action$.ofType('INIT_MYFLASHCARDS')
-  .mergeMap(action => fetchWords(store))
-  .map((payload) => ({ type: 'INIT_WORDS', payload }))
+  .mergeMap(action =>
+    fetchWords(store)
+    .map((payload) => ({ type: 'INIT_WORDS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
+  )
 
-export default [fetchMyFlashcards]
+const deleteRequest = (sensesArray, store) => {
+  return Observable.from(
+    withAuthentication(store.getState())(
+      request,
+      'https://dbinterceptor-f.now.sh/deleteword/' + store.getState().core.profile.identities[0].user_id,
+      'POST',
+      JSON.stringify({ senseIds: sensesArray })
+    )
+  )
+}
+
+const deleteWords = (action$, store) =>
+  action$.ofType('DELETE_WORDS')
+  .mergeMap(action =>
+    deleteRequest(action.payload, store)
+    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
+  )
+
+const multipleDeleteTransformer = (action$, store) =>
+  action$.ofType('DELETE_MULTIPLE_TRANSFORM')
+  .map((action) => ({
+    type: 'DELETE_WORDS',
+    payload: reduceToSenseIds(store.getState().wordsState.filteredArray)
+  }))
+
+export default [fetchMyFlashcards, deleteWords, multipleDeleteTransformer]

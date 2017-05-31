@@ -4,11 +4,17 @@ import HomePage from './main'
 
 const mapDispatchToProps = dispatch => ({
   initState: () => dispatch({ type: 'INIT_MYFLASHCARDS' }),
-  filterWords: (payload) => dispatch({ type: 'FILTER_WORDS', payload })
+  filterWords: (payload) => dispatch({ type: 'FILTER_WORDS', payload }),
+  deleteWords: (payload) => dispatch({ type: 'DELETE_WORDS', payload }),
+  toggleMultipleSelect: () => dispatch({ type: 'TOGGLE_MULTIPLE_SELECT' }),
+  select: (index) => dispatch({ type: 'SELECT', index }),
+  multipleDeleteTransformer: () => dispatch({ type: 'DELETE_MULTIPLE_TRANSFORM' }),
+  sort: () => dispatch({ type: 'SORT_WORDS' })
 })
 
 const mapStateToProps = state => ({
-  ...pick(['wordsArray', 'isLoading', 'multipleSelect', 'searchString', 'filteredArray'], state.wordsState)
+  ...pick(['wordsArray', 'isLoading', 'multipleSelect', 'searchString',
+    'filteredArray', 'multipleSelect', 'sorted'], state.wordsState)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

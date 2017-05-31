@@ -13,7 +13,9 @@ const CardsMaker = (props) =>
         <Card.Content>
           <Image floated='right'>
             <Popup trigger={<Icon link name='plus'
-              onClick={() => props.addWord(element)} />} content='Add to My Flashcards' />
+              onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation })}
+                            />}
+              content='Add to My Flashcards' />
           </Image>
           <Card.Header>
             {props.searchString}
@@ -32,7 +34,8 @@ CardsMaker.propTypes = {
   searchResults: PropTypes.array,
   searchString: PropTypes.string,
   addWord: PropTypes.func,
-  filterWords: PropTypes.func
+  filterWords: PropTypes.func,
+  pronounciation: PropTypes.string
 }
 
 export default ({ search, results, searchString,
@@ -60,7 +63,7 @@ export default ({ search, results, searchString,
       {isLoading && <Icon loading size='huge' name='rocket' />}
       {results.words.length !== 0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={results.words} searchString={searchString}
-          addWord={addWord} filterWords={filterWords} />
+          addWord={addWord} filterWords={filterWords} pronounciation={results.pronounciation} />
       </Segment>}
       {((results.words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
     </div>
