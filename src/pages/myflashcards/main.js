@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import { Card, Segment, Icon, Image, Search, Popup, Button } from 'semantic-ui-react'
+import { Card, Segment, Icon, Image, Search, Popup, Button, Dropdown } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 const searchGoogle = (word) => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
+}
+
+const audio = (index) => {
+  document.getElementById('audio' + index).play()
 }
 
 const CardsMaker = ({ deleteWords, filteredArray, multipleSelect, select }) =>
@@ -13,6 +17,10 @@ const CardsMaker = ({ deleteWords, filteredArray, multipleSelect, select }) =>
         <Card.Content onClick={() => { multipleSelect && select(index) }}>
           <Image floated='right'>
             {!multipleSelect && <div>
+              <audio id={'audio' + index} src={element.word.pronounciation} />
+              <Popup
+                trigger={<Icon link name='volume up' onClick={() => audio(index)} />}
+                content='Click to hear pronounciation' />
               <Popup
                 trigger={<Icon link name='google' onClick={() => searchGoogle(element.word)} />}
                 content='Search this word on Google' />
@@ -50,24 +58,36 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <div className='main-container'>
-        <Button toggle active={this.props.multipleSelect} onClick={this.props.toggleMultipleSelect}>
-          Select Multiple
-        </Button>
-        {!this.props.multipleSelect && <Button toggle active={this.props.sorted} onClick={this.props.sort}>
-          A-Z
-        </Button>}
-        {this.props.multipleSelect && <Button onClick={this.props.multipleDeleteTransformer}>
-          Delete
-        </Button>}
-        <Search
-          size='big'
-          onSearchChange={(e, v) => this.handleSearchChange(e, v, this)}
-          open={false}
-          icon='filter'
-          placeholder='Search your words..'
-          value={this.props.searchString}
-          className='animated fadeIn'
-        />
+        <div className='menu-items'>
+          <Button icon='add square' />
+          <Dropdown text='Select List'
+            floating
+            labeled
+            button
+            className='icon'
+            icon='list layout'
+            options={[{ key: 'List 1', text: 'List 1', value: 'List 1' },
+              { key: 'List 2', text: 'List 2', value: 'List 2' }]}
+          />
+          {!this.props.multipleSelect && <Search
+            size='big'
+            onSearchChange={(e, v) => this.handleSearchChange(e, v, this)}
+            open={false}
+            icon='filter'
+            placeholder='Search your words..'
+            value={this.props.searchString}
+            className='animated fadeIn align-center' />
+          }
+          <Button toggle active={this.props.multipleSelect} onClick={this.props.toggleMultipleSelect}>
+            Select Multiple
+          </Button>
+          {this.props.multipleSelect && <Button onClick={this.props.multipleDeleteTransformer}>
+            Delete
+          </Button>}
+          <Button toggle active={this.props.sorted} onClick={this.props.sort}>
+            A-Z
+          </Button>
+        </div>
         { this.props.isLoading && <Icon loading size='huge' name='rocket' /> }
         <Segment basic>
           <CardsMaker filteredArray={this.props.filteredArray} deleteWords={this.props.deleteWords}
