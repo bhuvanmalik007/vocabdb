@@ -11,7 +11,7 @@ const audio = (index) => {
 }
 
 const CardsMaker = ({ deleteWords, filteredArray, multipleSelect, select }) =>
-  <Card.Group itemsPerRow={4}>
+  <Card.Group itemsPerRow={4} >
     {filteredArray.map((element, index) =>
       <Card key={index} className='animated fadeIn' link={multipleSelect} >
         <Card.Content onClick={() => { multipleSelect && select(index) }}>
@@ -60,14 +60,18 @@ export default class MyFlashcards extends Component {
       <div className='main-container'>
         <div className='menu-items'>
           <Button icon='add square' />
-          <Dropdown text='Select List'
+          <Dropdown
+            text='Select List'
+            closeOnChange
             floating
             labeled
             button
+            selection
             className='icon'
             icon='list layout'
-            options={[{ key: 'List 1', text: 'List 1', value: 'List 1' },
-              { key: 'List 2', text: 'List 2', value: 'List 2' }]}
+            // value={}
+            onChange={(e, obj) => obj.value === 'all' ? this.props.fetchAll() : this.props.onListChange(obj.value)}
+            options={this.props.lists.map((list, index) => ({ key: index, text: list.listName, value: list.listId }))}
           />
           {!this.props.multipleSelect && <Search
             size='big'
@@ -109,5 +113,8 @@ MyFlashcards.propTypes = {
   isLoading: PropTypes.bool,
   filteredArray: PropTypes.array,
   deleteWords: PropTypes.func,
-  select: PropTypes.func
+  select: PropTypes.func,
+  lists: PropTypes.array,
+  onListChange: PropTypes.func,
+  fetchAll: PropTypes.func
 }

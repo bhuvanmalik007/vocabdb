@@ -8,6 +8,9 @@ const actionHandlers = {
     isLoading: false,
     total: action.payload.length
   }),
+  INIT_LISTS: (state, action) => Object.assign({}, state, {
+    lists: action.payload
+  }),
   ADD_WORD: (state, action) => Object.assign({}, state, {
     wordsArray: [action.payload, ...state.wordsArray],
     total: state.total + 1

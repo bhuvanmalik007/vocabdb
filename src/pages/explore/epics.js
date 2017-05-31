@@ -11,7 +11,7 @@ const postWord = (wordObj, store) => {
 }
 
 const fetchWord = (word, store) => {
-  if (word.trim() === '') return IP(() => ({ words: [] }))
+  if (word.trim() === '') return Observable.from(IP(() => ({ words: [] })))
   return Observable.from((withAuthentication(store.getState())(
     request,
     'https://madoxford-f.now.sh/search/' + word,
@@ -20,7 +20,6 @@ const fetchWord = (word, store) => {
 }
 
 const loaded = () => ({ type: 'IS_LOADING', bool: false })
-
 const setResults = payload => payload.words
 ? ({ type: 'SET_RESULTS', payload })
 : ({ type: 'SET_RESULTS', payload: { words: [] } })
