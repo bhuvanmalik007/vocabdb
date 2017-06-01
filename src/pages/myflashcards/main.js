@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Segment, Icon, Image, Search, Popup, Button, Dropdown } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import ReduxModal from '../../connectors/reduxmodal'
+import AddList from '../../connectors/addlist'
+import SelectListForm from '../../connectors/addwordlistselect'
 
 const searchGoogle = (word) => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
@@ -59,20 +62,28 @@ export default class MyFlashcards extends Component {
     return (
       <div className='main-container'>
         <div className='menu-items'>
-          <Button icon='add square' />
-          <Dropdown
+          <ReduxModal triggerButton={<Button icon='add square' onClick={this.props.toggleModalVisibility} />}
+            header='CREATE NEW LIST' content={<AddList />}
+          />
+          {this.props.multipleSelect && <ReduxModal
+            triggerButton={<Button content='ADD TO A LIST'
+              onClick={this.props.toggleModalVisibility} />}
+            header='SELECT A LIST TO ADD WORDS TO'
+            content={<SelectListForm />}
+                                        />}
+          {!this.props.multipleSelect && <Dropdown
             text='Select List'
             closeOnChange
             floating
             labeled
             button
             selection
+            selectOnBlur={false}
             className='icon'
             icon='list layout'
-            // value={}
             onChange={(e, obj) => obj.value === 'all' ? this.props.fetchAll() : this.props.onListChange(obj.value)}
             options={this.props.lists.map((list, index) => ({ key: index, text: list.listName, value: list.listId }))}
-          />
+                                         />}
           {!this.props.multipleSelect && <Search
             size='big'
             onSearchChange={(e, v) => this.handleSearchChange(e, v, this)}
@@ -82,15 +93,11 @@ export default class MyFlashcards extends Component {
             value={this.props.searchString}
             className='animated fadeIn align-center' />
           }
-          <Button toggle active={this.props.multipleSelect} onClick={this.props.toggleMultipleSelect}>
-            Select Multiple
-          </Button>
-          {this.props.multipleSelect && <Button onClick={this.props.multipleDeleteTransformer}>
-            Delete
-          </Button>}
-          <Button toggle active={this.props.sorted} onClick={this.props.sort}>
-            A-Z
-          </Button>
+          <Button toggle active={this.props.multipleSelect} content='Select Multiple'
+            onClick={this.props.toggleMultipleSelect} />
+          {this.props.multipleSelect && <Button onClick={this.props.multipleDeleteTransformer}
+            content='DELETE' />}
+          <Button toggle active={this.props.sorted} content='A-Z' onClick={this.props.sort} />
         </div>
         { this.props.isLoading && <Icon loading size='huge' name='rocket' /> }
         <Segment basic>
@@ -116,5 +123,6 @@ MyFlashcards.propTypes = {
   select: PropTypes.func,
   lists: PropTypes.array,
   onListChange: PropTypes.func,
-  fetchAll: PropTypes.func
+  fetchAll: PropTypes.func,
+  toggleModalVisibility: PropTypes.func
 }

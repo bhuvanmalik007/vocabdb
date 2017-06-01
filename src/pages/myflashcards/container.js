@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => ({
   multipleDeleteTransformer: () => dispatch({ type: 'DELETE_MULTIPLE_TRANSFORM' }),
   sort: () => dispatch({ type: 'SORT_WORDS' }),
   onListChange: (payload) => dispatch({ type: 'FETCH_LIST_WORDS', payload }),
-  fetchAll: () => dispatch({ type: 'FETCH_MYFLASHCARDS' })
+  fetchAll: () => dispatch({ type: 'FETCH_MYFLASHCARDS' }),
+  toggleModalVisibility: () => dispatch({ type: 'TOGGLE_MODAL_VISIBILITY' })
 })
 
 const mapStateToProps = state => ({

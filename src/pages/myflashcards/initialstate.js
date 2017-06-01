@@ -6,5 +6,6 @@ export default {
   isLoading: true,
   total: 0,
   multipleSelect: false,
-  sorted: false
+  sorted: false,
+  modalVisibility: false
 }

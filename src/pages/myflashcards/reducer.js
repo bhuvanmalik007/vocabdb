@@ -46,7 +46,10 @@ const actionHandlers = {
         ? !state.filteredArray[action.index].selected : true
       },
       ...state.filteredArray.slice(action.index + 1)]
-  })
+  }),
+  TOGGLE_MODAL_VISIBILITY: (state) => Object.assign({}, state, {
+    modalVisibility: !state.modalVisibility }),
+  ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] })
 
 }
 

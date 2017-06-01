@@ -87,4 +87,24 @@ const fetchMyListWords = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords, multipleDeleteTransformer, fetchMyListWords]
+const createListRequest = (listName, store) => {
+  return Observable.from(
+    withAuthentication(store.getState())(
+      request,
+      'https://dbinterceptor-f.now.sh/addlist/' + store.getState().core.profile.identities[0].user_id,
+      'POST',
+      JSON.stringify({ listName, wordIds:[] })
+    )
+  )
+}
+
+const createList = (action$, store) =>
+  action$.ofType('CREATE_LIST')
+  .mergeMap(action =>
+    createListRequest(action.payload, store)
+    .map(({ id }) => ({ type: 'ADD_LIST', payload:{ listId: id, listName: action.payload } }))
+    .catch(payload => Observable.of({ type: 'API_ERROR' }))
+  )
+
+export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords,
+  multipleDeleteTransformer, fetchMyListWords, createList]
