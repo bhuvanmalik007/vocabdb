@@ -38,7 +38,7 @@ export class LandingView extends Component {
         <Box pad='medium' colorIndex='grey-1-a'>
           <Tiles size='medium' justify='center' pad='large'>
             <FeatureCard heading='Flashcards' para='Store words as flashcards with meaning, example sentences,
-              pronunciation & personal notes!' />
+              pronounciation & personal notes!' />
             <FeatureCard heading='Your Words' para='Segregate your words into lists' />
             <FeatureCard heading='Games' para='Play word games' />
             <FeatureCard heading='Starter Words'
@@ -53,7 +53,7 @@ export class LandingView extends Component {
           <Tiles size='medium' justify='center' pad='large'>
             <FeatureShow icon={<ChapterAdd colorIndex='brand' size='large' />}
               heading='Flashcards'
-              para='Store words as flashcards with meaning, example sentences, pronunciation & personal notes!' />
+              para='Store words as flashcards with meaning, example sentences, pronounciation & personal notes!' />
             <FeatureShow icon={<Apps colorIndex='brand' size='large' />}
               heading='Your Words' para='Segregate your words into lists' />
             <FeatureShow icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games' />
