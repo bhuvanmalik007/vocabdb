@@ -9,7 +9,6 @@ const mapDispatchToProps = dispatch => ({
   deleteFromList: (payload) => dispatch({ type: 'DELETE_FROM_LIST', payload }),
   toggleMultipleSelect: () => dispatch({ type: 'TOGGLE_MULTIPLE_SELECT' }),
   select: (index) => dispatch({ type: 'SELECT', index }),
-  multipleDeleteTransformer: () => dispatch({ type: 'DELETE_MULTIPLE_TRANSFORM' }),
   sort: () => dispatch({ type: 'SORT_WORDS' }),
   onListChange: (payload) => dispatch({ type: 'FETCH_LIST_WORDS', payload }),
   fetchAll: () => dispatch({ type: 'FETCH_MYFLASHCARDS' }),

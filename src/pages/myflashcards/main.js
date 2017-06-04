@@ -128,7 +128,6 @@ MyFlashcards.propTypes = {
   toggleMultipleSelect: PropTypes.func,
   sorted: PropTypes.bool,
   sort: PropTypes.func,
-  multipleDeleteTransformer: PropTypes.func,
   searchString: PropTypes.string,
   isLoading: PropTypes.bool,
   filteredArray: PropTypes.array,

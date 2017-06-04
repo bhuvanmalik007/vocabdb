@@ -48,7 +48,7 @@ const deleteWords = (action$, store) =>
   action$.ofType('DELETE_WORDS')
   .mergeMap(action =>
     postRequest(action.payload.requestObj, action.payload.route, store)
-    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .map((payload) => ({ type: 'TOGGLE_MULTIPLE_SELECT', payload: true }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
@@ -71,8 +71,9 @@ const fetchMyListWords = (action$, store) =>
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')
   .mergeMap(action =>
-    postRequest({ listName: action.payload, wordIds:[] }, '/addlist/', store)
-    .map(({ id }) => ({ type: 'ADD_LIST', payload:{ listId: id, listName: action.payload } }))
+    postRequest(action.payload, '/addlist/', store)
+    .flatMap(({ id }) => [{ type: 'ADD_LIST', payload:{ listId: id, listName: action.payload.listName } },
+      { type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
@@ -81,7 +82,7 @@ const addWordsToList = (action$, store) =>
   .mergeMap(action =>
     postRequest({ listId: action.payload,
       wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray) }, '/addlist/', store)
-    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
@@ -89,7 +90,7 @@ const renameList = (action$, store) =>
   action$.ofType('RENAME_LIST')
   .mergeMap(action =>
     postRequest(action.payload, '/renamelist/', store)
-    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .map((payload) => ({ type: 'SHOW_MODAL' }))
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
@@ -97,7 +98,7 @@ const deleteList = (action$, store) =>
   action$.ofType('DELETE_LIST')
   .mergeMap(action =>
     postRequest({ listIds: [action.payload] }, '/deletelist/', store)
-    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'FETCH_MYFLASHCARDS' }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 

@@ -2,10 +2,13 @@ import AddListForm from '../components/addlistform'
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { pick } from 'ramda' //eslint-disable-line
+import { selectedCountReducer, reduceToSenseIds } from '../futils/selectionreducers'
 
-const AddList = ({ createList }) => {
+const AddList = ({ createList, multipleSelect, filteredArray }) => {
   const submit = (formData) => {
-    createList(formData.listName)
+    createList({ listName: formData.listName,
+      wordIds: multipleSelect && selectedCountReducer(filteredArray) > 0 ? reduceToSenseIds(filteredArray) : [] })
   }
   return (
     <AddListForm onSubmit={submit} />
@@ -13,12 +16,14 @@ const AddList = ({ createList }) => {
 }
 
 AddList.propTypes = {
-  createList: PropTypes.func
+  createList: PropTypes.func,
+  multipleSelect: PropTypes.bool,
+  filteredArray: PropTypes.array
 }
 
-function mapStateToProps (state) {
-  return {}
-}
+const mapStateToProps = state => ({
+  ...pick(['multipleSelect', 'filteredArray'], state.wordsState)
+})
 
 const mapDispatchToProps = (dispatch) => ({
   createList: (payload) => dispatch({ type: 'CREATE_LIST', payload })

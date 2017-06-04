@@ -37,8 +37,8 @@ const actionHandlers = {
     filteredArray: [...action.wordsArray, ...state.wordsArray],
     total: state.total + action.wordsArray.length
   }),
-  TOGGLE_MULTIPLE_SELECT: (state) => Object.assign({}, state, {
-    multipleSelect: !state.multipleSelect,
+  TOGGLE_MULTIPLE_SELECT: (state, action) => Object.assign({}, state, {
+    multipleSelect: action.payload ? false : !state.multipleSelect,
     filteredArray: state.filteredArray.map(wordObj => ({ ...wordObj, selected: false }))
   }),
   SELECT: (state, action) => Object.assign({}, state, {
@@ -49,11 +49,13 @@ const actionHandlers = {
       },
       ...state.filteredArray.slice(action.index + 1)]
   }),
-  // SHOW_MODAL: (state, action) => Object.assign({}, state, {
-  //   modal: { visibility: !state.modal.visibility, ...action.payload } }),
   ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] }),
-  SET_CURRENT_LIST: (state, action) => Object.assign({}, state, { currentListId: action.payload })
-
+  SET_CURRENT_LIST: (state, action) => Object.assign({}, state, { currentListId: action.payload }),
+  DELETE_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.filter(listObj =>
+    listObj.listId !== action.payload) }),
+  RENAME_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.map(listObj =>
+    listObj.listId === action.payload.listId
+    ? { listName: action.payload.newName, listId: listObj.listId } : listObj) })
 }
 
 export default Reducer(initialState, actionHandlers)
