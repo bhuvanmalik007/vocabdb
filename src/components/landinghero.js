@@ -5,26 +5,23 @@ import Card from 'grommet/components/Card'
 import Hero from 'grommet/components/Hero'
 import Heading from 'grommet/components/Heading'
 
-const Header = props => <div>
-  {
-    props.authenticated && <Hero size='large' background={props.image} colorIndex={props.grommetColor} justify='end'>
-      <Card colorIndex={props.cardColor}
-        heading={
-          <Heading strong>
-            {props.heading}
-          </Heading>
-        }
-        description={props.desc}
-        label={props.label}
-        size='large'
-        link={
-          <Anchor href='#' primary label={props.getStarted} />
-        } />
-    </Hero> || <div />
-  }
-</div>
+const LandingHero = props =>
+  <Hero size='xlarge' backgroundImage={props.image} justify='end'>
+    <Card colorIndex={props.cardColor}
+      heading={
+        <Heading strong>
+          {props.heading}
+        </Heading>
+      }
+      description={props.desc}
+      label={props.label}
+      size='large'
+      link={
+        <Anchor href='#' primary label={props.getStarted} />
+      } />
+  </Hero>
 
-Header.propTypes = {
+LandingHero.propTypes = {
   authenticated: PropTypes.bool,
   image: PropTypes.string,
   grommetColor: PropTypes.string,
@@ -35,4 +32,4 @@ Header.propTypes = {
   getStarted: PropTypes.string
 }
 
-export default Header
+export default LandingHero

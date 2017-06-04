@@ -8,14 +8,12 @@ import FeatureCard from '../../components/featurecard'
 import Tiles from 'grommet/components/Tiles'
 import Box from 'grommet/components/Box'
 import Free from '../../static/free.jpg'
-import LandingFooter from '../../components/landingfooter'
 import ChapterAdd from 'grommet/components/icons/base/ChapterAdd'
 import Apps from 'grommet/components/icons/base/Apps'
 import Gamepad from 'grommet/components/icons/base/Gamepad'
 import Book from 'grommet/components/icons/base/Book'
 import Star from 'grommet/components/icons/base/Star'
 import FeatureShow from '../../components/featureshow'
-import Image from 'grommet/components/Image'
 
 export class LandingView extends Component {
 
@@ -27,9 +25,8 @@ export class LandingView extends Component {
     return (
       <GrommetApp centered={false}>
         <Box>
-          <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated}
-            profile={this.props.profile} />
-          <LandingHero image={<Image src={HeroImage} fit='cover' full />}
+          <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated} />
+          <LandingHero image={HeroImage}
             grommetColor='grey-1-a'
             heading='Giving your vocabulary preparation awesome super powers!'
             desc='Whether youʼre an English major or appearing for exams with English sections like
@@ -49,7 +46,7 @@ export class LandingView extends Component {
             <FeatureCard heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
-        <LandingHero image={<Image src={Free} fit='cover' full />}
+        <LandingHero image={Free}
           grommetColor='light-1'
           heading='Try it for free today!' getStarted='Get Started' justify='center' />
         <Box pad='large' align='center'>
@@ -65,7 +62,6 @@ export class LandingView extends Component {
             <FeatureShow icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
-        <LandingFooter />
       </GrommetApp>
     )
   }
