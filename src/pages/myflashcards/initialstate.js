@@ -7,5 +7,6 @@ export default {
   total: 0,
   multipleSelect: false,
   sorted: false,
-  modalVisibility: false
+  // modal: { visibility: false },
+  currentListId: 'all'
 }

@@ -16,8 +16,10 @@ const actionHandlers = {
     total: state.total + 1
   }),
   DELETE_WORDS: (state, action) => Object.assign({}, state, {
-    wordsArray: state.wordsArray.filter(wordObj => !action.payload.find(senseId => wordObj.word.id === senseId)),
-    filteredArray: state.filteredArray.filter(wordObj => !action.payload.find(senseId => wordObj.word.id === senseId)),
+    wordsArray: state.wordsArray.filter(wordObj =>
+      !action.payload.requestObj.senseIds.find(senseId => wordObj.word.id === senseId)),
+    filteredArray: state.filteredArray.filter(wordObj =>
+      !action.payload.requestObj.senseIds.find(senseId => wordObj.word.id === senseId)),
     total: state.total - 1
   }),
   FILTER_WORDS: (state, action) => Object.assign({}, state, {
@@ -47,9 +49,10 @@ const actionHandlers = {
       },
       ...state.filteredArray.slice(action.index + 1)]
   }),
-  TOGGLE_MODAL_VISIBILITY: (state) => Object.assign({}, state, {
-    modalVisibility: !state.modalVisibility }),
-  ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] })
+  // SHOW_MODAL: (state, action) => Object.assign({}, state, {
+  //   modal: { visibility: !state.modal.visibility, ...action.payload } }),
+  ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] }),
+  SET_CURRENT_LIST: (state, action) => Object.assign({}, state, { currentListId: action.payload })
 
 }
 

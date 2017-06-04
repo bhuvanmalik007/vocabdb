@@ -3,33 +3,37 @@ import { Modal } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { pick } from 'ramda' //eslint-disable-line
 import { connect } from 'react-redux'
+import AddList from '../connectors/addlist'
+import SelectList from '../connectors/addwordlistselect'
+import ListSettings from '../connectors/listsettings'
+
+const modalContentMapper = {
+  ADD_LIST: <AddList />,
+  SELECT_LIST: <SelectList />,
+  LIST_SETTINGS: <ListSettings />
+}
 
 const ReduxModal = (props) =>
   <Modal
-    trigger={props.triggerButton}
-    open={props.modalVisibility}
+    open={props.reduxModal.visibility}
     size='small'
-    header={props.header}
-    content={props.content}
+    header={props.reduxModal.header}
+    content={modalContentMapper[props.reduxModal.content]}
     closeIcon='close'
-    closeOnDocumentClick
-    onClose={props.toggleModalVisibility}
+    onClose={props.showModal}
   />
 
 ReduxModal.propTypes = {
-  triggerButton: PropTypes.element,
-  modalVisibility: PropTypes.bool,
-  header: PropTypes.string,
-  content: PropTypes.element,
-  toggleModalVisibility: PropTypes.func
+  reduxModal: PropTypes.object,
+  showModal: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleModalVisibility: () => dispatch({ type: 'TOGGLE_MODAL_VISIBILITY' })
+  showModal: () => dispatch({ type: 'SHOW_MODAL' })
 })
 
 const mapStateToProps = state => ({
-  ...pick(['modalVisibility'], state.wordsState)
+  ...pick(['reduxModal'], state.core)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxModal)

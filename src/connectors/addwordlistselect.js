@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { pick } from 'ramda' //eslint-disable-line
 
-const AddList = ({ lists }) => {
+const SelectList = ({ lists, addWordsToList }) => {
   const submit = (formData) => {
-    console.log(formData)
+    addWordsToList(formData.listId)
   }
   return (
-    <SelectListForm onSubmit={submit} lists={lists} />
+    <SelectListForm onSubmit={submit} lists={[...lists.slice(1)]} />
   )
 }
 
-AddList.propTypes = {
-  lists: PropTypes.array
+SelectList.propTypes = {
+  lists: PropTypes.array,
+  addWordsToList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -22,10 +23,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  createList: (payload) => dispatch({ type: 'CREATE_LIST', payload })
+  addWordsToList: (payload) => dispatch({ type: 'ADD_WORDS_TO_LIST', payload })
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddList)
+)(SelectList)

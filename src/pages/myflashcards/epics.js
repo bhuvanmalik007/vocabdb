@@ -1,23 +1,25 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 import request, { withAuthentication } from '../../futils/requestutil'
-import reduceToSenseIds from '../../futils/senseidreducer'
+import { reduceToSenseIds } from '../../futils/selectionreducers'
+import { DBINTERCEPTOR_API } from '../../constants'
 
-const fetchWords = store => {
+const getRequest = (urlPath, store) => {
   return Observable.from(
     withAuthentication(store.getState())(
       request,
-      'https://dbinterceptor-f.now.sh/user/' + store.getState().core.profile.identities[0].user_id,
+      DBINTERCEPTOR_API + urlPath + store.getState().core.profile.identities[0].user_id,
       'GET'
     )
   )
 }
 
-const fetchLists = store => {
+const postRequest = (reqBody, urlPath, store) => {
   return Observable.from(
     withAuthentication(store.getState())(
       request,
-      'https://dbinterceptor-f.now.sh/lists/' + store.getState().core.profile.identities[0].user_id,
-      'GET'
+      DBINTERCEPTOR_API + urlPath + store.getState().core.profile.identities[0].user_id,
+      'POST',
+      JSON.stringify(reqBody)
     )
   )
 }
@@ -29,82 +31,76 @@ const initMapper = (action$, store) =>
 const fetchMyFlashcards = (action$, store) =>
   action$.ofType('FETCH_MYFLASHCARDS')
   .mergeMap(action =>
-    fetchWords(store)
-    .map((payload) => ({ type: 'INIT_WORDS', payload }))
+    getRequest('/user/', store)
+    .flatMap((payload) => ([{ type: 'INIT_WORDS', payload }, { type: 'SET_CURRENT_LIST', payload: 'all' }]))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
 const fetchMyLists = (action$, store) =>
   action$.ofType('FETCH_LISTS')
   .mergeMap(action =>
-    fetchLists(store)
+    getRequest('/lists/', store)
     .map((lists) => ({ type: 'INIT_LISTS', payload: [{ listId: 'all', listName: 'ALL' }, ...lists.data] }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-const deleteRequest = (sensesArray, store) => {
-  return Observable.from(
-    withAuthentication(store.getState())(
-      request,
-      'https://dbinterceptor-f.now.sh/deleteword/' + store.getState().core.profile.identities[0].user_id,
-      'POST',
-      JSON.stringify({ senseIds: sensesArray })
-    )
-  )
-}
-
 const deleteWords = (action$, store) =>
   action$.ofType('DELETE_WORDS')
   .mergeMap(action =>
-    deleteRequest(action.payload, store)
+    postRequest(action.payload.requestObj, action.payload.route, store)
     .map((payload) => ({ type: 'SUCCESS', payload }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-const multipleDeleteTransformer = (action$, store) =>
-  action$.ofType('DELETE_MULTIPLE_TRANSFORM')
-  .map((action) => ({
-    type: 'DELETE_WORDS',
-    payload: reduceToSenseIds(store.getState().wordsState.filteredArray)
-  }))
+const deleteFromAll = (action$, store) =>
+  action$.ofType('DELETE_FROM_ALL')
+  .map((action) => ({ type: 'DELETE_WORDS', payload: { route: '/deleteword/', requestObj: action.payload } }))
 
-const fetchListWords = (listId, store) => {
-  return Observable.from(
-    withAuthentication(store.getState())(
-      request,
-      'https://dbinterceptor-f.now.sh/getlistwords/' + store.getState().core.profile.identities[0].user_id,
-      'POST',
-      JSON.stringify({ listId })
-    )
-  )
-}
+const deleteFromList = (action$, store) =>
+  action$.ofType('DELETE_FROM_LIST')
+  .map((action) => ({ type: 'DELETE_WORDS', payload: { route: '/deletelistwords/', requestObj: action.payload } }))
 
 const fetchMyListWords = (action$, store) =>
   action$.ofType('FETCH_LIST_WORDS')
   .mergeMap(action =>
-    fetchListWords(action.payload, store)
-    .map((payload) => ({ type: 'INIT_WORDS', payload }))
+    postRequest({ listId: action.payload }, '/getlistwords/', store)
+    .flatMap((payload) => ([{ type: 'INIT_WORDS', payload }, { type: 'SET_CURRENT_LIST', payload: action.payload }]))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
-
-const createListRequest = (listName, store) => {
-  return Observable.from(
-    withAuthentication(store.getState())(
-      request,
-      'https://dbinterceptor-f.now.sh/addlist/' + store.getState().core.profile.identities[0].user_id,
-      'POST',
-      JSON.stringify({ listName, wordIds:[] })
-    )
-  )
-}
 
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')
   .mergeMap(action =>
-    createListRequest(action.payload, store)
+    postRequest({ listName: action.payload, wordIds:[] }, '/addlist/', store)
     .map(({ id }) => ({ type: 'ADD_LIST', payload:{ listId: id, listName: action.payload } }))
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
+const addWordsToList = (action$, store) =>
+  action$.ofType('ADD_WORDS_TO_LIST')
+  .mergeMap(action =>
+    postRequest({ listId: action.payload,
+      wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray) }, '/addlist/', store)
+    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR' }))
+  )
+
+const renameList = (action$, store) =>
+  action$.ofType('RENAME_LIST')
+  .mergeMap(action =>
+    postRequest(action.payload, '/renamelist/', store)
+    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR' }))
+  )
+
+const deleteList = (action$, store) =>
+  action$.ofType('DELETE_LIST')
+  .mergeMap(action =>
+    postRequest({ listIds: [action.payload] }, '/deletelist/', store)
+    .map((payload) => ({ type: 'SUCCESS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR' }))
+  )
+
 export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords,
-  multipleDeleteTransformer, fetchMyListWords, createList]
+  fetchMyListWords, createList, addWordsToList,
+  renameList, deleteList, deleteFromList, deleteFromAll]
