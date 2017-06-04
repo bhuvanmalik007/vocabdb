@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Segment, Icon, Image, Search, Popup, Button, Dropdown } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
-// import AddList from '../../connectors/addlist'
-// import SelectList from '../../connectors/addwordlistselect'
-// import ListSettings from '../../connectors/listsettings'
 import { selectedCountReducer, reduceToSenseIds } from '../../futils/selectionreducers'
 
 const searchGoogle = (word) => {

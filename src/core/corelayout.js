@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AppHeader from '../connectors/Header'
+import AppHeader from '../connectors/appheader'
 import ReduxModal from '../connectors/reduxmodal'
+import { withRouter } from 'react-router'
 
-export const CoreLayout = store => ({ children }) => (
+const CoreLayout = ({ children, location }) => (
   <div>
-    {store.getState().core.authenticated && <AppHeader pathName={store.getState().location.pathName} />}
+    <AppHeader />
     <ReduxModal />
     {children}
   </div>
 )
 
 CoreLayout.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  location: PropTypes.object
 }
 
-export default CoreLayout
+export default withRouter(CoreLayout)

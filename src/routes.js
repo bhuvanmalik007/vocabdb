@@ -9,7 +9,7 @@ import Explore from './pages/explore'
 
 export const createRoutes = (store) => ({
   path: '/',
-  component: CoreLayout(store),
+  component: CoreLayout,
   indexRoute: {
     onEnter: (nextState, replace) => replace('/landing')
   },

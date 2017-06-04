@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types' //eslint-disable-line
-import GrommetApp from 'grommet/components/App'
 import LandingHeader from '../../components/landingheader'
 import HeroImage from '../../static/hero.jpg'
 import LandingHero from '../../components/landinghero'
@@ -14,11 +13,12 @@ import Gamepad from 'grommet/components/icons/base/Gamepad'
 import Book from 'grommet/components/icons/base/Book'
 import Star from 'grommet/components/icons/base/Star'
 import FeatureShow from '../../components/featureshow'
+import GrommetApp from 'grommet/components/App'
 
 export class LandingView extends Component {
 
   componentDidMount () {
-    this.props.prepareLockAuth()
+    this.props.prepareLockAuth(this.props.router)
   }
 
   render () {
@@ -70,10 +70,11 @@ export class LandingView extends Component {
 LandingView.propTypes = {
   emitAction: PropTypes.func,
   epicWorking: PropTypes.bool,
-  authenticated:PropTypes.bool,
-  profile:PropTypes.object,
+  authenticated: PropTypes.bool,
+  profile: PropTypes.object,
   showLogin: PropTypes.func,
-  prepareLockAuth:PropTypes.func
+  router: PropTypes.object,
+  prepareLockAuth: PropTypes.func
 }
 
 export default LandingView

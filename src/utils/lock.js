@@ -12,6 +12,6 @@ export default new Lock(ClientId, Domain, {
     primaryColor: '#000000'
   },
   languageDictionary: {
-    title: 'Mission Admission'
+    title: 'MISSION ADMISSION'
   }
 })

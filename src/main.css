@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom{
   display: none;
 }
@@ -25,9 +27,9 @@
   align-items: center;
 }
 
-#root {
-  background-color: #2C3E50;
-  min-height: 100vh;
+.auth0-lock-name{
+  font-family: 'Audiowide', cursive;
+  text-transform: capitalize;
 }
 
 .menu-items {

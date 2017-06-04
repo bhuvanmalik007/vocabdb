@@ -6,7 +6,7 @@ const ACTION_HANDLERS = {
   }
 }
 
-const initialState = { authenticated: false, profile: {}, idToken: null, reduxModal: { visibility:false } }
+const initialState = { authenticated: false, profile: {}, idToken: null }
 
 const MODAL_ACTION_HANDLERS = {
   SHOW_MODAL: (s, a) => Object.assign({}, s, {

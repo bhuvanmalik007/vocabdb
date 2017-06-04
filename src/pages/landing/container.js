@@ -5,7 +5,7 @@ import { LockThunk, OnAuthFunction } from '../../core/sideeffects'
 
 const mapDispatchToProps = dispatch => ({
   showLogin: () => dispatch(LockThunk()),
-  prepareLockAuth: () => dispatch(OnAuthFunction())
+  prepareLockAuth: router => dispatch(OnAuthFunction(router))
 })
 
 const mapStateToProps = state => ({

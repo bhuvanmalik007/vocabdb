@@ -117,6 +117,7 @@
     "sass-loader": "^4.0.0",
     "semantic-ui-react": "^0.68.3",
     "style-loader": "^0.13.1",
+    "styled-components": "^2.0.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.14",
     "yargs": "^6.3.0"
