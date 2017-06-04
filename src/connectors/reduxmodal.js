@@ -13,18 +13,20 @@ const modalContentMapper = {
   LIST_SETTINGS: <ListSettings />
 }
 
-const ReduxModal = (props) =>
+const ReduxModal = ({ visibility, header, content, showModal }) =>
   <Modal
-    open={props.reduxModal.visibility}
+    open={visibility}
     size='small'
-    header={props.reduxModal.header}
-    content={modalContentMapper[props.reduxModal.content]}
+    header={header}
+    content={modalContentMapper[content]}
     closeIcon='close'
-    onClose={props.showModal}
+    onClose={showModal}
   />
 
 ReduxModal.propTypes = {
-  reduxModal: PropTypes.object,
+  visibility: PropTypes.bool,
+  content: PropTypes.string,
+  header: PropTypes.string,
   showModal: PropTypes.func
 }
 
@@ -33,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  ...pick(['reduxModal'], state.core)
+  ...pick(['visibility', 'content', 'header'], state.reduxModal)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReduxModal)
