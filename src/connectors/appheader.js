@@ -9,7 +9,7 @@ import Logo from '../static/final.png'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
-import RCompose from '../futils/composer'
+import composeR from 'compose-r'
 import { pick } from 'ramda'
 
 const StyledImage = styled(Image)`
@@ -51,4 +51,4 @@ const mapDispatchToProps = dispatch => ({
   routeTo: path => dispatch({ type: 'LOCATION_CHANGE', payload: path })
 })
 
-export default RCompose(connect(mapStateToProps, mapDispatchToProps), withRouter)(AppHeader)
+export default composeR(connect(mapStateToProps, mapDispatchToProps), withRouter)(AppHeader)

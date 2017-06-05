@@ -1,9 +1,15 @@
 import { injectReducer } from '../../store/reducers'
+import { browserHistory } from 'react-router'
+import { AuthenticatedLens } from '../../core/lenses'
 
 // Sync route definition
 export default(store) => ({
   path:'explore',
   getComponent (nextState, cb) {
+    if (!AuthenticatedLens(store)) {
+      browserHistory.replace('/landing')
+      return
+    }
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {

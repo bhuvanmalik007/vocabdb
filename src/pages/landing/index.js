@@ -6,7 +6,7 @@ export default(store) => ({
   path:'landing',
   getComponent (nextState, cb) {
     if (store.getState().core.authenticated) {
-      browserHistory.push('/myflashcards')
+      browserHistory.replace('/myflashcards')
       return
     }
     /*  Webpack - use 'require.ensure' to create a split point
