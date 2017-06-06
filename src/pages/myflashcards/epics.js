@@ -33,7 +33,7 @@ const fetchMyFlashcards = (action$, store) =>
   .mergeMap(action =>
     getRequest('/user/', store)
     .flatMap((payload) => ([{ type: 'INIT_WORDS', payload }, { type: 'SET_CURRENT_LIST', payload: 'all' }]))
-    .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload:payload.status }))
   )
 
 const fetchMyLists = (action$, store) =>

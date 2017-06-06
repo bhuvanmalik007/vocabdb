@@ -1,20 +1,29 @@
 import React from 'react'
 import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import Columns from 'grommet/components/Columns'
 
 const audio = () => {
   document.getElementById('audio').play()
 }
 
-const CardsMaker = (props) =>
-  <Card.Group itemsPerRow={2}>
+const CardsMaker = props =>
+  <Columns size='medium' justify='center' masonry
+    maxCount={3} responsive>
     {props.searchResults.map((element, index) =>
-      <Card key={index} className='animated fadeIn'>
+      <Card
+        key={index}
+        textSize='small'
+        colorIndex='light-1'
+        margin='small'
+        contentPad='medium'
+        direction='column'>
         <Card.Content>
           <Image floated='right'>
-            <Popup trigger={<Icon link name='plus'
-              onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation })}
-                            />}
+            <Popup trigger={
+              <Icon link name='plus'
+                onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation })}
+              />}
               content='Add to My Flashcards' />
           </Image>
           <Card.Header>
@@ -28,7 +37,7 @@ const CardsMaker = (props) =>
           </Card.Description>
         </Card.Content>
       </Card>)}
-  </Card.Group>
+  </Columns>
 
 CardsMaker.propTypes = {
   searchResults: PropTypes.array,
@@ -38,8 +47,16 @@ CardsMaker.propTypes = {
   pronounciation: PropTypes.string
 }
 
-export default ({ search, results, searchString,
-   addWord, filterWords, updateSearchString, isLoading, setLoader }) => {
+const ExploreSenses = ({
+  search,
+  results,
+  searchString,
+  addWord,
+  filterWords,
+  updateSearchString,
+  isLoading,
+  setLoader
+}) => {
   const handleSearchChange = (e, value) => {
     setLoader()
     updateSearchString(value)
@@ -70,5 +87,15 @@ export default ({ search, results, searchString,
   )
 }
 
-CardsMaker.propTypes = {
+ExploreSenses.propTypes = {
+  search: PropTypes.string,
+  results: PropTypes.object,
+  searchString: PropTypes.string,
+  filterWords: PropTypes.func,
+  updateSearchString: PropTypes.func,
+  isLoading: PropTypes.boolean,
+  setLoader: PropTypes.func,
+  addWord: PropTypes.func
 }
+
+export default ExploreSenses

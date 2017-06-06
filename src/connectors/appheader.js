@@ -26,7 +26,6 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
         <Menu label='Label' inline direction='row' flex='grow' align='end' justify='start'
           pad={{ horizontal: 'medium' }}>
           <Link to='myflashcards'>My Flashcards</Link>
-          <Link>Add</Link>
           <Link to='explore'>Explore Words</Link>
         </Menu>
       </Box>

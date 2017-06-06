@@ -21,10 +21,12 @@
 }
 
 .main-container {
+  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
+  min-height: 100vh;
 }
 
 .auth0-lock-name{
