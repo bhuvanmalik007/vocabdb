@@ -78,9 +78,9 @@ const ExploreSenses = ({
   setLoader
 }) => {
   const handleSearchChange = e => {
-    setLoader()
     updateSearchString(e.target.value)
-    search(e.target.value)
+    // setLoader()
+    // search(e.target.value)
   }
   return (
     <div className='main-container'>

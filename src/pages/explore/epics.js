@@ -24,6 +24,10 @@ const fetchWord = (word, store) => {
   )
 }
 
+const updateSearchString = (action$, store) =>
+  action$.ofType('UPDATE_GLOBAL_SEARCH_STRING')
+  .flatMap((action) => [{ type: 'IS_LOADING', bool: true }, { type: 'SEARCH', payload: action.payload }])
+
 const loaded = () => ({ type: 'IS_LOADING', bool: false })
 
 const setResults = payload => payload.words
@@ -51,4 +55,4 @@ const addWordEpic = action$ =>
   action$.ofType('SELECT_WORD')
   .map(action => ({ type: 'ADD_WORD', payload: { ...action.payload, index:undefined } }))
 
-export default [search, sendWord, addWordEpic]
+export default [search, sendWord, addWordEpic, updateSearchString]
