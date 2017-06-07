@@ -8,9 +8,9 @@ const actionHandlers = {
     Object.assign({}, state, { searchString: action.payload, isLoading: true }),
   IS_LOADING: (state, action) => Object.assign({}, state, { isLoading: action.bool }),
   SELECT_WORD: (s, a) => Object.assign({}, s, { words: [
-    ...s.words.slice(0, a.index),
-    { ...s.words[a.index], selected: true },
-    ...s.words.slice(a.index)
+    ...s.words.slice(0, a.payload.index),
+    { ...s.words[a.payload.index], selected: true },
+    ...s.words.slice(a.payload.index + 1)
   ] })
 }
 

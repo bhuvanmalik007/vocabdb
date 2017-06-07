@@ -10,6 +10,7 @@
   "scripts": {
     "live": "gh-pages -d dist",
     "clean": "rimraf dist",
+    "auto": "git add . && git commit -mAUTOCOMMIT && git push origin master",
     "compile": "better-npm-run compile",
     "lint": "eslint bin build config server src tests",
     "lint:fix": "npm run lint -- --fix",

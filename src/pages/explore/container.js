@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  ...pick(['results', 'isLoading', 'searchString'], state.globalSearchState)
+  ...pick(['words', 'pronounciation', 'isLoading', 'searchString'], state.globalSearchState)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explore)

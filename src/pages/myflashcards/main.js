@@ -39,6 +39,9 @@ const LowPadButton = styled(GrommetButton)`
     padding: 10px !important;
   }
 `
+const SmallerCards = styled(Card)`
+
+`
 
 const DashButton = props =>
   <Box pad='medium'>
@@ -60,8 +63,8 @@ const audio = (index) => {
 
 const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) =>
   <Box pad='medium' full='horizontal'>
-    <Columns size='medium' justify='center' masonry
-      maxCount={3} responsive>
+    <Columns size='medium' justify='center'
+      maxCount={3} masonry>
       {filteredArray.length && filteredArray.map((element, index) =>
         <Box onClick={() => { multipleSelect && select(index) }} pad='none' key={index}>
           <Card
