@@ -6,7 +6,7 @@ const mapDispatchToProps = dispatch => ({
   updateSearchString: (payload) => dispatch({ type: 'UPDATE_GLOBAL_SEARCH_STRING', payload }),
   search: (payload) => dispatch({ type: 'SEARCH', payload }),
   setLoader: () => dispatch({ type: 'IS_LOADING', bool: true }),
-  addWord: (payload) => dispatch({ type: 'ADD_WORD', payload })
+  addWord: (payload) => dispatch({ type: 'SELECT_WORD', payload })
   // filterWords: (searchString) => dispatch({ type: 'FILTER_WORDS', searchString })
 })
 

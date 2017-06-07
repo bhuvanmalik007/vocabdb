@@ -1,11 +1,34 @@
 import React from 'react'
-import { Card, Segment, Icon, Image, Search, Popup } from 'semantic-ui-react'
+import { Segment, Icon } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import Columns from 'grommet/components/Columns'
+import Card from 'grommet/components/Card'
+import Paragraph from 'grommet/components/Paragraph'
+import Heading from 'grommet/components/Heading'
+import styled from 'styled-components'
+import Box from 'grommet/components/Box'
+import GrommetSearch from 'grommet/components/Search'
+import FormAdd from 'grommet/components/icons/base/FormAdd'
+import GrommetButton from 'grommet/components/Button'
+import Status from 'grommet/components/icons/Status'
 
-const audio = () => {
-  document.getElementById('audio').play()
-}
+const ShadowBox = styled(Box)`
+  background-color: #ffffff;
+  z-index: 3;
+  width: 100%;
+`
+
+const LowPadButton = styled(GrommetButton)`
+  border-radius: 0px;
+  span {
+    padding: 10px !important;
+  }
+`
+
+const IconButton = props =>
+  <Box pad='none'>
+    <LowPadButton {...props} />
+  </Box>
 
 const CardsMaker = props =>
   <Columns size='medium' justify='center' masonry
@@ -18,24 +41,20 @@ const CardsMaker = props =>
         margin='small'
         contentPad='medium'
         direction='column'>
-        <Card.Content>
-          <Image floated='right'>
-            <Popup trigger={
-              <Icon link name='plus'
-                onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation })}
-              />}
-              content='Add to My Flashcards' />
-          </Image>
-          <Card.Header>
-            {props.searchString}
-          </Card.Header>
-          <Card.Meta>
-            {element.meaning}
-          </Card.Meta>
-          <Card.Description>
-            {element.example}
-          </Card.Description>
-        </Card.Content>
+        <Box align='end'>
+          {!element.selected ? <IconButton icon={<FormAdd />}
+            onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation, index })} />
+            : <Status value='ok' />}
+        </Box>
+        <Heading>
+          {element.word}
+        </Heading>
+        <Paragraph margin='small' size='large'>
+          {element.meaning}
+        </Paragraph>
+        <Paragraph margin='small'>
+          {element.example}
+        </Paragraph>
       </Card>)}
   </Columns>
 
@@ -49,7 +68,8 @@ CardsMaker.propTypes = {
 
 const ExploreSenses = ({
   search,
-  results,
+  words,
+  pronounciation,
   searchString,
   addWord,
   filterWords,
@@ -57,43 +77,46 @@ const ExploreSenses = ({
   isLoading,
   setLoader
 }) => {
-  const handleSearchChange = (e, value) => {
+  const handleSearchChange = e => {
     setLoader()
-    updateSearchString(value)
-    search(value)
+    updateSearchString(e.target.value)
+    search(e.target.value)
   }
   return (
     <div className='main-container'>
-      <audio id='audio' src={results.pronounciation} />
-      <Search
-        size='big'
-        onSearchChange={handleSearchChange}
-        open={false}
-        icon='search'
-        value={searchString}
-        placeholder='Explore new words..'
-        className='animated fadeIn' />
-      {results.words.length !== 0 && !isLoading && results.pronounciation &&
+      <ShadowBox justify='center' align='center' direction='row' pad='medium'>
+        <GrommetSearch
+          inline
+          fill
+          iconAlign='start'
+          onDOMChange={handleSearchChange}
+          placeholder='Explore new words..'
+          value={searchString} />
+      </ShadowBox>
+      {/* <audio id='audio' src={results.pronounciation} /> */}
+
+      {/* {results.words.length !== 0 && !isLoading && results.pronounciation &&
         <Popup position='right center' trigger={<Icon inverted link name='volume up' size='huge'
           onClick={audio} />} content='Click to hear pronounciation' />
-      }
+      } */}
       {isLoading && <Icon loading size='huge' name='rocket' />}
-      {results.words.length !== 0 && !isLoading && <Segment basic>
-        <CardsMaker searchResults={results.words} searchString={searchString}
-          addWord={addWord} filterWords={filterWords} pronounciation={results.pronounciation} />
+      {words.length !== 0 && !isLoading && <Segment basic>
+        <CardsMaker searchResults={words} searchString={searchString}
+          addWord={addWord} filterWords={filterWords} pronounciation={pronounciation} />
       </Segment>}
-      {((results.words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
+      {((words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
     </div>
   )
 }
 
 ExploreSenses.propTypes = {
-  search: PropTypes.string,
-  results: PropTypes.object,
+  search: PropTypes.func,
+  words: PropTypes.array,
+  pronounciation:PropTypes.string,
   searchString: PropTypes.string,
   filterWords: PropTypes.func,
   updateSearchString: PropTypes.func,
-  isLoading: PropTypes.boolean,
+  isLoading: PropTypes.bool,
   setLoader: PropTypes.func,
   addWord: PropTypes.func
 }

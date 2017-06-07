@@ -1,1 +1,1 @@
-export default { results: { words: [] }, searchString: '', isLoading: false }
+export default { words: [], searchString: '', isLoading: false, pronounciation:null }

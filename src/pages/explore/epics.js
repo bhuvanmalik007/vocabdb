@@ -12,14 +12,20 @@ const postWord = (wordObj, store) => {
 
 const fetchWord = (word, store) => {
   if (word.trim() === '') return Observable.from(IP(() => ({ words: [] })))
-  return Observable.from((withAuthentication(store.getState())(
-    request,
-    'https://madoxford-f.now.sh/search/' + word,
-    'GET'
-  )))
+  return Observable.from(
+    (withAuthentication(store.getState())(
+      request,
+      'https://madoxford-f.now.sh/search/' + word,
+      'GET'
+    )).then(
+      result => IP(() => Object.assign({},
+        result, { words: result.words.map(x => ({ ...x, selected: false })) }
+      )))
+  )
 }
 
 const loaded = () => ({ type: 'IS_LOADING', bool: false })
+
 const setResults = payload => payload.words
 ? ({ type: 'SET_RESULTS', payload })
 : ({ type: 'SET_RESULTS', payload: { words: [] } })
@@ -30,15 +36,19 @@ const search = (action$, store) =>
   .mergeMap(action =>
     fetchWord(action.payload, store)
     .flatMap((results) => ([loaded(), setResults(results)]))
-    .catch(payload => Observable.of({ type:'API_ERROR', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
 const sendWord = (action$, store) =>
-  action$.ofType('ADD_WORD')
+  action$.ofType('SELECT_WORD')
   .mergeMap(action =>
-    postWord(action.payload, store)
+    postWord({ ...action.payload, index:undefined }, store)
     .map((payload) => ({ type: 'SUCCESS' }))
-    .catch(payload => Observable.of({ type:'API_ERROR', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-export default [search, sendWord]
+const addWordEpic = action$ =>
+  action$.ofType('SELECT_WORD')
+  .map(action => ({ type: 'ADD_WORD', payload: { ...action.payload, index:undefined } }))
+
+export default [search, sendWord, addWordEpic]
