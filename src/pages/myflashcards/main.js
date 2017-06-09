@@ -27,10 +27,13 @@ const StyledSelect = styled(Select)`
 const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
 `
+
 const ShadowBox = styled(Box)`
   background-color: #ffffff;
   z-index: 3;
   width: 100%;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
 `
 
 const LowPadButton = styled(GrommetButton)`
@@ -38,9 +41,6 @@ const LowPadButton = styled(GrommetButton)`
   span {
     padding: 10px !important;
   }
-`
-const SmallerCards = styled(Card)`
-
 `
 
 const DashButton = props =>
