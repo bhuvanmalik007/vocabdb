@@ -55,7 +55,9 @@ const actionHandlers = {
     listObj.listId !== action.payload) }),
   RENAME_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.map(listObj =>
     listObj.listId === action.payload.listId
-    ? { listName: action.payload.newName, listId: listObj.listId } : listObj) })
+    ? { listName: action.payload.newName, listId: listObj.listId } : listObj) }),
+  SLIDESHOW_MOVER: (state, action) => Object.assign({}, state, {
+    slideShowIndex: action.payload === '+' ? (state.slideShowIndex + 1) : (state.slideShowIndex - 1) })
 }
 
 export default Reducer(initialState, actionHandlers)
