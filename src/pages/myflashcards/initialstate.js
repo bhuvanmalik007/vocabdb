@@ -8,5 +8,6 @@ export default {
   multipleSelect: false,
   sorted: false,
   // modal: { visibility: false },
-  currentListId: 'all'
+  currentListId: 'all',
+  slideShowIndex: 0
 }

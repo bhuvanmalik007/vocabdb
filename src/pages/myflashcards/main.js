@@ -17,6 +17,7 @@ import Volume from 'grommet/components/icons/base/Volume'
 import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
 import Status from 'grommet/components/icons/Status'
+import PlayIcon from 'grommet/components/icons/base/Play'
 
 const StyledSelect = styled(Select)`
   input {
@@ -180,6 +181,12 @@ export default class MyFlashcards extends Component {
           }
 
           <DashButton primary={this.props.sorted} onClick={this.props.sort} label='A-Z' />
+
+          {!this.props.multipleSelect &&
+            <IconButton icon={<PlayIcon />} onClick={() =>
+              this.props.showModal({ content: 'SLIDESHOW', size: 'fullscreen' })}
+            />
+          }
 
         </ShadowBox>
 

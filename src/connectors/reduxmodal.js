@@ -6,20 +6,22 @@ import { connect } from 'react-redux'
 import AddList from '../connectors/addlist'
 import SelectList from '../connectors/addwordlistselect'
 import ListSettings from '../connectors/listsettings'
+import SlideShow from '../connectors/slideshow'
 
 const modalContentMapper = {
   ADD_LIST: <AddList />,
   SELECT_LIST: <SelectList />,
-  LIST_SETTINGS: <ListSettings />
+  LIST_SETTINGS: <ListSettings />,
+  SLIDESHOW: <SlideShow />
 }
 
-const ReduxModal = ({ visibility, header, content, showModal }) =>
+const ReduxModal = ({ visibility, header, content, showModal, size }) =>
   <Modal
     open={visibility}
-    size='small'
+    size={size}
     header={header}
     content={modalContentMapper[content]}
-    closeIcon='close'
+    // closeIcon='close'
     onClose={showModal}
   />
 
@@ -27,7 +29,8 @@ ReduxModal.propTypes = {
   visibility: PropTypes.bool,
   content: PropTypes.string,
   header: PropTypes.string,
-  showModal: PropTypes.func
+  showModal: PropTypes.func,
+  size: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => ({
