@@ -142,7 +142,9 @@ export default class MyFlashcards extends Component {
               placeHolder='Select List'
               className='icon'
               icon='list layout'
-              onChange={(e, obj) => obj.value === 'all' ? this.props.fetchAll() : this.props.onListChange(obj.value)}
+              value={this.props.currentListId}
+              onChange={(e) => e.value.value === 'all'
+                ? this.props.fetchAll() : this.props.onListChange(e.value.value)}
               options={
                 this.props.lists.map((list, index) => ({ key: index, text: list.listName, value: list.listId }))
               }
