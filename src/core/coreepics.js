@@ -7,15 +7,17 @@ const NotifierEpic = action$ =>
 const ApiErrorEpic = action$ =>
   action$.ofType('API_ERROR').map(action => {
     if (action.payload === 500) {
-      return { type: 'SHOWTOAST', content: 'Something Went Wrong', danger:true }
+      return { type: 'SHOWTOAST', content: 'Something Went Wrong', danger: true }
     }
 
     if (action.payload === 403) {
-      browserHistory.replace('/landing')
       return { type: 'UNPROTECTED' }
     }
 
     return { type: 'UNIDENTIFIEDAPIERROR' }
   })
 
-export default [NotifierEpic, ApiErrorEpic]
+const UnprotectedEpic = action$ =>
+  action$.ofType('UNPROTECTED').do(() => browserHistory.replace('/landing'))
+
+export default [NotifierEpic, ApiErrorEpic, UnprotectedEpic]

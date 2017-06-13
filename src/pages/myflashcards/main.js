@@ -30,10 +30,13 @@ const StyledSelect = styled(Select)`
 const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
 `
+
 const ShadowBox = styled(Box)`
   background-color: #ffffff;
   z-index: 3;
   width: 100%;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
 `
 
 const LowPadButton = styled(GrommetButton)`
@@ -42,12 +45,15 @@ const LowPadButton = styled(GrommetButton)`
     padding: 10px !important;
   }
 `
+<<<<<<< HEAD
 const SmallerCards = styled(Card)`
 
 `
 const Styledspinning = styled(Spinning)`
   margin-top : 20px;
 `
+=======
+>>>>>>> f4598f636315116e8a9480ea618ceed6ae59c43a
 
 const DashButton = props =>
   <Box pad='medium'>
@@ -150,7 +156,9 @@ export default class MyFlashcards extends Component {
               placeHolder='Select List'
               className='icon'
               icon='list layout'
-              onChange={(e, obj) => obj.value === 'all' ? this.props.fetchAll() : this.props.onListChange(obj.value)}
+              value={this.props.currentListId}
+              onChange={(e) => e.value.value === 'all'
+                ? this.props.fetchAll() : this.props.onListChange(e.value.value)}
               options={
                 this.props.lists.map((list, index) => ({ key: index, text: list.listName, value: list.listId }))
               }

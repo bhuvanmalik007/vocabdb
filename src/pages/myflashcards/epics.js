@@ -32,8 +32,8 @@ const fetchMyFlashcards = (action$, store) =>
   action$.ofType('FETCH_MYFLASHCARDS')
   .mergeMap(action =>
     getRequest('/user/', store)
-    .flatMap((payload) => ([{ type: 'INIT_WORDS', payload }, { type: 'SET_CURRENT_LIST', payload: 'all' }]))
-    .catch(payload => Observable.of({ type: 'API_ERROR', payload:payload.status }))
+    .map((payload) => ({ type: 'INIT_WORDS', payload }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
 const fetchMyLists = (action$, store) =>
@@ -64,24 +64,35 @@ const fetchMyListWords = (action$, store) =>
   action$.ofType('FETCH_LIST_WORDS')
   .mergeMap(action =>
     postRequest({ listId: action.payload }, '/getlistwords/', store)
-    .flatMap((payload) => ([{ type: 'INIT_WORDS', payload }, { type: 'SET_CURRENT_LIST', payload: action.payload }]))
+    .map((payload) => ({ type: 'INIT_WORDS', payload }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
+
+const setCurrentListEpic = (action$, store) =>
+  action$.ofType('FETCH_LIST_WORDS')
+  .map(action => ({ type: 'SET_CURRENT_LIST', payload: action.payload }))
+
+const setAllListEpic = (action$, store) =>
+  action$.ofType('FETCH_MYFLASHCARDS')
+  .map(action => ({ type: 'SET_CURRENT_LIST', payload: 'all' }))
 
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')
   .mergeMap(action =>
     postRequest(action.payload, '/addlist/', store)
-    .flatMap(({ id }) => [{ type: 'ADD_LIST', payload:{ listId: id, listName: action.payload.listName } },
-      { type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }])
+    .flatMap(({ id }) => [{ type: 'ADD_LIST', payload: { listId: id, listName: action.payload.listName } },
+      { type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }
+    ])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
 const addWordsToList = (action$, store) =>
   action$.ofType('ADD_WORDS_TO_LIST')
   .mergeMap(action =>
-    postRequest({ listId: action.payload,
-      wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray) }, '/addlist/', store)
+    postRequest({
+      listId: action.payload,
+      wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray)
+    }, '/addlist/', store)
     .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
@@ -104,4 +115,5 @@ const deleteList = (action$, store) =>
 
 export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords,
   fetchMyListWords, createList, addWordsToList,
-  renameList, deleteList, deleteFromList, deleteFromAll]
+  renameList, deleteList, deleteFromList, deleteFromAll, setCurrentListEpic, setAllListEpic
+]
