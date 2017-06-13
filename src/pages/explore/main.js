@@ -11,6 +11,8 @@ import GrommetSearch from 'grommet/components/Search'
 import FormAdd from 'grommet/components/icons/base/FormAdd'
 import GrommetButton from 'grommet/components/Button'
 import Status from 'grommet/components/icons/Status'
+import Spinning from 'grommet/components/icons/Spinning'
+import Animate from 'grommet/components/Animate'
 
 const ShadowBox = styled(Box)`
   background-color: #ffffff;
@@ -24,6 +26,9 @@ const LowPadButton = styled(GrommetButton)`
     padding: 10px !important;
   }
 `
+const Styledspinning = styled(Spinning)`
+  margin-top : 20px;
+`
 
 const IconButton = props =>
   <Box pad='none'>
@@ -31,6 +36,8 @@ const IconButton = props =>
   </Box>
 
 const CardsMaker = props =>
+<Animate enter={{"animation": "fade", "duration": 1000, "delay": 100}}
+keep={false} visible={true}>
   <Columns size='medium' justify='center' masonry
     maxCount={3} responsive>
     {props.searchResults.map((element, index) =>
@@ -57,6 +64,7 @@ const CardsMaker = props =>
         </Paragraph>
       </Card>)}
   </Columns>
+</Animate>
 
 CardsMaker.propTypes = {
   searchResults: PropTypes.array,
@@ -99,7 +107,7 @@ const ExploreSenses = ({
         <Popup position='right center' trigger={<Icon inverted link name='volume up' size='huge'
           onClick={audio} />} content='Click to hear pronounciation' />
       } */}
-      {isLoading && <Icon loading size='huge' name='rocket' />}
+      {isLoading && <Styledspinning size='large'/>}
       {words.length !== 0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={words} searchString={searchString}
           addWord={addWord} filterWords={filterWords} pronounciation={pronounciation} />

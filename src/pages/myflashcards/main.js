@@ -18,6 +18,8 @@ import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
 import Status from 'grommet/components/icons/Status'
 import PlayIcon from 'grommet/components/icons/base/Play'
+import Spinning from 'grommet/components/icons/Spinning'
+import Animate from 'grommet/components/Animate'
 
 const StyledSelect = styled(Select)`
   input {
@@ -43,6 +45,9 @@ const LowPadButton = styled(GrommetButton)`
 const SmallerCards = styled(Card)`
 
 `
+const Styledspinning = styled(Spinning)`
+  margin-top : 20px;
+`
 
 const DashButton = props =>
   <Box pad='medium'>
@@ -63,6 +68,8 @@ const audio = (index) => {
 }
 
 const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) =>
+<Animate enter={{"animation": "fade", "duration": 1000, "delay": 0}}
+keep={false} visible={true}>
   <Box pad='medium' full='horizontal'>
     <Columns size='medium' justify='center'
       maxCount={3} masonry>
@@ -102,6 +109,7 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
         </Box>) || <div />}
     </Columns>
   </Box>
+</Animate>
 
 CardsMaker.propTypes = {
   deleteFromAll: PropTypes.func,
@@ -190,13 +198,14 @@ export default class MyFlashcards extends Component {
 
         </ShadowBox>
 
-        { this.props.isLoading && <Icon loading size='huge' name='rocket' /> }
+        { this.props.isLoading && <Styledspinning size='large'/> }
 
-        <Segment basic>
-          <CardsMaker filteredArray={this.props.filteredArray} deleteFromAll={this.props.deleteFromAll}
-            multipleSelect={this.props.multipleSelect} select={this.props.select}
-            currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList} />
-        </Segment>
+        {!this.props.isLoading &&
+          <Segment basic>
+            <CardsMaker filteredArray={this.props.filteredArray} deleteFromAll={this.props.deleteFromAll}
+              multipleSelect={this.props.multipleSelect} select={this.props.select}
+              currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList} />
+          </Segment>}
       </div>
     )
   }

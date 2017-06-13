@@ -10,6 +10,7 @@ import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CaretNextIcon from 'grommet/components/icons/base/CaretNext'
 import GrommetButton from 'grommet/components/Button'
 import styled from 'styled-components'
+import Carousel from 'grommet/components/Carousel'
 
 const LowPadButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -23,30 +24,28 @@ const IconButton = props =>
   </Box>
 
 const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
-  <Box pad='medium' full='true' alignContent='center'>
-    <Card
-      textSize='small'
-      colorIndex='light-1'
-      margin='small'
-      contentPad='medium'
-      direction='column'>
-      <Heading>
-        {wordsArray[slideShowIndex].word.word}
-      </Heading>
-      <Paragraph margin='small' size='large'>
-        {wordsArray[slideShowIndex].word.meaning}
-      </Paragraph>
-      <Paragraph margin='small'>
-        {wordsArray[slideShowIndex].word.example}
-      </Paragraph>
-    </Card>
-    <Box direction='row' alignContent='around'>
-      <IconButton icon={<CaretBackIcon />}
-        onClick={() => slideShowIndex > 0 && moveSlideshow('-')} />
-      <IconButton icon={<CaretNextIcon />}
-        onClick={() => slideShowIndex + 1 < wordsArray.length && moveSlideshow('+')} />
-    </Box>
-  </Box>
+  <Carousel>
+    {wordsArray.map( words =>
+      <Box pad='large' alignContent='center'>
+        <Card
+          textSize='small'
+          colorIndex='light-1'
+          margin='small'
+          contentPad='medium'
+          direction='column'>
+          <Heading>
+            {words.word.word}
+          </Heading>
+          <Paragraph margin='small' size='large'>
+            {words.word.meaning}
+          </Paragraph>
+          <Paragraph margin='small'>
+            {words.word.example}
+          </Paragraph>
+        </Card>
+      </Box>
+    )}
+  </Carousel>
 
 SlideShow.propTypes = {
   wordsArray: PropTypes.array,
