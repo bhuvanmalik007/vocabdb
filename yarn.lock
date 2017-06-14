@@ -5131,6 +5131,10 @@ react-addons-transition-group@^15.3.0:
     fbjs "^0.8.4"
     object-assign "^4.1.0"
 
+react-animate-on-change@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-animate-on-change/-/react-animate-on-change-0.2.1.tgz#62898eb33547e9facff1737264a3d9a53c98e8b3"
+
 react-desc@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-desc/-/react-desc-1.1.0.tgz#d9e65ae52401f548be69c3d6644e1425ac11dc04"

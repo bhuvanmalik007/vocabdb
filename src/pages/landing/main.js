@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types' //eslint-disable-line
 import LandingHeader from '../../components/landingheader'
+import LandingFooter from '../../components/landingfooter'
 import HeroImage from '../../static/hero.jpg'
 import LandingHero from '../../components/landinghero'
 import FeatureCard from '../../components/featurecard'
@@ -35,33 +36,36 @@ export class LandingView extends Component {
             getStarted='Get Started' cardColor='grey-1' label='Mission Admission' justify='end'
             authenticated={this.props.authenticated} />
         </Box>
-        <Box pad='medium' colorIndex='grey-1-a'>
+        <Box pad='large' align='center' colorIndex='grey-2'>
           <Tiles size='medium' justify='center' pad='large'>
-            <FeatureCard heading='Flashcards' para='Store words as flashcards with meaning, example sentences,
-              pronounciation & personal notes!' />
-            <FeatureCard heading='Your Words' para='Segregate your words into lists' />
-            <FeatureCard heading='Games' para='Play word games' />
-            <FeatureCard heading='Starter Words'
-              para='Sample word pack with the most recurring words to get you up and running' />
-            <FeatureCard heading='Favourites' para='Store favourites' />
+            <FeatureShow icon={<ChapterAdd colorIndex='light-1' size='large' />}
+              heading='Flashcards'
+              para='Store words as flashcards with meaning, example sentences, pronounciation & personal notes!' />
+            <FeatureShow icon={<Apps colorIndex='light-1' size='large' />}
+              heading='Your Words' para='Segregate your words into lists' />
+            <FeatureShow icon={<Gamepad colorIndex='light-1' size='large' />} heading='Games' para='Play word games' />
+            <FeatureShow icon={<Book colorIndex='light-1' size='large' />}
+              heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
+            <FeatureShow icon={<Star colorIndex='light-1' size='large' />} heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
         <LandingHero image={Free}
-          grommetColor='light-1'
-          heading='Try it for free today!' getStarted='Get Started' justify='center' />
-        <Box pad='large' align='center'>
+        grommetColor='light-1'
+        heading='Try it for free today!' getStarted='Get Started' justify='center' />
+        <Box pad='large' align='center' colorIndex='light-1'>
           <Tiles size='medium' justify='center' pad='large'>
-            <FeatureShow icon={<ChapterAdd colorIndex='brand' size='large' />}
+            <FeatureCard icon={<ChapterAdd colorIndex='brand' size='large' />}
               heading='Flashcards'
               para='Store words as flashcards with meaning, example sentences, pronounciation & personal notes!' />
-            <FeatureShow icon={<Apps colorIndex='brand' size='large' />}
+            <FeatureCard icon={<Apps colorIndex='brand' size='large' />}
               heading='Your Words' para='Segregate your words into lists' />
-            <FeatureShow icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games' />
-            <FeatureShow icon={<Book colorIndex='brand' size='large' />}
+            <FeatureCard icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games' />
+            <FeatureCard icon={<Book colorIndex='brand' size='large' />}
               heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
-            <FeatureShow icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites' />
+            <FeatureCard icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites' />
           </Tiles>
         </Box>
+        <LandingFooter/>
       </GrommetApp>
     )
   }

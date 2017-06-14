@@ -64,3 +64,12 @@
 .align-center {
   align-self: center;
 }
+.sliderchange{
+  animation: clicked-keyframes 1s;
+}
+@keyframes clicked-keyframes {
+  from {
+    opacity: 0.01
+  }
+  to {opacity: 1}
+}
