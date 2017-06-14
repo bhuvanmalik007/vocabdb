@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Icon, Button } from 'semantic-ui-react'
+import { Segment, Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { selectedCountReducer, reduceToSenseIds } from '../../futils/selectionreducers'
 import Box from 'grommet/components/Box'
@@ -45,15 +45,10 @@ const LowPadButton = styled(GrommetButton)`
     padding: 10px !important;
   }
 `
-<<<<<<< HEAD
-const SmallerCards = styled(Card)`
 
-`
 const Styledspinning = styled(Spinning)`
   margin-top : 20px;
 `
-=======
->>>>>>> f4598f636315116e8a9480ea618ceed6ae59c43a
 
 const DashButton = props =>
   <Box pad='medium'>
@@ -74,48 +69,48 @@ const audio = (index) => {
 }
 
 const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) =>
-<Animate enter={{"animation": "fade", "duration": 1000, "delay": 0}}
-keep={false} visible={true}>
-  <Box pad='medium' full='horizontal'>
-    <Columns size='medium' justify='center'
-      maxCount={3} masonry>
-      {filteredArray.length && filteredArray.map((element, index) =>
-        <Box onClick={() => { multipleSelect && select(index) }} pad='none' key={index}>
-          <Card
-            textSize='small'
-            colorIndex='light-1'
-            margin='small'
-            contentPad='medium'
-            direction='column'>
-            <Box align='end'>
-              {multipleSelect && element.hasOwnProperty('selected') && element.selected &&
-                <Status value='ok' />}
-            </Box>
-            <Heading>
-              {element.word.word}
-            </Heading>
-            <Paragraph margin='small' size='large'>
-              {element.word.meaning}
-            </Paragraph>
-            <Paragraph margin='small'>
-              {element.word.example}
-            </Paragraph>
-            <Box align='end'>
-              {!multipleSelect && <div>
-                <GrommetButton icon={<Volume />} onClick={() => audio(index)} id='VolumeUp' />
-                <audio id={'audio' + index} src={element.word.pronounciation} />
-                <GrommetButton icon={<PlatformGoogle />} onClick={() => searchGoogle(element.word.word)} />
-                <GrommetButton onClick={() => currentListId === 'all'
-                  ? deleteFromAll({ senseIds: [element.word.id] })
-                  : deleteFromList({ listId: currentListId, senseIds: [element.word.id] })}
-                  icon={<Close />} />
-              </div>}
-            </Box>
-          </Card>
-        </Box>) || <div />}
-    </Columns>
-  </Box>
-</Animate>
+  <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
+    keep={false} visible>
+    <Box pad='medium' full='horizontal'>
+      <Columns size='medium' justify='center'
+        maxCount={3} masonry>
+        {filteredArray.length && filteredArray.map((element, index) =>
+          <Box onClick={() => { multipleSelect && select(index) }} pad='none' key={index}>
+            <Card
+              textSize='small'
+              colorIndex='light-1'
+              margin='small'
+              contentPad='medium'
+              direction='column'>
+              <Box align='end'>
+                {multipleSelect && element.hasOwnProperty('selected') && element.selected &&
+                  <Status value='ok' />}
+              </Box>
+              <Heading>
+                {element.word.word}
+              </Heading>
+              <Paragraph margin='small' size='large'>
+                {element.word.meaning}
+              </Paragraph>
+              <Paragraph margin='small'>
+                {element.word.example}
+              </Paragraph>
+              <Box align='end'>
+                {!multipleSelect && <div>
+                  <GrommetButton icon={<Volume />} onClick={() => audio(index)} id='VolumeUp' />
+                  <audio id={'audio' + index} src={element.word.pronounciation} />
+                  <GrommetButton icon={<PlatformGoogle />} onClick={() => searchGoogle(element.word.word)} />
+                  <GrommetButton onClick={() => currentListId === 'all'
+                    ? deleteFromAll({ senseIds: [element.word.id] })
+                    : deleteFromList({ listId: currentListId, senseIds: [element.word.id] })}
+                    icon={<Close />} />
+                </div>}
+              </Box>
+            </Card>
+          </Box>) || <div />}
+      </Columns>
+    </Box>
+  </Animate>
 
 CardsMaker.propTypes = {
   deleteFromAll: PropTypes.func,
@@ -206,7 +201,7 @@ export default class MyFlashcards extends Component {
 
         </ShadowBox>
 
-        { this.props.isLoading && <Styledspinning size='large'/> }
+        { this.props.isLoading && <Styledspinning size='large' /> }
 
         {!this.props.isLoading &&
           <Segment basic>
