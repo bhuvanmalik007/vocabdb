@@ -12,7 +12,7 @@ import AddIcon from 'grommet/components/icons/base/Add'
 import Multiple from 'grommet/components/icons/base/Multiple'
 import Select from 'grommet/components/Select'
 import GrommetSearch from 'grommet/components/Search'
-import styled from 'styled-components'
+import styled,{keyframes} from 'styled-components'
 import Volume from 'grommet/components/icons/base/Volume'
 import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
@@ -21,14 +21,13 @@ import PlayIcon from 'grommet/components/icons/base/Play'
 import Spinning from 'grommet/components/icons/Spinning'
 import Animate from 'grommet/components/Animate'
 
-const StyledSelect = styled(Select)`
-  input {
-    border-radius: 0px;
-    padding: 12px;
-  }
-`
+
 const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
+  &:active{
+    background-color : #865cd6;
+    color : white;
+  }
 `
 
 const ShadowBox = styled(Box)`
@@ -45,15 +44,19 @@ const LowPadButton = styled(GrommetButton)`
     padding: 10px !important;
   }
 `
-<<<<<<< HEAD
+
 const SmallerCards = styled(Card)`
 
 `
 const Styledspinning = styled(Spinning)`
   margin-top : 20px;
 `
-=======
->>>>>>> f4598f636315116e8a9480ea618ceed6ae59c43a
+const Hovercard = styled(Card)`
+  transition : all 0.5s ease;
+  &:hover {
+   transform : scale(1.05);
+  }
+`
 
 const DashButton = props =>
   <Box pad='medium'>
@@ -81,7 +84,7 @@ keep={false} visible={true}>
       maxCount={3} masonry>
       {filteredArray.length && filteredArray.map((element, index) =>
         <Box onClick={() => { multipleSelect && select(index) }} pad='none' key={index}>
-          <Card
+          <Hovercard
             textSize='small'
             colorIndex='light-1'
             margin='small'
@@ -111,7 +114,7 @@ keep={false} visible={true}>
                   icon={<Close />} />
               </div>}
             </Box>
-          </Card>
+          </Hovercard>
         </Box>) || <div />}
     </Columns>
   </Box>
@@ -152,7 +155,7 @@ export default class MyFlashcards extends Component {
           }
 
           {!this.props.multipleSelect &&
-            <StyledSelect
+            <Select
               placeHolder='Select List'
               className='icon'
               icon='list layout'

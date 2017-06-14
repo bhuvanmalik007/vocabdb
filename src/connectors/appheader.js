@@ -9,6 +9,11 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
 import composeR from 'compose-r'
 import { pick } from 'ramda'
+import styled from 'styled-components'
+
+const Styledlink = styled(Link)`
+  color : #ccc;
+`
 
 const AppHeader = ({ showLogin, authenticated, location }) =>
   <div>
@@ -19,8 +24,8 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
         <Title className='lato-logo'>VocabDB</Title>
         <Menu label='Label' inline direction='row' flex='grow' align='end' justify='start'
           pad={{ horizontal: 'medium' }}>
-          <Link to='myflashcards' className='header-texts'>My Flashcards</Link>
-          <Link to='explore' className='header-texts'>Explore Words</Link>
+          <Styledlink to='myflashcards' className='header-texts'>My Flashcards</Styledlink>
+          <Styledlink to='explore' className='header-texts'>Explore Words</Styledlink>
         </Menu>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'

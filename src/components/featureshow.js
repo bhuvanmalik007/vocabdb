@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Headline from 'grommet/components/Headline';
-import Box from 'grommet/components/Box';
+import Tile from 'grommet/components/Tile'
 import Paragraph from 'grommet/components/Paragraph';
 
 export default props =>
-  <Box pad="medium" basis="1/3">
+  <Tile pad="medium" basis="1/3" colorIndex='grey-2'>
     {props.icon}
     <Headline size="small" strong={true} margin="medium">
       {props.heading}
@@ -12,4 +12,4 @@ export default props =>
     <Paragraph margin="none">
       {props.para}
     </Paragraph>
-  </Box>
+  </Tile>
