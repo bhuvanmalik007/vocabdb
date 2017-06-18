@@ -26,6 +26,7 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
           pad={{ horizontal: 'medium' }}>
           <Styledlink to='myflashcards' className='header-texts'>My Flashcards</Styledlink>
           <Styledlink to='explore' className='header-texts'>Explore Words</Styledlink>
+          <Styledlink to='test' className='header-texts'>Test</Styledlink>
         </Menu>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
