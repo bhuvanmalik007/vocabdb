@@ -9,10 +9,10 @@ let TestListSelectForm = ({ handleSubmit, pristine, submitting, lists }) => {
       <Segment raised padded className='animated fadeIn'>
         <Form onSubmit={handleSubmit}>
           <Form.Field width={7}>
-            <Field name='listObj' component='select'>
+            <Field name='index' component='select'>
               {/* <option /> */}
               {
-                lists.map((list, index) => <option key={index} value={list}>{list.listName}
+                lists.map((list, index) => <option key={index} value={index}>{list.listName}
                 </option>)
               }
             </Field>

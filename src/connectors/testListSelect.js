@@ -6,7 +6,7 @@ import { pick } from 'ramda' //eslint-disable-line
 
 const TestListSelect = ({ lists, createTest }) => {
   const submit = (formData) => {
-    createTest(formData.listObj)
+    createTest(lists[formData.index])
   }
   return (
     <TestListSelectForm onSubmit={submit} lists={lists} />

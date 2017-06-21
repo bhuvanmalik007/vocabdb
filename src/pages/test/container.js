@@ -9,7 +9,8 @@ const mapDispatchToProps = dispatch => ({
   goBack: () => dispatch({ type: 'GO_BACK' }),
   reveal: () => dispatch({ type: 'REVEAL' }),
   setStatus: (payload) => dispatch({ type: 'SET_STATUS', payload }),
-  reset: (payload) => dispatch({ type: 'RESET_TEST', payload })
+  reset: (payload) => dispatch({ type: 'RESET_TEST', payload }),
+  delete: (payload) => dispatch({ type: 'DELETE_TEST', payload })
 })
 
 const mapStateToProps = state => ({

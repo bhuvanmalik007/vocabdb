@@ -45,25 +45,18 @@ const fetchTests = (action$, store) =>
 
 const createTest = (action$, store) =>
   action$.ofType('CREATE_TEST')
-    .map((payload) => ({ type: 'START_TEST',
-      payload: { index: action.payload.index, test: payload, listId: action.payload.listId } }))
+    .flatMap((action) => [{ type: 'GET_TEST', payload: { index: 0, listId: action.payload.listId } },
+    { type: 'SHOW_MODAL' }])
 
 const startTest = (action$, store) =>
   action$.ofType('GET_TEST')
   .mergeMap(action =>
     postRequest({ listId: action.payload.listId }, '/getgame/', store)
-    .map((payload) => ({ type: 'START_TEST',
-      payload: { index: action.payload.index, test: payload, listId: action.payload.listId } }))
+    .flatMap((payload) => [{ type: 'START_TEST',
+      payload: { index: action.payload.index, test: payload, listId: action.payload.listId } },
+      { type: 'FETCH_TEST_LISTS' }])
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
-
-// const startTest = (action$, store) =>
-//   action$.ofType('GET_TEST')
-//   .mergeMap(action =>
-//     postRequest({ listId: action.payload.listId }, '/getgame/', store)
-//     .map((payload) => ({ type: 'START_TEST', payload: { stats: action.payload, test: payload } }))
-//     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
-//   )
 
 const resetTest = (action$, store) =>
   action$.ofType('RESET_TEST')
@@ -74,16 +67,12 @@ const resetTest = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
-// const setStatus = (action$, store) =>
-//   action$.ofType('SET_STATUS')
-//   .mergeMap(action =>
-//     postRequest({
-//       listId: action.payload.wordObj.listId,
-//       status: action.payload.wordObj.status,
-//       mindex: action.payload.wordObj.mindex
-//     }, '/setwordstatus/', store)
-//     .map((payload) => ({ type: 'START_TEST', payload: { stats: action.payload, test: payload } }))
-//     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
-//   )
+const deleteTest = (action$, store) =>
+  action$.ofType('DELETE_TEST')
+  .mergeMap(action =>
+    postRequest({ listId: action.payload.listId }, '/deletegame/', store)
+    .map((payload) => ({ type: 'FETCH_TEST_LISTS' }))
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
+  )
 
-export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest]
+export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest, deleteTest]
