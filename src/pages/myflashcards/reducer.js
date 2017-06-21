@@ -50,7 +50,8 @@ const actionHandlers = {
       ...state.filteredArray.slice(action.index + 1)]
   }),
   ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] }),
-  SET_CURRENT_LIST: (state, action) => Object.assign({}, state, { currentListId: action.payload }),
+  SET_CURRENT_LIST: (state, action) => Object.assign({}, state,
+    { currentListName: action.payload.listName, currentListId: action.payload.listId }),
   DELETE_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.filter(listObj =>
     listObj.listId !== action.payload) }),
   RENAME_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.map(listObj =>

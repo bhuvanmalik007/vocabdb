@@ -19,6 +19,7 @@ import CloseIcon from 'grommet/components/icons/base/Close'
 import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
 import Legend from 'grommet/components/Legend'
 import Split from 'grommet/components/Split'
+import RefreshIcon from 'grommet/components/icons/base/Refresh'
 
 const Hovercard = styled(Card)`
   transition : all 0.5s ease;
@@ -38,6 +39,7 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
+        {/* LEFT SIDE */}
         <Sidebar colorIndex='light-2' size='medium'>
           <Header pad='small'
             justify='center'>
@@ -57,7 +59,7 @@ export default class MyFlashcards extends Component {
               {
                 this.props.savedTests.map((test, index) =>
                   <Tile key={index}>
-                    <Hovercard colorIndex='light-1' onClick={() => this.props.getTest(test)}>
+                    <Hovercard colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}>
                       <Heading>{test.listName}</Heading>
                       <Label>Remaining Words : {test.wordsToPlay}</Label>
                       <Paragraph>Correct Words : {test.correctWords}</Paragraph>
@@ -71,9 +73,19 @@ export default class MyFlashcards extends Component {
           {
             this.props.ongoingTest &&
               <Box justify='center'>
-                <Legend series={[{ 'label': 'CORRECT', 'value': this.props.correct, 'colorIndex': 'ok' },
-                  { 'label': 'INCORRECT', 'value': this.props.incorrect, 'colorIndex': 'critical' },
-                  { 'label': 'REMAINING', 'value': this.props.remaining, 'colorIndex': 'unknown' }]}
+                <Legend series={[{
+                  'label': 'CORRECT',
+                  'value': this.props.savedTests[this.props.testIndex].correctWords,
+                  'colorIndex': 'ok'
+                }, {
+                  'label': 'INCORRECT',
+                  'value': this.props.savedTests[this.props.testIndex].incorrectWords,
+                  'colorIndex': 'critical'
+                }, {
+                  'label': 'REMAINING',
+                  'value': this.props.savedTests[this.props.testIndex].wordsToPlay,
+                  'colorIndex': 'unknown'
+                }]}
                   size='large'
                   total />
               </Box>
@@ -81,9 +93,14 @@ export default class MyFlashcards extends Component {
           {
             this.props.ongoingTest && <Footer pad='medium'>
               <Button icon={<CaretBackIcon size='large' />} onClick={this.props.goBack} />
+              {this.props.testWordsCounter === this.props.testWordsArray.length &&
+                <Button icon={<RefreshIcon size='large' />} onClick={() => this.props.reset(this.props.listId)} />
+              }
             </Footer>
           }
         </Sidebar>
+
+        {/* RIGHT SIDE */}
         { !this.props.ongoingTest &&
           <Box
             justify='center'
@@ -97,12 +114,12 @@ export default class MyFlashcards extends Component {
             justify='center'
             align='center'
             pad='medium'>
-            { !this.props.revealed &&
+            { !this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
               <Card heading={this.props.testWordsArray[this.props.testWordsCounter].word}
                 contentPad='large' textSize='xlarge' description='Tap to see meaning'
                 onClick={this.props.reveal} />
             }
-            { this.props.revealed &&
+            { this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
               <Hovercard
                 textSize='small'
                 colorIndex='light-1'
@@ -121,13 +138,19 @@ export default class MyFlashcards extends Component {
                 <Paragraph>
                   <Button icon={<CloseIcon />}
                     label="I didn't know this word"
-                    // onClick
+                    onClick={() =>
+                      this.props.setStatus({
+                        status: -1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
+                      })}
                     accent
                     primary={false}
                     secondary />
                   <Button icon={<CheckmarkIcon />}
                     label='I knew this word'
-                    // onClick
+                    onClick={() =>
+                      this.props.setStatus({
+                        status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
+                      })}
                     primary={false}
                     secondary={false} />
                 </Paragraph>
@@ -144,6 +167,12 @@ export default class MyFlashcards extends Component {
                   </div>}
                 </Box> */}
               </Hovercard>
+            }
+            {
+              this.props.testWordsCounter === this.props.testWordsArray.length &&
+                <Heading>
+                  COMPLETED!
+                </Heading>
             }
           </Box>
         }
@@ -166,5 +195,9 @@ MyFlashcards.propTypes = {
   revealed: PropTypes.bool,
   reveal: PropTypes.func,
   testWordsArray: PropTypes.array,
-  testWordsCounter: PropTypes.number
+  testWordsCounter: PropTypes.number,
+  setStatus: PropTypes.func,
+  listId: PropTypes.string,
+  reset: PropTypes.func,
+  testIndex: PropTypes.number
 }

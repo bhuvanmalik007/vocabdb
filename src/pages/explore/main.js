@@ -39,7 +39,7 @@ const IconButton = props =>
 
 const CardsMaker = props =>
 <Animate enter={{"animation": "fade", "duration": 1000, "delay": 100}}
-keep={false} visible={true}>
+  keep={false} visible={true}>
   <Columns size='medium' justify='center' masonry
     maxCount={3} responsive>
     {props.searchResults.map((element, index) =>

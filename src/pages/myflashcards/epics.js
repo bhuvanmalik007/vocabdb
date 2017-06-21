@@ -63,7 +63,7 @@ const deleteFromList = (action$, store) =>
 const fetchMyListWords = (action$, store) =>
   action$.ofType('FETCH_LIST_WORDS')
   .mergeMap(action =>
-    postRequest({ listId: action.payload }, '/getlistwords/', store)
+    postRequest({ listId: action.payload.listId }, '/getlistwords/', store)
     .map((payload) => ({ type: 'INIT_WORDS', payload }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
@@ -74,7 +74,7 @@ const setCurrentListEpic = (action$, store) =>
 
 const setAllListEpic = (action$, store) =>
   action$.ofType('FETCH_MYFLASHCARDS')
-  .map(action => ({ type: 'SET_CURRENT_LIST', payload: 'all' }))
+  .map(action => ({ type: 'SET_CURRENT_LIST', payload: { listName: 'all', listId: 'all' } }))
 
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')
