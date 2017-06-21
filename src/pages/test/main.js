@@ -20,6 +20,7 @@ import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
 import Legend from 'grommet/components/Legend'
 import Split from 'grommet/components/Split'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
+import TrashIcon from 'grommet/components/icons/base/Trash'
 
 const Hovercard = styled(Card)`
   transition : all 0.5s ease;
@@ -65,6 +66,8 @@ export default class MyFlashcards extends Component {
                       <Paragraph>Correct Words : {test.correctWords}</Paragraph>
                       <Paragraph>Incorrect Words : {test.incorrectWords}</Paragraph>
                     </Hovercard>
+                    <Button icon={<TrashIcon size='large' />}
+                      onClick={() => this.props.delete({ index, listId: test.listId })} />
                   </Tile>
                 )
               }
@@ -184,10 +187,7 @@ export default class MyFlashcards extends Component {
 MyFlashcards.propTypes = {
   initTestState: PropTypes.func,
   savedTests: PropTypes.array,
-  correct: PropTypes.number,
-  incorrect: PropTypes.number,
   ongoingTest: PropTypes.bool,
-  remaining: PropTypes.number,
   goBack: PropTypes.func,
   listName: PropTypes.string,
   getTest: PropTypes.func,
@@ -199,5 +199,6 @@ MyFlashcards.propTypes = {
   setStatus: PropTypes.func,
   listId: PropTypes.string,
   reset: PropTypes.func,
-  testIndex: PropTypes.number
+  testIndex: PropTypes.number,
+  delete: PropTypes.func
 }
