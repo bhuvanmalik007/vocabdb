@@ -38,35 +38,35 @@ const IconButton = props =>
   </Box>
 
 const CardsMaker = props =>
-<Animate enter={{"animation": "fade", "duration": 1000, "delay": 100}}
-keep={false} visible={true}>
-  <Columns size='medium' justify='center' masonry
-    maxCount={3} responsive>
-    {props.searchResults.map((element, index) =>
-      <Card
-        key={index}
-        textSize='small'
-        colorIndex='light-1'
-        margin='small'
-        contentPad='medium'
-        direction='column'>
-        <Box align='end'>
-          {!element.selected ? <IconButton icon={<FormAdd />}
-            onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation, index })} />
-            : <Status value='ok' />}
-        </Box>
-        <Heading>
-          {element.word}
-        </Heading>
-        <Paragraph margin='small' size='large'>
-          {element.meaning}
-        </Paragraph>
-        <Paragraph margin='small'>
-          {element.example}
-        </Paragraph>
-      </Card>)}
-  </Columns>
-</Animate>
+  <Animate enter={{"animation": "fade", "duration": 1000, "delay": 100}}
+    keep={false} visible={true}>
+    <Columns size='medium' justify='center' masonry
+      maxCount={3} responsive>
+      {props.searchResults.map((element, index) =>
+        <Card
+          key={index}
+          textSize='small'
+          colorIndex='light-1'
+          margin='small'
+          contentPad='medium'
+          direction='column'>
+          <Box align='end'>
+            {!element.selected ? <IconButton icon={<FormAdd />}
+              onClick={() => props.addWord({ ...element, pronounciation: props.pronounciation, index })} />
+              : <Status value='ok' />}
+          </Box>
+          <Heading>
+            {element.word}
+          </Heading>
+          <Paragraph margin='small' size='large'>
+            {element.meaning}
+          </Paragraph>
+          <Paragraph margin='small'>
+            {element.example}
+          </Paragraph>
+        </Card>)}
+    </Columns>
+  </Animate>
 
 CardsMaker.propTypes = {
   searchResults: PropTypes.array,
@@ -109,7 +109,7 @@ const ExploreSenses = ({
         <Popup position='right center' trigger={<Icon inverted link name='volume up' size='huge'
           onClick={audio} />} content='Click to hear pronounciation' />
       } */}
-      {isLoading && <Styledspinning size='large'/>}
+      {isLoading && <Styledspinning size='large' />}
       {words.length !== 0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={words} searchString={searchString}
           addWord={addWord} filterWords={filterWords} pronounciation={pronounciation} />

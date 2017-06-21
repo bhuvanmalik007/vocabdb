@@ -26,9 +26,9 @@ const IconButton = props =>
 const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
   <Box pad='medium' full='true' alignContent='center'>
     <AnimateOnChange
-    baseClassName="slider"
-    animationClassName="sliderchange"
-    animate={true}>
+      baseClassName='slider'
+      animationClassName='sliderchange'
+      animate>
       <Card
         textSize='small'
         colorIndex='light-1'
