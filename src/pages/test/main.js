@@ -21,6 +21,8 @@ import Legend from 'grommet/components/Legend'
 import Split from 'grommet/components/Split'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import TrashIcon from 'grommet/components/icons/base/Trash'
+import Meter from 'grommet/components/Meter'
+import Value from 'grommet/components/Value'
 
 const Hovercard = styled(Card)`
   transition : all 0.5s ease;
@@ -75,22 +77,40 @@ export default class MyFlashcards extends Component {
           }
           {
             this.props.ongoingTest &&
-              <Box justify='center'>
-                <Legend series={[{
+              <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
+                <Value value={this.props.savedTests[this.props.testIndex].correctWords}
+                  units='words' label='Correct' />
+                <Meter value={this.props.savedTests[this.props.testIndex].correctWords} onActive={() => null}
+                  max={this.props.savedTests[this.props.testIndex].correctWords +
+                    this.props.savedTests[this.props.testIndex].incorrectWords +
+                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
+                <Value value={this.props.savedTests[this.props.testIndex].incorrectWords}
+                  units='words' label='Incorrect' />
+                <Meter value={this.props.savedTests[this.props.testIndex].incorrectWords} onActive={() => null}
+                  max={this.props.savedTests[this.props.testIndex].correctWords +
+                    this.props.savedTests[this.props.testIndex].incorrectWords +
+                  this.props.savedTests[this.props.testIndex].wordsToPlay}/>
+                <Value value={this.props.savedTests[this.props.testIndex].wordsToPlay}
+                  units='words' label='Remaining' />
+                <Meter value={this.props.savedTests[this.props.testIndex].wordsToPlay} onActive={() => null}
+                  max={this.props.savedTests[this.props.testIndex].correctWords +
+                  this.props.savedTests[this.props.testIndex].incorrectWords +
+                this.props.savedTests[this.props.testIndex].wordsToPlay}/>
+                {/* <Legend series={[{
                   'label': 'CORRECT',
                   'value': this.props.savedTests[this.props.testIndex].correctWords,
                   'colorIndex': 'ok'
-                }, {
+                  }, {
                   'label': 'INCORRECT',
                   'value': this.props.savedTests[this.props.testIndex].incorrectWords,
                   'colorIndex': 'critical'
-                }, {
+                  }, {
                   'label': 'REMAINING',
                   'value': this.props.savedTests[this.props.testIndex].wordsToPlay,
                   'colorIndex': 'unknown'
-                }]}
+                  }]}
                   size='large'
-                  total />
+                total /> */}
               </Box>
           }
           {
@@ -157,18 +177,6 @@ export default class MyFlashcards extends Component {
                     primary={false}
                     secondary={false} />
                 </Paragraph>
-
-                {/* <Box align='end'>
-                  {!multipleSelect && <div>
-                    <GrommetButton icon={<Volume />} onClick={() => audio(index)} id='VolumeUp' />
-                    <audio id={'audio' + index} src={element.word.pronounciation} />
-                    <GrommetButton icon={<PlatformGoogle />} onClick={() => searchGoogle(element.word.word)} />
-                    <GrommetButton onClick={() => currentListId === 'all'
-                      ? deleteFromAll({ senseIds: [element.word.id] })
-                      : deleteFromList({ listId: currentListId, senseIds: [element.word.id] })}
-                      icon={<Close />} />
-                  </div>}
-                </Box> */}
               </Hovercard>
             }
             {

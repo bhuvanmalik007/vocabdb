@@ -88,3 +88,7 @@
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
 }
+
+.grommetux-meter__graphic{
+  width: 240px !important;
+}
