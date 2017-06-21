@@ -4,17 +4,33 @@ import LandingHeader from '../../components/landingheader'
 import LandingFooter from '../../components/landingfooter'
 import HeroImage from '../../static/hero.jpg'
 import LandingHero from '../../components/landinghero'
-import FeatureCard from '../../components/featurecard'
-import Tiles from 'grommet/components/Tiles'
 import Box from 'grommet/components/Box'
-import Free from '../../static/free.jpg'
-import ChapterAdd from 'grommet/components/icons/base/ChapterAdd'
-import Apps from 'grommet/components/icons/base/Apps'
-import Gamepad from 'grommet/components/icons/base/Gamepad'
-import Book from 'grommet/components/icons/base/Book'
-import Star from 'grommet/components/icons/base/Star'
-import FeatureShow from '../../components/featureshow'
 import GrommetApp from 'grommet/components/App'
+import Section from 'grommet/components/Section'
+import styled from 'styled-components'
+import Headline from 'grommet/components/Headline'
+import SampleCard from './samplecard'
+import SampleCardMaker from './samplecardmaker'
+import OxfordPng from '../../static/oxford.png'
+import Image from 'grommet/components/Image'
+import Animate from 'grommet/components/Animate'
+
+const NoPadSection = styled(Section)`
+  padding: 0px !important;
+  background-color: #f0f0f0;
+`
+
+const NoPadSection2 = styled(Section)`
+  padding: 0px !important;
+`
+
+const Box50 = styled(Box)`
+  width: 50%;
+`
+
+const FixImage = styled(Image)`
+  width: 800px !important;
+`
 
 export class LandingView extends Component {
 
@@ -33,39 +49,71 @@ export class LandingView extends Component {
             desc='Whether youʼre an English major or appearing for exams with English sections like
             SAT, GMAT, GRE, LSAT etc or any other Entrance Exam,
             building vocabulary is the first step and also the most important.'
-            getStarted='Get Started' cardColor='grey-1' label='Mission Admission' justify='end'
+            getStarted='Get Started' cardColor='grey-1' justify='end'
             authenticated={this.props.authenticated} />
         </Box>
-        <Box pad='large' align='center' colorIndex='grey-2'>
-          <Tiles size='medium' justify='center' pad='large'>
-            <FeatureShow icon={<ChapterAdd colorIndex='light-1' size='large' />}
-              heading='Flashcards'
-              para='Store words as flashcards with meaning, example sentences, pronounciation & personal notes!' />
-            <FeatureShow icon={<Apps colorIndex='light-1' size='large' />}
-              heading='Your Words' para='Segregate your words into lists' />
-            <FeatureShow icon={<Gamepad colorIndex='light-1' size='large' />} heading='Games' para='Play word games' />
-            <FeatureShow icon={<Book colorIndex='light-1' size='large' />}
-              heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
-            <FeatureShow icon={<Star colorIndex='light-1' size='large' />} heading='Favourites' para='Store favourites' />
-          </Tiles>
-        </Box>
-        <LandingHero image={Free}
-        grommetColor='light-1'
-        heading='Try it for free today!' getStarted='Get Started' justify='center' />
-        <Box pad='large' align='center' colorIndex='light-1'>
-          <Tiles size='medium' justify='center' pad='large'>
-            <FeatureCard icon={<ChapterAdd colorIndex='brand' size='large' />}
-              heading='Flashcards'
-              para='Store words as flashcards with meaning, example sentences, pronounciation & personal notes!' />
-            <FeatureCard icon={<Apps colorIndex='brand' size='large' />}
-              heading='Your Words' para='Segregate your words into lists' />
-            <FeatureCard icon={<Gamepad colorIndex='brand' size='large' />} heading='Games' para='Play word games' />
-            <FeatureCard icon={<Book colorIndex='brand' size='large' />}
-              heading='Starter Words' para='Sample word pack with the most recurring words to get you up and running' />
-            <FeatureCard icon={<Star colorIndex='brand' size='large' />} heading='Favourites' para='Store favourites' />
-          </Tiles>
-        </Box>
-        <LandingFooter/>
+        <NoPadSection
+          justify='center'
+          align='center' full direction='row' pad={{ vertical: 'large' }} className='sec2'>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start'>
+            <SampleCard />
+          </Box>
+          <Box direction='column' alignContent='start' pad='large'>
+            <Headline size='medium' className='monserret'>Flashcards</Headline>
+            <Headline size='small' className='lato'>
+              Store words as flashcards complete with meaning, example
+              sentences, pronunciation & personal notes!
+            </Headline>
+            <Box direction='row' responsive={false} align='center'>
+              {/* <Button icon={<LinkNextIcon />} path='/dash' className='lato linkb' label='Explore Projects' /> */}
+            </Box>
+          </Box>
+        </NoPadSection>
+        <NoPadSection2
+          justify='center'
+          align='center' full direction='row' pad={{ vertical: 'large' }} className='sec2'>
+          <Box direction='column' alignContent='start' pad='large'>
+            <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
+              keep={false} visible='scroll'>
+              <Headline size='medium' className='monserret'>Explore</Headline>
+              <Headline size='small' className='lato'>
+                Explore new words with a simple search powered by Oxford
+                Dictionaries<sup>TM</sup>
+              </Headline>
+              <Box direction='row' responsive={false} align='center'>
+                {/* <Button icon={<LinkNextIcon />} path='/dash' className='lato linkb' label='Explore Projects' /> */}
+              </Box>
+            </Animate>
+          </Box>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
+            <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
+              keep={false} visible='scroll'>
+              <FixImage src={OxfordPng} size='large' />
+            </Animate>
+          </Box>
+        </NoPadSection2>
+        <NoPadSection
+          justify='center'
+          align='center' full direction='row' pad={{ vertical: 'large' }} className='sec2'>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start'>
+            <SampleCardMaker />
+          </Box>
+          <Box50 direction='column' align='end' pad='large' flex='false'>
+            <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
+              keep={false} visible='scroll'>
+              <Headline size='medium' className='monserret'>Storage & Organization</Headline>
+              <Headline size='small' className='lato'>
+                Store as many words as you need for that exam!
+                Search your words, sort them from A-Z or segregate them into lists. You
+                have all the powers! Gone are the days of writing down words or printouts!
+              </Headline>
+              <Box direction='row' responsive={false} align='center'>
+                {/* <Button icon={<LinkNextIcon />} path='/dash' className='lato linkb' label='Explore Projects' /> */}
+              </Box>
+            </Animate>
+          </Box50>
+        </NoPadSection>
+        <LandingFooter />
       </GrommetApp>
     )
   }

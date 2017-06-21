@@ -48,7 +48,7 @@ const Styledspinning = styled(Spinning)`
   margin-top : 20px;
 `
 
-const Hovercard = styled(Card)`
+export const Hovercard = styled(Card)`
   transition : all 0.5s ease;
   &:hover {
    border: ${props => props.selecting ? `1px solid #865cd6` : `none`};
@@ -160,11 +160,11 @@ export default class MyFlashcards extends Component {
               placeHolder='Select List'
               className='icon'
               icon='list layout'
-              value={this.props.currentListId}
+              value={this.props.currentListName}
               onChange={(e) => e.value.value === 'all'
-                ? this.props.fetchAll() : this.props.onListChange(e.value.value)}
+                ? this.props.fetchAll() : this.props.onListChange({ listId: e.value.value, listName: e.value.label })}
               options={
-                this.props.lists.map((list, index) => ({ key: index, text: list.listName, value: list.listId }))
+                this.props.lists.map((list, index) => ({ key: index, label: list.listName, value: list.listId }))
               }
             />
           }
@@ -240,5 +240,6 @@ MyFlashcards.propTypes = {
   onListChange: PropTypes.func,
   fetchAll: PropTypes.func,
   showModal: PropTypes.func,
-  currentListId: PropTypes.string
+  currentListId: PropTypes.string,
+  currentListName: PropTypes.string
 }

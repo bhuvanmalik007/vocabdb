@@ -6,8 +6,10 @@ export const OnAuthFunction = router => dispatch => Lock.on('authenticated', fun
   Lock.getProfile(authResult.idToken, function (error, profile) {
     if (error) {
       dispatch({ type: 'ERROR IN AUTHENTICATION' })
+      Lock.hide()
     }
     dispatch({ type: 'AUTHENTICATED', pld: { profile, idToken: authResult.idToken } })
+    Lock.hide()
     router.push({ pathname: '/myflashcards' })
   })
 })

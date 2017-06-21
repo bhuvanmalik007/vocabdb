@@ -1,20 +1,17 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 import request, { withAuthentication } from '../../futils/requestutil'
-import { reduceToSenseIds } from '../../futils/selectionreducers'
+import { reduceToSenseIds } from '../../utils/selectionreducers'
 import { DBINTERCEPTOR_API } from '../../constants'
 
-const getRequest = (urlPath, store) => {
-  return Observable.from(
+const getRequest = (urlPath, store) => Observable.from(
     withAuthentication(store.getState())(
       request,
       DBINTERCEPTOR_API + urlPath + store.getState().core.profile.identities[0].user_id,
       'GET'
     )
   )
-}
 
-const postRequest = (reqBody, urlPath, store) => {
-  return Observable.from(
+const postRequest = (reqBody, urlPath, store) => Observable.from(
     withAuthentication(store.getState())(
       request,
       DBINTERCEPTOR_API + urlPath + store.getState().core.profile.identities[0].user_id,
@@ -22,7 +19,6 @@ const postRequest = (reqBody, urlPath, store) => {
       JSON.stringify(reqBody)
     )
   )
-}
 
 const initMapper = (action$, store) =>
   action$.ofType('INIT_STATE')
@@ -63,7 +59,7 @@ const deleteFromList = (action$, store) =>
 const fetchMyListWords = (action$, store) =>
   action$.ofType('FETCH_LIST_WORDS')
   .mergeMap(action =>
-    postRequest({ listId: action.payload }, '/getlistwords/', store)
+    postRequest({ listId: action.payload.listId }, '/getlistwords/', store)
     .map((payload) => ({ type: 'INIT_WORDS', payload }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
@@ -74,7 +70,7 @@ const setCurrentListEpic = (action$, store) =>
 
 const setAllListEpic = (action$, store) =>
   action$.ofType('FETCH_MYFLASHCARDS')
-  .map(action => ({ type: 'SET_CURRENT_LIST', payload: 'all' }))
+  .map(action => ({ type: 'SET_CURRENT_LIST', payload: { listName: 'all', listId: 'all' } }))
 
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')

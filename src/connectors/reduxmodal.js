@@ -7,12 +7,14 @@ import AddList from '../connectors/addlist'
 import SelectList from '../connectors/addwordlistselect'
 import ListSettings from '../connectors/listsettings'
 import SlideShow from '../connectors/slideshow'
+import TestListSelect from '../connectors/testListSelect'
 
 const modalContentMapper = {
   ADD_LIST: <AddList />,
   SELECT_LIST: <SelectList />,
   LIST_SETTINGS: <ListSettings />,
-  SLIDESHOW: <SlideShow />
+  SLIDESHOW: <SlideShow />,
+  TEST_LIST_SELECT: <TestListSelect />
 }
 
 const ReduxModal = ({ visibility, header, content, showModal, size }) =>

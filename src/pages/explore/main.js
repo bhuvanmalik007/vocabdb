@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Icon } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import Columns from 'grommet/components/Columns'
 import Card from 'grommet/components/Card'
@@ -38,8 +38,8 @@ const IconButton = props =>
   </Box>
 
 const CardsMaker = props =>
-  <Animate enter={{"animation": "fade", "duration": 1000, "delay": 100}}
-    keep={false} visible={true}>
+  <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 100 }}
+    keep={false} visible>
     <Columns size='medium' justify='center' masonry
       maxCount={3} responsive>
       {props.searchResults.map((element, index) =>
@@ -122,7 +122,7 @@ const ExploreSenses = ({
 ExploreSenses.propTypes = {
   search: PropTypes.func,
   words: PropTypes.array,
-  pronounciation:PropTypes.string,
+  pronounciation: PropTypes.string,
   searchString: PropTypes.string,
   filterWords: PropTypes.func,
   updateSearchString: PropTypes.func,

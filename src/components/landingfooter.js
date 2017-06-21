@@ -1,23 +1,35 @@
 import React from 'react'
-import Footer from 'grommet/components/Footer'
-import Title from 'grommet/components/Title'
+import { Link } from 'react-router' //eslint-disable-line
 import Box from 'grommet/components/Box'
 import Paragraph from 'grommet/components/Paragraph'
 import Anchor from 'grommet/components/Anchor'
-import { Link } from 'react-router'
+import styled from 'styled-components'
+import { MAILID } from '../constants'
+
+const BGTextNoMargin = styled(Paragraph)`
+  background: black;
+  padding: 7px;
+`
 
 export default props => (
-  <Box pad='small' colorIndex='grey-1'>
-    <Footer justify='between' primary>
-      <Box direction='row'
-        align='center'
-        pad={{ between: 'medium' }}>
-        <Paragraph margin='none'>
-          <Anchor>
-            Made with ♥ by students for students
-          </Anchor>
-        </Paragraph>
-      </Box>
-    </Footer>
+  <Box direction='row'
+    className='wallpaper open-sans'
+    justify='between'
+    colorIndex='grey-1' pad='medium' responsive>
+    <Box direction='column' alignSelf='end'>
+      <Paragraph size='small'>
+        Made with λs and ♥️
+      </Paragraph>
+    </Box>
+    <Box direction='column' alignSelf='end'>
+      <BGTextNoMargin size='small' margin='none'>
+        © {new Date().getFullYear()} Rajat Sharma
+      </BGTextNoMargin>
+      <BGTextNoMargin size='small' margin='none'>
+        For more details on this <br />
+        Please contact <Anchor href={'mailto:' + MAILID} label={MAILID} /> <br />
+        All Graphics created with <Anchor href='https://logomakr.com' label='Logomakr' />
+      </BGTextNoMargin>
+    </Box>
   </Box>
 )

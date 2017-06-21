@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Audiowide');
 @import url('https://fonts.googleapis.com/css?family=Lato:700i');
 @import url('https://fonts.googleapis.com/css?family=Crete+Round:400i');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom{
   display: none;
@@ -72,4 +73,18 @@
     opacity: 0.01
   }
   to {opacity: 1}
+}
+
+.wallpaper{
+  background-image: url("./static/hero.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 2;
+}
+
+.open-sans{
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
 }
