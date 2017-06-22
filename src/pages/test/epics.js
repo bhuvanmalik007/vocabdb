@@ -58,6 +58,17 @@ const startTest = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
+const setStatus = (action$, store) =>
+  action$.ofType('SET_STATUS')
+  .mergeMap(action =>
+    postRequest({
+      listId: store.getState().test.listId,
+      status: action.payload.status,
+      mindex: action.payload.wordObj.mindex
+    }, '/setwordstatus/', store)
+    .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
+  )
+
 const resetTest = (action$, store) =>
   action$.ofType('RESET_TEST')
   .mergeMap(action =>
@@ -75,4 +86,4 @@ const deleteTest = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
-export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest, deleteTest]
+export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest, deleteTest, setStatus]

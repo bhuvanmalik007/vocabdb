@@ -76,7 +76,7 @@ export class LandingView extends Component {
               keep={false} visible='scroll'>
               <Headline size='medium' className='monserret'>Explore</Headline>
               <Headline size='small' className='lato'>
-                Explore new words with a simple search powered by Oxford
+                Explore new words and make them your own with a simple search powered by Oxford
                 Dictionaries<sup>TM</sup>
               </Headline>
               <Box direction='row' responsive={false} align='center'>
@@ -102,9 +102,8 @@ export class LandingView extends Component {
               keep={false} visible='scroll'>
               <Headline size='medium' className='monserret'>Storage & Organization</Headline>
               <Headline size='small' className='lato'>
-                Store as many words as you need for that exam!
-                Search your words, sort them from A-Z or segregate them into lists. You
-                have all the powers! Gone are the days of writing down words or printouts!
+                Search your words, sort them from A-Z or segregate them into lists. You have all the powers!<br />
+                Gone are the days of writing down words or taking printouts!
               </Headline>
               <Box direction='row' responsive={false} align='center'>
                 {/* <Button icon={<LinkNextIcon />} path='/dash' className='lato linkb' label='Explore Projects' /> */}
