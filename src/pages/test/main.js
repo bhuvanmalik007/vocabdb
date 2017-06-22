@@ -17,7 +17,6 @@ import ChapterAddIcon from 'grommet/components/icons/base/ChapterAdd'
 import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
-import Legend from 'grommet/components/Legend'
 import Split from 'grommet/components/Split'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import TrashIcon from 'grommet/components/icons/base/Trash'
@@ -89,28 +88,13 @@ export default class MyFlashcards extends Component {
                 <Meter value={this.props.savedTests[this.props.testIndex].incorrectWords} onActive={() => null}
                   max={this.props.savedTests[this.props.testIndex].correctWords +
                     this.props.savedTests[this.props.testIndex].incorrectWords +
-                  this.props.savedTests[this.props.testIndex].wordsToPlay}/>
+                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
                 <Value value={this.props.savedTests[this.props.testIndex].wordsToPlay}
                   units='words' label='Remaining' />
                 <Meter value={this.props.savedTests[this.props.testIndex].wordsToPlay} onActive={() => null}
                   max={this.props.savedTests[this.props.testIndex].correctWords +
-                  this.props.savedTests[this.props.testIndex].incorrectWords +
-                this.props.savedTests[this.props.testIndex].wordsToPlay}/>
-                {/* <Legend series={[{
-                  'label': 'CORRECT',
-                  'value': this.props.savedTests[this.props.testIndex].correctWords,
-                  'colorIndex': 'ok'
-                  }, {
-                  'label': 'INCORRECT',
-                  'value': this.props.savedTests[this.props.testIndex].incorrectWords,
-                  'colorIndex': 'critical'
-                  }, {
-                  'label': 'REMAINING',
-                  'value': this.props.savedTests[this.props.testIndex].wordsToPlay,
-                  'colorIndex': 'unknown'
-                  }]}
-                  size='large'
-                total /> */}
+                    this.props.savedTests[this.props.testIndex].incorrectWords +
+                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
               </Box>
           }
           {

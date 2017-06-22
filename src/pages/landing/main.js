@@ -25,7 +25,6 @@ const NoPadSection2 = styled(Section)`
 `
 
 const Box50 = styled(Box)`
-  width: 50%;
 `
 
 const FixImage = styled(Image)`
@@ -94,11 +93,11 @@ export class LandingView extends Component {
         </NoPadSection2>
         <NoPadSection
           justify='center'
-          align='center' full direction='row' pad={{ vertical: 'large' }} className='sec2'>
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start'>
+          align='center' full direction='row' pad={{ vertical: 'large' }} className='sec2' basis='full' flex={false}>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
           </Box>
-          <Box50 direction='column' align='end' pad='large' flex='false'>
+          <Box50 direction='column' align='end' pad='large' basis='1/2' flex={false} full={false}>
             <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
               keep={false} visible='scroll'>
               <Headline size='medium' className='monserret'>Storage & Organization</Headline>
