@@ -14,7 +14,7 @@ export const LandingSection = ({ children, heading, text, color, reverse }) =>
     justify='center'
     color={color}
     align='center' full direction='row' pad={{ vertical: 'large' }} reverse={reverse}>
-    <Box direction='column' alignContent='start' pad='large'>
+    <Box direction='column' alignContent='start' pad='large' basis='1/2'>
       <Headline size='medium' className='monserret'>{heading}</Headline>
       <Headline size='small' className='lato'>
         {text}
