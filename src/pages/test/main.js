@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Sidebar from 'grommet/components/Sidebar'
-import Header from 'grommet/components/Header'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import Footer from 'grommet/components/Footer'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
-import Tiles from 'grommet/components/Tiles'
-import Tile from 'grommet/components/Tile'
 import Card from 'grommet/components/Card'
 import Label from 'grommet/components/Label'
-import Anchor from 'grommet/components/Anchor'
-import ChapterAddIcon from 'grommet/components/icons/base/ChapterAdd'
 import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
@@ -26,8 +21,19 @@ import { TestWordsLens, TotalWordsLens } from './lenses'
 import styled from 'styled-components'
 
 const QuickSilverSidebar = styled(Sidebar)`
-  background-color: #fff;
+  background-color: #BDD9BF;
 `
+
+// const ListHovercard = styled(Card)`
+//   transition : all 0.5s ease;
+//   &:hover {
+//    border: ${props => props.selecting ? `1px solid #865cd6` : `none`};
+//    transform: translateY(-2px);
+//    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+//    transition: transform .3s,-webkit-transform .3s;
+//   }
+// `
+
 const SidebarActions = styled(Box)`
   font-size: 18px;
   background-color: #1B998B;
@@ -37,6 +43,27 @@ const SidebarActions = styled(Box)`
     background-color: #44ABA0;
   }
 `
+
+const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [
+  {
+    label:`Correct ${correctWords}`,
+    value:correctWords,
+    colorIndex: 'ok',
+    onClick:() => null
+  },
+  {
+    label:`Incorrect ${incorrectWords}`,
+    value:incorrectWords,
+    colorIndex: 'critical',
+    onClick:() => null
+  },
+  {
+    label:`Remaining ${totalWords}`,
+    value:totalWords,
+    colorIndex: 'neutral-3-t',
+    onClick:() => null
+  }
+]
 
 export default class MyFlashcards extends Component {
 
@@ -64,23 +91,21 @@ export default class MyFlashcards extends Component {
           {
             this.props.ongoingTest && <Box>{this.props.listName}</Box>
           }
-          {/* {
-            !this.props.ongoingTest && <Box>
+          {
+            !this.props.ongoingTest && <Box pad='medium'>
               {
                 this.props.savedTests.map((test, index) =>
                   <Hovercard key={index}
-                    colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}>
+                    colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}
+                    align='center'>
                     <Heading>{test.listName}</Heading>
-                    <Label>Remaining Words : {test.wordsToPlay}</Label>
-                    <Paragraph>Correct Words : {test.correctWords}</Paragraph>
-                    <Paragraph>Incorrect Words : {test.incorrectWords}</Paragraph>
+                    <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
+                      type='spiral' />
                   </Hovercard>
-                  // <Button icon={<TrashIcon size='large' />}
-                  // onClick={() => this.props.delete({ index, listId: test.listId })} />
                 )
               }
             </Box>
-          } */}
+          }
           {
             this.props.ongoingTest &&
               <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>

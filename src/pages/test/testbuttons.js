@@ -18,3 +18,5 @@ TestButton.propTypes = {
   accent: PT.string,
   icon: PT.string
 }
+// <Button icon={<TrashIcon size='large' />}
+// onClick={() => this.props.delete({ index, listId: test.listId })} />
