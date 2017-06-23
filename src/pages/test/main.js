@@ -26,7 +26,7 @@ import { TestWordsLens, TotalWordsLens } from './lenses'
 import styled from 'styled-components'
 
 const QuickSilverSidebar = styled(Sidebar)`
-  background-color: #D1D1D1;
+  background-color: #fff;
 `
 const SidebarActions = styled(Box)`
   font-size: 18px;
