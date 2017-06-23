@@ -36,7 +36,9 @@ const actionHandlers = {
     revealed: false
   }),
   DELETE_TEST: (state, action) => Object.assign({}, state, {
-    savedTests: [...state.savedTests.slice(0, action.payload.index), ...state.savedTests.slice(action.payload.index + 1)]
+    savedTests: [
+      ...state.savedTests.slice(0, action.payload.index), ...state.savedTests.slice(action.payload.index + 1)
+    ]
   })
 }
 

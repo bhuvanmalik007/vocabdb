@@ -15,14 +15,18 @@ const Styledlink = styled(Link)`
   color : #fff;
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
+  &:hover{
+    color: #d1d1d1
+  }
 `
 
 const NotBlackHeader = styled(Header)`
-  background-color: #2E294E;
+  background-color: #000;
 `
 
 const MontserretTitle = styled(Title)`
   font-size: 32px;
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
 `
 
@@ -35,9 +39,9 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
         <MontserretTitle>VocabDB</MontserretTitle>
         <Menu label='Label' inline direction='row' flex='grow' align='end' justify='start'
           pad={{ horizontal: 'medium' }}>
-          <Styledlink to='myflashcards' className='montserret'>My Flashcards</Styledlink>
-          <Styledlink to='explore' className='montserret'>Explore Words</Styledlink>
-          <Styledlink to='test' className='montserret'>Test</Styledlink>
+          <Styledlink to='myflashcards'>My Flashcards</Styledlink>
+          <Styledlink to='explore'>Explore Words</Styledlink>
+          <Styledlink to='test'>Test</Styledlink>
         </Menu>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
