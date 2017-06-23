@@ -12,7 +12,6 @@ import Tile from 'grommet/components/Tile'
 import Card from 'grommet/components/Card'
 import Label from 'grommet/components/Label'
 import Anchor from 'grommet/components/Anchor'
-import styled from 'styled-components'
 import ChapterAddIcon from 'grommet/components/icons/base/ChapterAdd'
 import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CloseIcon from 'grommet/components/icons/base/Close'
@@ -22,26 +21,18 @@ import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import TrashIcon from 'grommet/components/icons/base/Trash'
 import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
-
-const Hovercard = styled(Card)`
-  transition : all 0.5s ease;
-  &:hover {
-   border: ${props => props.selecting ? `1px solid #865cd6` : `none`};
-   transform: translateY(-2px);
-   box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
-   transition: transform .3s,-webkit-transform .3s;
-  }
-`
+import { Hovercard } from '../myflashcards/main'
+import { TestWordsLens, TotalWordsLens } from './lenses'
 
 export default class MyFlashcards extends Component {
 
   componentDidMount () {
     this.props.initTestState()
   }
+
   render () {
     return (
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
-        {/* LEFT SIDE */}
         <Sidebar colorIndex='light-2' size='medium'>
           <Header pad='small'
             justify='center'>
@@ -77,24 +68,18 @@ export default class MyFlashcards extends Component {
           {
             this.props.ongoingTest &&
               <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
-                <Value value={this.props.savedTests[this.props.testIndex].correctWords}
+                <Value value={TestWordsLens(this.props, 'correctWords')}
                   units='words' label='Correct' />
-                <Meter value={this.props.savedTests[this.props.testIndex].correctWords} onActive={() => null}
-                  max={this.props.savedTests[this.props.testIndex].correctWords +
-                    this.props.savedTests[this.props.testIndex].incorrectWords +
-                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
-                <Value value={this.props.savedTests[this.props.testIndex].incorrectWords}
+                <Meter value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
+                  max={TotalWordsLens(this.props)} />
+                <Value value={TestWordsLens(this.props, 'incorrectWords')}
                   units='words' label='Incorrect' />
-                <Meter value={this.props.savedTests[this.props.testIndex].incorrectWords} onActive={() => null}
-                  max={this.props.savedTests[this.props.testIndex].correctWords +
-                    this.props.savedTests[this.props.testIndex].incorrectWords +
-                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
-                <Value value={this.props.savedTests[this.props.testIndex].wordsToPlay}
+                <Meter value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
+                  max={TotalWordsLens(this.props)} />
+                <Value value={TestWordsLens(this.props, 'wordsToPlay')}
                   units='words' label='Remaining' />
-                <Meter value={this.props.savedTests[this.props.testIndex].wordsToPlay} onActive={() => null}
-                  max={this.props.savedTests[this.props.testIndex].correctWords +
-                    this.props.savedTests[this.props.testIndex].incorrectWords +
-                  this.props.savedTests[this.props.testIndex].wordsToPlay} />
+                <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
+                  max={TotalWordsLens(this.props)} />
               </Box>
           }
           {
@@ -113,7 +98,7 @@ export default class MyFlashcards extends Component {
             justify='center'
             align='center'
             pad='medium'>
-            <Heading size='large'>Choose a test, you fucking cunt</Heading>
+            <Heading size='large'>Choose a test</Heading>
           </Box>
         }
         { this.props.ongoingTest &&
