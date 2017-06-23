@@ -1,4 +1,6 @@
 export default {
+  leftLoader: false,
+  rightLoader: false,
   lists: [],
   ongoingTest: false,
   savedTests: [],

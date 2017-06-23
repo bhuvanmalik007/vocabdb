@@ -2,11 +2,15 @@ import Reducer from '../../futils/reducecreator'
 import initialState from './initialstate'
 
 const actionHandlers = {
+  INIT_TEST_STATE: (state, action) => Object.assign({}, state, {
+    leftLoader: true
+  }),
   SET_LISTS: (state, action) => Object.assign({}, state, {
     lists: action.payload.data
   }),
   SET_TESTS_LIST: (state, action) => Object.assign({}, state, {
-    savedTests: action.payload.data
+    savedTests: action.payload.data,
+    leftLoader: false
   }),
   CREATE_TEST: (state, action) => Object.assign({}, state, {
     savedTests: [action.payload, ...state.savedTests]
