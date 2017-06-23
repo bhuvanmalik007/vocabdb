@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:700i');
 @import url('https://fonts.googleapis.com/css?family=Crete+Round:400i');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom{
   display: none;
@@ -29,13 +30,6 @@
   font-style: italic;
   margin-right: 10px;
   font-size: 32px;
-}
-
-.header-texts{
-  font-family: 'Crete Round', serif;
-  font-weight: 400;
-  font-style: italic;
-  color: #fff;
 }
 
 .header-texts:hover{
@@ -87,6 +81,11 @@
 .open-sans{
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
+}
+
+.montserret{
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .grommetux-meter__graphic{

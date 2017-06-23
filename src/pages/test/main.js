@@ -33,7 +33,7 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
-        <Sidebar colorIndex='light-2' size='medium'>
+        <Sidebar colorIndex='neutral-4' size='medium'>
           <Header pad='small'
             justify='center'>
             {
@@ -129,22 +129,18 @@ export default class MyFlashcards extends Component {
                 </Paragraph>
                 <Paragraph>
                   <Button icon={<CloseIcon />}
-                    label="I didn't know this word"
+                    label={'I didn\'t know this word'}
                     onClick={() =>
                       this.props.setStatus({
                         status: -1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
                       })}
-                    accent
-                    primary={false}
-                    secondary />
+                    accent />
                   <Button icon={<CheckmarkIcon />}
                     label='I knew this word'
                     onClick={() =>
                       this.props.setStatus({
                         status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
-                      })}
-                    primary={false}
-                    secondary={false} />
+                      })} />
                 </Paragraph>
               </Hovercard>
             }

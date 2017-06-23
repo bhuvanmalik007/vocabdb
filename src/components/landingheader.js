@@ -5,10 +5,11 @@ import Header from 'grommet/components/Header'
 import Menu from 'grommet/components/Menu'
 import PropTypes from 'prop-types'
 import Title from 'grommet/components/Title'
+import styled from 'styled-components'
 
 const LandingHeader = ({ showLogin, authenticated }) =>
   <div>
-    {!authenticated && <Header justify='center' colorIndex='grey-1'>
+    {!authenticated && <RifleGreenHeader justify='center' colorIndex='#41463D'>
       <Box size={{ width: { max: 'xxlarge' } }} direction='row'
         responsive={false} justify='start' align='center'
         pad={{ horizontal: 'medium' }} flex='grow'>
@@ -17,7 +18,7 @@ const LandingHeader = ({ showLogin, authenticated }) =>
           <Anchor onClick={() => showLogin()}>Get Started</Anchor>
         </Menu>
       </Box>
-    </Header>}
+    </RifleGreenHeader>}
   </div>
 
 LandingHeader.propTypes = {
