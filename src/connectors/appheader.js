@@ -18,7 +18,7 @@ const Styledlink = styled(Link)`
 `
 
 const NotBlackHeader = styled(Header)`
-  background-color: #34435E;
+  background-color: #2E294E;
 `
 
 const MontserretTitle = styled(Title)`

@@ -18,11 +18,25 @@ import CloseIcon from 'grommet/components/icons/base/Close'
 import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
 import Split from 'grommet/components/Split'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
-import TrashIcon from 'grommet/components/icons/base/Trash'
+import TrashIcon from 'grommet/components/icons/base/Trash' //eslint-disable-line
 import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
 import { Hovercard } from '../myflashcards/main'
 import { TestWordsLens, TotalWordsLens } from './lenses'
+import styled from 'styled-components'
+
+const QuickSilverSidebar = styled(Sidebar)`
+  background-color: #D1D1D1;
+`
+const SidebarActions = styled(Box)`
+  font-size: 18px;
+  background-color: #1B998B;
+  transition: background-color 0.5s ease;
+  color: #fff;
+  &:hover{
+    background-color: #44ABA0;
+  }
+`
 
 export default class MyFlashcards extends Component {
 
@@ -33,38 +47,40 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
-        <Sidebar colorIndex='neutral-4' size='medium'>
-          <Header pad='small'
-            justify='center'>
-            {
-              !this.props.ongoingTest && <Anchor onClick={() =>
-                this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
-                <ChapterAddIcon size='large' />
-              </Anchor>
-            }
-            {
-              this.props.ongoingTest && <Heading>{this.props.listName}</Heading>
-            }
-          </Header>
-          <br />
+        <QuickSilverSidebar colorIndex='neutral-4' size='medium'>
           {
-            !this.props.ongoingTest && <Tiles fill flush={false}>
+              !this.props.ongoingTest &&
+                <SidebarActions
+                  colorIndex='grey-4'
+                  size='large'
+                  pad='medium'
+                  justify='center'
+                  align='center'
+                  onClick={() =>
+                    this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
+                  Create New Game
+                </SidebarActions>
+          }
+          {
+            this.props.ongoingTest && <Box>{this.props.listName}</Box>
+          }
+          {/* {
+            !this.props.ongoingTest && <Box>
               {
                 this.props.savedTests.map((test, index) =>
-                  <Tile key={index}>
-                    <Hovercard colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}>
-                      <Heading>{test.listName}</Heading>
-                      <Label>Remaining Words : {test.wordsToPlay}</Label>
-                      <Paragraph>Correct Words : {test.correctWords}</Paragraph>
-                      <Paragraph>Incorrect Words : {test.incorrectWords}</Paragraph>
-                    </Hovercard>
-                    <Button icon={<TrashIcon size='large' />}
-                      onClick={() => this.props.delete({ index, listId: test.listId })} />
-                  </Tile>
+                  <Hovercard key={index}
+                    colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}>
+                    <Heading>{test.listName}</Heading>
+                    <Label>Remaining Words : {test.wordsToPlay}</Label>
+                    <Paragraph>Correct Words : {test.correctWords}</Paragraph>
+                    <Paragraph>Incorrect Words : {test.incorrectWords}</Paragraph>
+                  </Hovercard>
+                  // <Button icon={<TrashIcon size='large' />}
+                  // onClick={() => this.props.delete({ index, listId: test.listId })} />
                 )
               }
-            </Tiles>
-          }
+            </Box>
+          } */}
           {
             this.props.ongoingTest &&
               <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
@@ -90,9 +106,8 @@ export default class MyFlashcards extends Component {
               }
             </Footer>
           }
-        </Sidebar>
+        </QuickSilverSidebar>
 
-        {/* RIGHT SIDE */}
         { !this.props.ongoingTest &&
           <Box
             justify='center'
