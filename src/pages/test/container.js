@@ -15,7 +15,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   ...pick(['savedTests', 'ongoingTest', 'correct', 'incorrect', 'remaining',
-    'listName', 'revealed', 'testWordsArray', 'testWordsCounter', 'listId', 'testIndex'], state.test)
+    'listName', 'revealed', 'testWordsArray', 'testWordsCounter', 'listId',
+    'testIndex', 'leftLoader', 'rightLoader'], state.test)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Test)

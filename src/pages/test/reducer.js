@@ -15,11 +15,15 @@ const actionHandlers = {
   CREATE_TEST: (state, action) => Object.assign({}, state, {
     savedTests: [action.payload, ...state.savedTests]
   }),
-  START_TEST: (state, action) => Object.assign({}, state, {
+  GET_TEST: (state, action) => Object.assign({}, state, {
+    rightLoader: true,
     ongoingTest: true,
+    testIndex: action.payload.index
+  }),
+  START_TEST: (state, action) => Object.assign({}, state, {
     testWordsArray: action.payload.test.data.wordsToPlay,
-    testIndex: action.payload.index,
-    listId: action.payload.listId
+    listId: action.payload.listId,
+    rightLoader: false
   }),
   GO_BACK: (state) => Object.assign({}, state, {
     ongoingTest: false

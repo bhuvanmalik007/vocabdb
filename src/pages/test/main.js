@@ -76,7 +76,10 @@ export default class MyFlashcards extends Component {
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
         <QuickSilverSidebar colorIndex='neutral-4' size='medium'>
           {
-              !this.props.ongoingTest &&
+            this.props.leftLoader && 'PUT ANY LOADER HERE'
+          }
+          {
+              !this.props.ongoingTest && !this.props.leftLoader &&
                 <SidebarActions
                   colorIndex='grey-4'
                   size='large'
@@ -141,7 +144,7 @@ export default class MyFlashcards extends Component {
             <Heading size='large'>Choose a test</Heading>
           </Box>
         }
-        { this.props.ongoingTest &&
+        { this.props.ongoingTest && !this.props.rightLoader &&
           <Box
             justify='center'
             align='center'
@@ -192,6 +195,9 @@ export default class MyFlashcards extends Component {
             }
           </Box>
         }
+        {
+          this.props.ongoingTest && this.props.rightLoader && 'ANY LOADER HERE'
+        }
       </Split>
     )
   }
@@ -213,5 +219,7 @@ MyFlashcards.propTypes = {
   listId: PropTypes.string,
   reset: PropTypes.func,
   testIndex: PropTypes.number,
-  delete: PropTypes.func
+  delete: PropTypes.func,
+  leftLoader: PropTypes.bool,
+  rightLoader: PropTypes.bool
 }
