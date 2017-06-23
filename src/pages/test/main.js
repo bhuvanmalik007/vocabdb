@@ -70,11 +70,11 @@ export default class MyFlashcards extends Component {
               <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
                 <Value value={TestWordsLens(this.props, 'correctWords')}
                   units='words' label='Correct' />
-                <Meter value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
+                <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
                   max={TotalWordsLens(this.props)} />
                 <Value value={TestWordsLens(this.props, 'incorrectWords')}
                   units='words' label='Incorrect' />
-                <Meter value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
+                <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
                   max={TotalWordsLens(this.props)} />
                 <Value value={TestWordsLens(this.props, 'wordsToPlay')}
                   units='words' label='Remaining' />
