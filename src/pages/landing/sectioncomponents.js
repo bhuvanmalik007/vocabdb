@@ -7,12 +7,14 @@ import PT from 'prop-types'
 
 const NoPadSection = styled(Section)`
   background-color: ${props => props.color};
+  color : ${props => props.tcolor}
 `
 
-export const LandingSection = ({ children, heading, text, color, reverse }) =>
+export const LandingSection = ({ children, heading, text, color, tcolor, reverse }) =>
   <NoPadSection
     justify='center'
     color={color}
+    tcolor={tcolor}
     align='center' full direction='row' pad={{ vertical: 'large' }} reverse={reverse}>
     <Box direction='column' alignContent='start' pad='large' basis='1/2'>
       <Headline size='medium' className='monserret'>{heading}</Headline>
@@ -28,5 +30,6 @@ LandingSection.propTypes = {
   heading: PT.string,
   text: PT.element,
   color: PT.string,
+  tcolor: PT.string,
   reverse: PT.boolean
 }
