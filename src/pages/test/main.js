@@ -19,6 +19,7 @@ import Value from 'grommet/components/Value'
 import { Hovercard } from '../myflashcards/main'
 import { TestWordsLens, TotalWordsLens } from './lenses'
 import styled from 'styled-components'
+import Spinning from 'grommet/components/icons/Spinning'
 
 const QuickSilverSidebar = styled(Sidebar)`
   background-color: #BDD9BF;
@@ -42,6 +43,9 @@ const SidebarActions = styled(Box)`
   &:hover{
     background-color: #44ABA0;
   }
+`
+const Styledspinning = styled(Spinning)`
+  margin : 10vh auto;
 `
 
 const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [
@@ -76,20 +80,20 @@ export default class MyFlashcards extends Component {
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
         <QuickSilverSidebar colorIndex='neutral-4' size='medium'>
           {
-            this.props.leftLoader && 'PUT ANY LOADER HERE'
+            this.props.leftLoader && <Styledspinning size='large'/>
           }
           {
-              !this.props.ongoingTest && !this.props.leftLoader &&
-                <SidebarActions
-                  colorIndex='grey-4'
-                  size='large'
-                  pad='medium'
-                  justify='center'
-                  align='center'
-                  onClick={() =>
-                    this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
-                  Create New Game
-                </SidebarActions>
+            !this.props.ongoingTest && !this.props.leftLoader &&
+              <SidebarActions
+                colorIndex='grey-4'
+                size='large'
+                pad='medium'
+                justify='center'
+                align='center'
+                onClick={() =>
+                  this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
+                Create New Game
+              </SidebarActions>
           }
           {
             this.props.ongoingTest && <Box>{this.props.listName}</Box>
@@ -111,7 +115,7 @@ export default class MyFlashcards extends Component {
           }
           {
             this.props.ongoingTest &&
-              <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
+              <Box justify='center' pad={{ horizontal: 'large' , vertical : 'medium' }} alignContent='center'>
                 <Value value={TestWordsLens(this.props, 'correctWords')}
                   units='words' label='Correct' />
                 <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
@@ -127,7 +131,7 @@ export default class MyFlashcards extends Component {
               </Box>
           }
           {
-            this.props.ongoingTest && <Footer pad='medium'>
+            this.props.ongoingTest && <Footer pad='medium' justify='center'>
               <Button icon={<CaretBackIcon size='large' />} onClick={this.props.goBack} />
               {this.props.testWordsCounter === this.props.testWordsArray.length &&
                 <Button icon={<RefreshIcon size='large' />} onClick={() => this.props.reset(this.props.listId)} />
@@ -196,7 +200,13 @@ export default class MyFlashcards extends Component {
           </Box>
         }
         {
-          this.props.ongoingTest && this.props.rightLoader && 'ANY LOADER HERE'
+          this.props.ongoingTest && this.props.rightLoader &&
+          <Box
+            justify='center'
+            align='center'
+            pad='medium'>
+            <Styledspinning size='large'/>
+          </Box>
         }
       </Split>
     )
