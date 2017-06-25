@@ -73,8 +73,9 @@ const resetTest = (action$, store) =>
   action$.ofType('RESET_TEST')
   .mergeMap(action =>
     postRequest({ listId: action.payload }, '/refreshgame/', store)
-    .map((payload) => ({ type: 'START_TEST',
-      payload: { index: store.getState().test.testIndex, test: payload, listId: store.getState().test.listId } }))
+    .flatMap((payload) => [{ type: 'START_TEST',
+      payload: { index: store.getState().test.testIndex, test: payload, listId: store.getState().test.listId } },
+    { type: 'RESET_STATS', payload: payload.data.wordsToPlay.length }])
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
