@@ -7,8 +7,6 @@ import Footer from 'grommet/components/Footer'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import Card from 'grommet/components/Card'
-import Label from 'grommet/components/Label'
-import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import CheckmarkIcon from 'grommet/components/icons/base/Checkmark'
 import Split from 'grommet/components/Split'
@@ -19,53 +17,52 @@ import Value from 'grommet/components/Value'
 import { Hovercard } from '../myflashcards/main'
 import { TestWordsLens, TotalWordsLens } from './lenses'
 import styled from 'styled-components'
+import IdentityComponent from '../../futils/identitycomponent'
+import GamePad from 'grommet/components/icons/base/Gamepad'
+import LinkPrevious from 'grommet/components/icons/base/LinkPrevious'
+import Animate from 'grommet/components/Animate'
+import { FoldingCube } from 'better-react-spinkit'
+import ComposeR from 'compose-r'
 
-const QuickSilverSidebar = styled(Sidebar)`
-  background-color: #BDD9BF;
-`
-
-// const ListHovercard = styled(Card)`
-//   transition : all 0.5s ease;
-//   &:hover {
-//    border: ${props => props.selecting ? `1px solid #865cd6` : `none`};
-//    transform: translateY(-2px);
-//    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
-//    transition: transform .3s,-webkit-transform .3s;
-//   }
-// `
-
-const SidebarActions = styled(Box)`
+const SidebarActions = () => styled(Box)`
   font-size: 18px;
-  background-color: #1B998B;
+  background-color: #E8C547;
   transition: background-color 0.5s ease;
   color: #fff;
   &:hover{
-    background-color: #44ABA0;
+    background-color: #EACA57;
   }
+`
+const FlameSidebarAction = x => styled(x)`
+  background-color: #D34E24;
+`
+
+const LightGreyTestArea = styled(Box)`
+  background-color: #ebeced;
 `
 
 const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [
   {
-    label:`Correct ${correctWords}`,
-    value:correctWords,
+    label: `Correct ${correctWords}`,
+    value: correctWords,
     colorIndex: 'ok',
-    onClick:() => null
+    onClick: () => null
   },
   {
-    label:`Incorrect ${incorrectWords}`,
-    value:incorrectWords,
+    label: `Incorrect ${incorrectWords}`,
+    value: incorrectWords,
     colorIndex: 'critical',
-    onClick:() => null
+    onClick: () => null
   },
   {
-    label:`Remaining ${totalWords}`,
-    value:totalWords,
+    label: `Remaining ${totalWords}`,
+    value: totalWords,
     colorIndex: 'neutral-3-t',
-    onClick:() => null
+    onClick: () => null
   }
 ]
 
-export default class MyFlashcards extends Component {
+export default class Test extends Component {
 
   componentDidMount () {
     this.props.initTestState()
@@ -74,13 +71,23 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <Split flex='right' priority='left' separator={false} showOnResponsive='both'>
-        <QuickSilverSidebar colorIndex='neutral-4' size='medium'>
-          {
-            this.props.leftLoader && 'PUT ANY LOADER HERE'
-          }
-          {
+        <IdentityComponent fn={styled(Sidebar)`
+          background-color: #E5E3DF;
+        `}
+          colorIndex='neutral-4'
+          size='medium'
+          justify='between'
+        >
+          <span>
+            { this.props.leftLoader &&
+              <Box full align='center' alignContent='center'>
+                <FoldingCube size={100} color='#1B998B' />
+              </Box>
+            }
+            {
               !this.props.ongoingTest && !this.props.leftLoader &&
-                <SidebarActions
+                <IdentityComponent
+                  fn={SidebarActions()}
                   colorIndex='grey-4'
                   size='large'
                   pad='medium'
@@ -89,121 +96,137 @@ export default class MyFlashcards extends Component {
                   onClick={() =>
                     this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
                   Create New Game
-                </SidebarActions>
-          }
-          {
-            this.props.ongoingTest && <Box>{this.props.listName}</Box>
-          }
-          {
-            !this.props.ongoingTest && <Box pad='medium'>
-              {
-                this.props.savedTests.map((test, index) =>
-                  <Hovercard key={index}
-                    colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}
-                    align='center'>
-                    <Heading>{test.listName}</Heading>
-                    <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
-                      type='spiral' />
-                  </Hovercard>
-                )
-              }
-            </Box>
-          }
-          {
-            this.props.ongoingTest &&
-              <Box justify='center' pad={{ horizontal: 'large' }} alignContent='center'>
-                <Value value={TestWordsLens(this.props, 'correctWords')}
-                  units='words' label='Correct' />
-                <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
-                  max={TotalWordsLens(this.props)} />
-                <Value value={TestWordsLens(this.props, 'incorrectWords')}
-                  units='words' label='Incorrect' />
-                <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
-                  max={TotalWordsLens(this.props)} />
-                <Value value={TestWordsLens(this.props, 'wordsToPlay')}
-                  units='words' label='Remaining' />
-                <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
-                  max={TotalWordsLens(this.props)} />
-              </Box>
-          }
-          {
-            this.props.ongoingTest && <Footer pad='medium'>
-              <Button icon={<CaretBackIcon size='large' />} onClick={this.props.goBack} />
-              {this.props.testWordsCounter === this.props.testWordsArray.length &&
-                <Button icon={<RefreshIcon size='large' />} onClick={() => this.props.reset(this.props.listId)} />
-              }
-            </Footer>
-          }
-        </QuickSilverSidebar>
-
-        { !this.props.ongoingTest &&
-          <Box
-            justify='center'
-            align='center'
-            pad='medium'>
-            <Heading size='large'>Choose a test</Heading>
-          </Box>
-        }
-        { this.props.ongoingTest && !this.props.rightLoader &&
-          <Box
-            justify='center'
-            align='center'
-            pad='medium'>
-            { !this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
-              <Card heading={this.props.testWordsArray[this.props.testWordsCounter].word}
-                contentPad='large' textSize='xlarge' description='Tap to see meaning'
-                onClick={this.props.reveal} />
-            }
-            { this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
-              <Hovercard
-                textSize='small'
-                colorIndex='light-1'
-                margin='small'
-                contentPad='medium'
-                direction='column'>
-                <Heading>
-                  {this.props.testWordsArray[this.props.testWordsCounter].word}
-                </Heading>
-                <Paragraph margin='small' size='large'>
-                  {this.props.testWordsArray[this.props.testWordsCounter].meaning}
-                </Paragraph>
-                <Paragraph margin='small'>
-                  {this.props.testWordsArray[this.props.testWordsCounter].example}
-                </Paragraph>
-                <Paragraph>
-                  <Button icon={<CloseIcon />}
-                    label={'I didn\'t know this word'}
-                    onClick={() =>
-                      this.props.setStatus({
-                        status: -1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
-                      })}
-                    accent />
-                  <Button icon={<CheckmarkIcon />}
-                    label='I knew this word'
-                    onClick={() =>
-                      this.props.setStatus({
-                        status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
-                      })} />
-                </Paragraph>
-              </Hovercard>
+                </IdentityComponent>
             }
             {
-              this.props.testWordsCounter === this.props.testWordsArray.length &&
+              this.props.ongoingTest && <Box>{this.props.listName}</Box>
+            }
+            {
+              !this.props.ongoingTest && <Box pad='medium'>
+                {
+                  this.props.savedTests.map((test, index) =>
+                    <Hovercard key={index}
+                      colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}
+                      align='center'>
+                      <Heading>{test.listName}</Heading>
+                      <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
+                        type='spiral' />
+                    </Hovercard>
+                  )
+                }
+              </Box>
+            }
+            { this.props.ongoingTest &&
+              <IdentityComponent
+                fn={SidebarActions()}
+                colorIndex='grey-4'
+                size='large'
+                pad='small'
+                justify='center'
+                align='center'
+                onClick={() => this.props.goBack()}>
+                <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
+                  keep>
+                  <Button icon={<LinkPrevious size='medium' />} />
+                </Animate>
+              </IdentityComponent> }
+            {
+              this.props.ongoingTest &&
+                <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }} alignContent='center'>
+                  <Value value={TestWordsLens(this.props, 'correctWords')}
+                    units='words' label='Correct' />
+                  <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
+                    max={TotalWordsLens(this.props)} />
+                  <Value value={TestWordsLens(this.props, 'incorrectWords')}
+                    units='words' label='Incorrect' />
+                  <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
+                    max={TotalWordsLens(this.props)} />
+                  <Value value={TestWordsLens(this.props, 'wordsToPlay')}
+                    units='words' label='Remaining' />
+                  <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
+                    max={TotalWordsLens(this.props)} />
+                </Box>
+            }
+            {
+              this.props.ongoingTest &&
+                <IdentityComponent
+                  fn={ComposeR(SidebarActions, FlameSidebarAction)()}
+                  colorIndex='grey-4'
+                  size='large'
+                  pad='small'
+                  justify='center'
+                  align='center'
+                  alignSelf='end'
+                  onClick={() => this.props.reset(this.props.listId)}>
+                  <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
+                    keep>
+                    <Button icon={<RefreshIcon size='large' />} />
+                  </Animate>
+                </IdentityComponent>
+            }
+          </span>
+        </IdentityComponent>
+
+        <LightGreyTestArea full colorIndex='light-2' justify='center' direction='row' align='center'>
+          { !this.props.ongoingTest &&
+            <IdentityComponent fn={styled(GamePad)`
+              font-size: 36px;
+            `} size='xlarge' colorIndex='grey-4-a' /> }
+          { this.props.ongoingTest && !this.props.rightLoader &&
+            <Box
+              justify='center'
+              align='center'
+              pad='medium'>
+              { !this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
+                <Card heading={this.props.testWordsArray[this.props.testWordsCounter].word}
+                  contentPad='large' textSize='xlarge' description='Tap to see meaning'
+                  onClick={this.props.reveal} /> }
+              { this.props.revealed && this.props.testWordsCounter < this.props.testWordsArray.length &&
+                <Hovercard
+                  textSize='small'
+                  colorIndex='light-1'
+                  margin='small'
+                  contentPad='medium'
+                  direction='column'>
+                  <Heading>
+                    {this.props.testWordsArray[this.props.testWordsCounter].word}
+                  </Heading>
+                  <Paragraph margin='small' size='large'>
+                    {this.props.testWordsArray[this.props.testWordsCounter].meaning}
+                  </Paragraph>
+                  <Paragraph margin='small'>
+                    {this.props.testWordsArray[this.props.testWordsCounter].example}
+                  </Paragraph>
+                  <Paragraph>
+                    <Button icon={<CloseIcon />}
+                      label={'I didn\'t know this word'}
+                      onClick={() =>
+                        this.props.setStatus({
+                          status: -1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
+                        })}
+                      accent />
+                    <Button icon={<CheckmarkIcon />}
+                      label='I knew this word'
+                      onClick={() =>
+                        this.props.setStatus({
+                          status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
+                        })} />
+                  </Paragraph>
+                </Hovercard> }
+              { this.props.testWordsCounter === this.props.testWordsArray.length &&
                 <Heading>
                   COMPLETED!
-                </Heading>
-            }
-          </Box>
-        }
-        {
-          this.props.ongoingTest && this.props.rightLoader && 'ANY LOADER HERE'
-        }
+                </Heading> }
+            </Box>
+          }
+          { this.props.ongoingTest && this.props.rightLoader && <FoldingCube size={100} color='#865cd6' /> }
+        </LightGreyTestArea>
       </Split>
     )
   }
 }
 
-MyFlashcards.propTypes = {
+Test.propTypes = {
   initTestState: PropTypes.func,
   savedTests: PropTypes.array,
   ongoingTest: PropTypes.bool,

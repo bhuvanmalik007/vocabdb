@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import Box from 'grommet/components/Box'
 import Headline from 'grommet/components/Headline'
 import PT from 'prop-types'
-
-const NoPadSection = styled(Section)`
-  background-color: ${props => props.color};
-`
+import IdentityComponent from '../../futils/identitycomponent'
 
 export const LandingSection = ({ children, heading, text, color, reverse }) =>
-  <NoPadSection
+  <IdentityComponent
+    fn={styled(Section)`
+      background-color: ${props => props.color};
+    `}
     justify='center'
     color={color}
     align='center' full direction='row' pad={{ vertical: 'large' }} reverse={reverse}>
@@ -21,7 +21,7 @@ export const LandingSection = ({ children, heading, text, color, reverse }) =>
       </Headline>
     </Box>
     {children}
-  </NoPadSection>
+  </IdentityComponent>
 
 LandingSection.propTypes = {
   children: PT.element,
