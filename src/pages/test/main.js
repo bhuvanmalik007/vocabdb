@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Sidebar from 'grommet/components/Sidebar'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
-import Footer from 'grommet/components/Footer'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import Card from 'grommet/components/Card'
@@ -115,6 +114,7 @@ export default class Test extends Component {
                   )
                 }
               </Box>
+
             }
             { this.props.ongoingTest &&
               <IdentityComponent

@@ -28,5 +28,6 @@ LandingSection.propTypes = {
   heading: PT.string,
   text: PT.element,
   color: PT.string,
+  tcolor: PT.string,
   reverse: PT.boolean
 }

@@ -42,17 +42,19 @@ export class LandingView extends Component {
           heading='Flashcards'
           text='Store words as flashcards complete with meaning, example
           sentences, pronunciation & personal notes!'
-          color='#f0f0f0'
+          color='#f1f3f4'
           reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
-            <SampleCard />
+            <StandardLandingAnimator component= { <SampleCard /> } style='slide-right' />
           </Box>
         </LandingSection>
         <LandingSection
           heading='Explore'
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
-          color='#ffffff'>
+          color='#000001'
+          tcolor='#fff'
+          >
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
           </Box>} style='fade' />

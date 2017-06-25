@@ -9,6 +9,11 @@ import styled from 'styled-components'
 
 const NotBlackHeader = styled(Header)`
   background-color: #000;
+  position : absolute;
+  z-index : 3;
+  top : 0;
+  left : 0;
+  box-shadow : 0 1px 5px black;
 `
 
 const MontserretTitle = styled(Title)`
@@ -19,7 +24,7 @@ const MontserretTitle = styled(Title)`
 
 const LandingHeader = ({ showLogin, authenticated }) =>
   <div>
-    {!authenticated && <NotBlackHeader justify='center' colorIndex=''>
+    {!authenticated && <NotBlackHeader justify='center'>
       <Box size={{ width: { max: 'xxlarge' } }} direction='row'
         responsive={false} justify='start' align='center'
         pad={{ horizontal: 'medium' }} flex='grow'>

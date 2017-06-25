@@ -9,6 +9,7 @@ import { MAILID } from '../constants'
 const BGTextNoMargin = styled(Paragraph)`
   background: black;
   padding: 7px;
+  box-shadow : 0 0 10px black;
 `
 
 export default props => (
