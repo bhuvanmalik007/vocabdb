@@ -2,6 +2,7 @@ import React from 'react'
 import PT from 'prop-types'
 
 const IdentityComponent = ({ fn, children, ...props }) => {
+  if (!fn) return null
   const Component = fn
   if (children) {
     return <Component {...props}>{children}</Component>
@@ -10,8 +11,12 @@ const IdentityComponent = ({ fn, children, ...props }) => {
 }
 
 IdentityComponent.propTypes = {
-  fn: PT.function,
-  children: PT.element
+  fn: PT.func,
+  children: PT.oneOfType([
+    PT.element,
+    PT.arrayOf(PT.element),
+    PT.string
+  ])
 }
 
 export default IdentityComponent

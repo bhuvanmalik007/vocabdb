@@ -22,6 +22,7 @@ import LinkPrevious from 'grommet/components/icons/base/LinkPrevious'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
 import ComposeR from 'compose-r'
+import EitherComponent from '../../futils/eithercomponent'
 
 const SidebarActions = () => styled(Box)`
   font-size: 18px;
@@ -78,30 +79,31 @@ export default class Test extends Component {
           justify='between'
         >
           <span>
-            { this.props.leftLoader &&
-              <Box full align='center' alignContent='center'>
+            <EitherComponent conditionerFn={() => this.props.leftLoader}
+              leftComponent={_ => <Box full align='center' alignContent='center'>
                 <FoldingCube size={100} color='#1B998B' />
-              </Box>
-            }
-            {
-              !this.props.ongoingTest && !this.props.leftLoader &&
-                <IdentityComponent
-                  fn={SidebarActions()}
-                  colorIndex='grey-4'
-                  size='large'
-                  pad='medium'
-                  justify='center'
-                  align='center'
-                  onClick={() =>
-                    this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
-                  Create New Game
-                </IdentityComponent>
-            }
-            {
-              this.props.ongoingTest && <Box>{this.props.listName}</Box>
-            }
-            {
-              !this.props.ongoingTest && <Box pad='medium'>
+              </Box>}
+              rightComponent={_ => null}
+            />
+            <EitherComponent conditionerFn={() => !this.props.ongoingTest && !this.props.leftLoader}
+              leftComponent={_ => <IdentityComponent
+                fn={SidebarActions()}
+                colorIndex='grey-4'
+                size='large'
+                pad='medium'
+                justify='center'
+                align='center'
+                onClick={() =>
+                  this.props.showModal({ header: 'SELECT A LIST FOR THE TEST', content: 'TEST_LIST_SELECT' })}>
+                Create New Game
+              </IdentityComponent>}
+              rightComponent={_ => null} />
+            <EitherComponent conditionerFn={() => this.props.ongoingTest}
+              leftComponent={_ => <Box>{this.props.listName}</Box>}
+              rightComponent={_ => null}
+            />
+            <EitherComponent conditionerFn={() => !this.props.ongoingTest}
+              leftComponent={_ => <Box pad='medium'>
                 {
                   this.props.savedTests.map((test, index) =>
                     <Hovercard key={index}
@@ -113,11 +115,11 @@ export default class Test extends Component {
                     </Hovercard>
                   )
                 }
-              </Box>
-
-            }
-            { this.props.ongoingTest &&
-              <IdentityComponent
+              </Box>}
+              rightComponent={_ => null}
+            />
+            <EitherComponent conditionerFn={() => this.props.ongoingTest}
+              leftComponent={_ => <IdentityComponent
                 fn={SidebarActions()}
                 colorIndex='grey-4'
                 size='large'
@@ -129,41 +131,46 @@ export default class Test extends Component {
                   keep>
                   <Button icon={<LinkPrevious size='medium' />} />
                 </Animate>
-              </IdentityComponent> }
-            {
-              this.props.ongoingTest &&
-                <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }} alignContent='center'>
-                  <Value value={TestWordsLens(this.props, 'correctWords')}
-                    units='words' label='Correct' />
-                  <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
-                    max={TotalWordsLens(this.props)} />
-                  <Value value={TestWordsLens(this.props, 'incorrectWords')}
-                    units='words' label='Incorrect' />
-                  <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')} onActive={() => null}
-                    max={TotalWordsLens(this.props)} />
-                  <Value value={TestWordsLens(this.props, 'wordsToPlay')}
-                    units='words' label='Remaining' />
-                  <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
-                    max={TotalWordsLens(this.props)} />
-                </Box>
-            }
-            {
-              this.props.ongoingTest &&
-                <IdentityComponent
-                  fn={ComposeR(SidebarActions, FlameSidebarAction)()}
-                  colorIndex='grey-4'
-                  size='large'
-                  pad='small'
-                  justify='center'
-                  align='center'
-                  alignSelf='end'
-                  onClick={() => this.props.reset(this.props.listId)}>
-                  <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
-                    keep>
-                    <Button icon={<RefreshIcon size='large' />} />
-                  </Animate>
-                </IdentityComponent>
-            }
+              </IdentityComponent>}
+              rightComponent={_ => null} />
+            <EitherComponent conditionerFn={() => this.props.ongoingTest}
+              leftComponent={
+                _ =>
+                  <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }}
+                    alignContent='center'>
+                    <Value value={TestWordsLens(this.props, 'correctWords')}
+                      units='words' label='Correct' />
+                    <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
+                      max={TotalWordsLens(this.props)} />
+                    <Value value={TestWordsLens(this.props, 'incorrectWords')}
+                      units='words' label='Incorrect' />
+                    <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')}
+                      onActive={() => null}
+                      max={TotalWordsLens(this.props)} />
+                    <Value value={TestWordsLens(this.props, 'wordsToPlay')}
+                      units='words' label='Remaining' />
+                    <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
+                      max={TotalWordsLens(this.props)} />
+                  </Box>}
+              rightComponent={_ => null}
+            />
+            <EitherComponent conditionerFn={() => this.props.ongoingTest}
+              leftComponent={_ => <IdentityComponent
+                fn={ComposeR(SidebarActions, FlameSidebarAction)()}
+                colorIndex='grey-4'
+                size='large'
+                pad='small'
+                justify='center'
+                align='center'
+                alignSelf='end'
+                onClick={() => this.props.reset(this.props.listId)}>
+                <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
+                  keep>
+                  <Button icon={<RefreshIcon size='large' />} />
+                </Animate>
+              </IdentityComponent>}
+              rightComponent={_ => null}
+            />
           </span>
         </IdentityComponent>
 
