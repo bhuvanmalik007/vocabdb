@@ -10,7 +10,7 @@ let TestListSelectForm = ({ handleSubmit, pristine, submitting, lists }) => {
         <Form onSubmit={handleSubmit}>
           <Form.Field width={7}>
             <Field name='index' component='select'>
-              {/* <option /> */}
+              <option />
               {
                 lists.map((list, index) => <option key={index} value={index}>{list.listName}
                 </option>)

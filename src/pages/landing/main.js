@@ -54,15 +54,15 @@ export class LandingView extends Component {
           Dictionaries™'
           color='#000001'
           tcolor='#fff'
-          >
+        >
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
           </Box>} style='fade' />
         </LandingSection>
         <LandingSection
           heading='Storage & Organization'
-          text='Search your words, sort them from A-Z or segregate them into lists. You have all the powers!<br />
-          Gone are the days of writing down words or taking printouts!'
+          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
+            <br /> Gone are the days of writing down words or taking printouts!</span>}
           color='#f0f0f0' reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
