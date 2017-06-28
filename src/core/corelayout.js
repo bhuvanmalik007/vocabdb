@@ -4,14 +4,22 @@ import AppHeader from '../connectors/appheader'
 import ReduxModal from '../connectors/reduxmodal'
 import Notifier from '../connectors/notifier'
 import { withRouter } from 'react-router'
+import styled from 'styled-components'
+
+const HeightLimiter = styled.div`
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
 
 const CoreLayout = ({ children, location }) => (
-  <div>
+  <HeightLimiter>
     <AppHeader />
     <ReduxModal />
     <Notifier />
     {children}
-  </div>
+  </HeightLimiter>
 )
 
 CoreLayout.propTypes = {

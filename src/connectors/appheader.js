@@ -13,7 +13,6 @@ import styled from 'styled-components'
 
 const Styledlink = styled(Link)`
   color : #fff;
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   &:hover{
     color: #d1d1d1
@@ -30,7 +29,7 @@ const MontserretTitle = styled(Title)`
   font-family: 'Montserrat', sans-serif;
 `
 
-const AppHeader = ({ showLogin, authenticated, location }) =>
+const AppHeader = ({ showLogin, authenticated, profile, location }) =>
   <div>
     {authenticated && <NotBlackHeader justify='between' colorIndex='grey-1'>
       <Box size={{ width: { max: 'xxlarge' } }} direction='row'
@@ -46,7 +45,7 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
         pad={{ horizontal: 'medium' }}>
-        <Anchor onClick={() => showLogin()}>Words Saved</Anchor>
+        <Anchor onClick={() => showLogin()}>{profile.nickname}</Anchor>
       </Menu>
     </NotBlackHeader>}
   </div>
@@ -54,11 +53,12 @@ const AppHeader = ({ showLogin, authenticated, location }) =>
 AppHeader.propTypes = {
   showLogin: PropTypes.func,
   authenticated: PropTypes.bool,
-  location: PropTypes.object
+  location: PropTypes.object,
+  profile: PropTypes.object
 }
 
 const mapStateToProps = state => ({
-  ...pick(['authenticated'], state.core)
+  ...pick(['authenticated', 'profile'], state.core)
 })
 
 const mapDispatchToProps = dispatch => ({

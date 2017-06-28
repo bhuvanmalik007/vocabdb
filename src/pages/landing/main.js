@@ -45,7 +45,7 @@ export class LandingView extends Component {
           color='#f1f3f4'
           reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
-            <StandardLandingAnimator component= { <SampleCard /> } style='slide-right' />
+            <StandardLandingAnimator component={<SampleCard />} style='slide-right' />
           </Box>
         </LandingSection>
         <LandingSection
