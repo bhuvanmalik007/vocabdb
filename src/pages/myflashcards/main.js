@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { selectedCountReducer, reduceToSenseIds } from '../../utils/selectionreducers'
 import Box from 'grommet/components/Box'
@@ -18,8 +18,8 @@ import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
 import Status from 'grommet/components/icons/Status'
 import PlayIcon from 'grommet/components/icons/base/Play'
-import Spinning from 'grommet/components/icons/Spinning'
 import Animate from 'grommet/components/Animate'
+import { FoldingCube } from 'better-react-spinkit'
 
 const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -42,10 +42,6 @@ const LowPadButton = styled(GrommetButton)`
   span {
     padding: 10px !important;
   }
-`
-
-const Styledspinning = styled(Spinning)`
-  margin-top : 20px;
 `
 
 export const Hovercard = styled(Card)`
@@ -210,14 +206,16 @@ export default class MyFlashcards extends Component {
 
         </ShadowBox>
 
-        { this.props.isLoading && <Styledspinning size='large' /> }
+        { this.props.isLoading && <Box full justify='center' align='center'>
+          <FoldingCube size={100} color='#865cd6' />
+        </Box> }
 
         {!this.props.isLoading &&
-          <Segment basic>
+          <Box full>
             <CardsMaker filteredArray={this.props.filteredArray} deleteFromAll={this.props.deleteFromAll}
               multipleSelect={this.props.multipleSelect} select={this.props.select}
               currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList} />
-          </Segment>}
+          </Box>}
       </div>
     )
   }
