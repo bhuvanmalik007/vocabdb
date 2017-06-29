@@ -65,7 +65,7 @@ export default class SampleCardMaker extends Component {
   render () {
     return <Box pad='small'>
       <Animate enter={{ 'animation': 'slide-up', 'duration': 1000, 'delay': 100 }}
-        keep={true} visible='scroll'>
+        keep visible='scroll'>
         <SampleTextInput
           value={this.state.searchText}
           placeHolder='Search Words'

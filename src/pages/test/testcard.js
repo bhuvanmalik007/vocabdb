@@ -46,7 +46,7 @@ const TestCard = props =>
     justify='center'
     align='center'
     pad='medium'>
-    {props.hiddenCondition && <StandardTestAnimator style='slide-left' component>
+    {props.hiddenCondition && <StandardTestAnimator style='slide-left'>
       <Unflipped
         colorIndex='light-1'
         margin='small'
@@ -65,7 +65,7 @@ const TestCard = props =>
     {props.revealedCondition && <StandardTestAnimator style='slide-left'><Flipped
       colorIndex='light-1'
       margin='small'
-      size='large'
+      size='medium'
       direction='column' justify='between'>
       <Box pad='medium'>
         <Heading>
