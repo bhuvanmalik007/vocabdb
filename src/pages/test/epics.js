@@ -66,6 +66,7 @@ const setStatus = (action$, store) =>
       status: action.payload.status,
       mindex: action.payload.wordObj.mindex
     }, '/setwordstatus/', store)
+    .map(response => ({ type: 'API_SUCCESS' }))
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
