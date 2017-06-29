@@ -13,6 +13,7 @@ import OxfordPng from '../../static/oxford.png'
 import Image from 'grommet/components/Image'
 import { StandardLandingAnimator } from './animators'
 import { LandingSection } from './sectioncomponents'
+import TestResults from './testresults'
 
 const FixImage = styled(Image)`
   width: 800px !important;
@@ -52,8 +53,8 @@ export class LandingView extends Component {
           heading='Explore'
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
-          color='#000001'
-          tcolor='#fff'
+          color='#fff'
+          tcolor='#000'
         >
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
@@ -66,6 +67,14 @@ export class LandingView extends Component {
           color='#f0f0f0' reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
+          </Box>
+        </LandingSection>
+        <LandingSection
+          heading='Games'
+          text={<span>Master those lists you created by playing word games!</span>}
+          color='#f0f0f0'>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <TestResults />
           </Box>
         </LandingSection>
         <LandingFooter />

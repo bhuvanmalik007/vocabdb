@@ -89,7 +89,7 @@ const LimitedSplit = styled(Split)`
   }
 `
 
-const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
+export const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
   label: `Correct ${correctWords}`,
   value: correctWords,
   colorIndex: 'ok',
@@ -104,7 +104,7 @@ const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
   {
     label: `Remaining ${totalWords}`,
     value: totalWords,
-    colorIndex: 'neutral-3-t',
+    colorIndex: 'warning',
     onClick: () => null
   }
 ]
