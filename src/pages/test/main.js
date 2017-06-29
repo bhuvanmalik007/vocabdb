@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Sidebar from 'grommet/components/Sidebar'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import Heading from 'grommet/components/Heading'
@@ -247,13 +246,13 @@ export default class Test extends Component {
                 this.props.testWordsCounter < this.props.testWordsArray.length}
                 completedCondition={this.props.testWordsCounter === this.props.testWordsArray.length}
                 revealFn={() => this.props.reveal()}
-                onCorrect={() =>
+                onCorrect={() => this.props.setStatus({
+                  status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
+                })}
+                onIncorrect={() =>
                   this.props.setStatus({
                     status: -1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
                   })}
-                onIncorrect={() => this.props.setStatus({
-                  status: 1, wordObj: this.props.testWordsArray[this.props.testWordsCounter]
-                })}
               />} rightComponent={_ => null} />
           { this.props.ongoingTest && this.props.rightLoader && <FoldingCube size={100} color='#865cd6' /> }
         </LightGreyTestArea>
