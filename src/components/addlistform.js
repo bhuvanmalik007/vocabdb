@@ -1,24 +1,32 @@
 import React from 'react'
-import { Form, Segment, Container, Button } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
+import Box from 'grommet/components/Box'
+import Form from 'grommet/components/Form'
+import FormField from 'grommet/components/FormField'
+import TextInput from 'grommet/components/TextInput'
+import GrommetButton from 'grommet/components/Button'
+import styled from 'styled-components'
+
+const LowPadButton = styled(GrommetButton)`
+  border-radius: 0px;
+  span {
+    padding: 10px !important;
+  }
+`
 
 let AddListForm = ({ handleSubmit, pristine, submitting }) => {
   return (
-    <Container>
-      <Segment raised padded className='animated fadeIn'>
-        <Form onSubmit={handleSubmit}>
-          <Form.Field width={7}>
-            <label>Enter List Name</label>
-            <Field name='listName' type='text' component='input' placeholder='Enter a name for the new list' />
-          </Form.Field>
-          <br />
-          <Form.Group>
-            <Button type='submit' disabled={pristine || submitting}>Create!</Button>
-          </Form.Group>
-        </Form>
-      </Segment>
-    </Container>
+    <Box pad='large'>
+      <Form onSubmit={handleSubmit}>
+        <FormField label='Enter List Name'>
+          <Field name='listName' component={TextInput} placeHolder='Enter a name for the new list' />
+        </FormField>
+        <Box pad={{ 'vertical': 'medium' }}>
+          <LowPadButton primary disabled={pristine || submitting} label='Create!' fill='false' />
+        </Box>
+      </Form>
+    </Box>
   )
 }
 

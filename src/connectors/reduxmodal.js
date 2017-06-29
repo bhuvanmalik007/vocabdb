@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal } from 'semantic-ui-react'
+import Layer from 'grommet/components/Layer'
 import PropTypes from 'prop-types'
 import { pick } from 'ramda' //eslint-disable-line
 import { connect } from 'react-redux'
@@ -10,7 +10,7 @@ import SlideShow from '../connectors/slideshow'
 import TestListSelect from '../connectors/testListSelect'
 import styled, { keyframes } from 'styled-components'
 
-const fade = keyframes `
+const fade = keyframes`
   from {
     transform : translateY(10%);
     opacity : 0;
@@ -20,7 +20,7 @@ const fade = keyframes `
     opacity : 1;
   }
 `
-const Animatedmodal = styled(Modal)`
+const Animatedmodal = styled(Layer)`
   animation: ${fade} 0.5s;
 `
 
@@ -34,13 +34,13 @@ const modalContentMapper = {
 
 const ReduxModal = ({ visibility, header, content, showModal, size }) =>
   <Animatedmodal
-    open={visibility}
-    size={size}
-    header={header}
-    content={modalContentMapper[content]}
-    // closeIcon='close'
+    hidden={!visibility}
+    closer
+    flush
     onClose={showModal}
-  />
+  >
+    {modalContentMapper[content]}
+  </Animatedmodal>
 
 ReduxModal.propTypes = {
   visibility: PropTypes.bool,
