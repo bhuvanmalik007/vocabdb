@@ -145,7 +145,7 @@ export default class Test extends Component {
               Create New Test
             </IdentityComponent>}
             rightComponent={_ => null} />
-          <EitherComponent conditionerFn={() => !this.props.ongoingTest}
+          <EitherComponent conditionerFn={() => !this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={_ => <Box pad='medium'>
               {
                 this.props.savedTests.map((test, index) =>
@@ -162,7 +162,7 @@ export default class Test extends Component {
             </Box>}
             rightComponent={_ => null}
           />
-          <EitherComponent conditionerFn={() => this.props.ongoingTest}
+          <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={_ => <IdentityComponent
               fn={SidebarActions()}
               colorIndex='grey-4'
@@ -177,11 +177,11 @@ export default class Test extends Component {
               </Animate>
             </IdentityComponent>}
             rightComponent={_ => null} />
-          <EitherComponent conditionerFn={() => this.props.ongoingTest}
+          <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={_ => <Heading align='center'>{this.props.listName}</Heading>}
             rightComponent={_ => null}
           />
-          <EitherComponent conditionerFn={() => this.props.ongoingTest}
+          <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={
                 _ =>
                   <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }}
@@ -203,7 +203,7 @@ export default class Test extends Component {
             rightComponent={_ => null}
           />
           <Box alignSelf='center'>
-            <EitherComponent conditionerFn={() => this.props.ongoingTest}
+            <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
               leftComponent={_ => <IdentityComponent
                 fn={ComposeR(SidebarActions, FlameSidebarAction)()}
                 colorIndex='grey-4'

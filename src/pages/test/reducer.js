@@ -3,7 +3,7 @@ import initialState from './initialstate'
 
 const actionHandlers = {
   INIT_TEST_STATE: (state, action) => Object.assign({}, state, {
-    leftLoader: true
+    leftLoader: !state.ongoingTest
   }),
   SET_LISTS: (state, action) => Object.assign({}, state, {
     lists: action.payload.data
