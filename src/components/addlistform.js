@@ -23,7 +23,7 @@ let AddListForm = ({ handleSubmit, pristine, submitting }) => {
           <Field name='listName' component={TextInput} placeHolder='Enter a name for the new list' />
         </FormField>
         <Box pad={{ 'vertical': 'medium' }}>
-          <LowPadButton primary disabled={pristine || submitting} label='Create!' fill='false' />
+          <LowPadButton primary disabled={pristine || submitting} label='Create!' fill='false' onClick={() => null} />
         </Box>
       </Form>
     </Box>
