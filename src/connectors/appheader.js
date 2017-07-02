@@ -45,7 +45,7 @@ const AppHeader = ({ showLogin, authenticated, profile, location }) =>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
         pad={{ horizontal: 'medium' }}>
-        <Anchor onClick={() => showLogin()}>{profile.nickname}</Anchor>
+        <Anchor onClick={() => null}>{profile.nickname}</Anchor>
       </Menu>
     </NotBlackHeader>}
   </div>
