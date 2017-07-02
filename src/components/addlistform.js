@@ -22,6 +22,7 @@ let AddListForm = ({ handleSubmit, pristine, submitting }) => {
         <FormField label='Enter List Name'>
           <Field name='listName' component={props => <TextInput
             placeHolder='Enter a name for the new list'
+            value={props.input.value}
             onDOMChange={param => {
               console.log(param.target.value)
               return props.input.onChange(param.target.value)
@@ -30,7 +31,7 @@ let AddListForm = ({ handleSubmit, pristine, submitting }) => {
         </FormField>
         <Box pad={{ vertical: 'medium' }}>
           <LowPadButton primary type='submit' disabled={pristine || submitting}
-            label='Create!' fill='false' onClick={_ => null} />
+            label='Create!' fill='false' onClick={pristine || submitting ? undefined : _ => null} />
         </Box>
       </Form>
     </Box>
