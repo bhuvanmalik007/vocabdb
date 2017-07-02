@@ -20,12 +20,12 @@ let SelectListForm = ({ handleSubmit, pristine, submitting, lists }) => {
     <Box pad='large'>
       <Form onSubmit={handleSubmit}>
         <FormField width={7}>
-          <Field name='listId' component={props => <Select
-            label={props.input}
+          <Field name='listObj' component={props => <Select
+            label={props.input.value.label}
             options={lists.map((list, index) => ({ value: list.listId, label: list.listName }))}
             value={props.input.value}
             onChange={param => {
-              return props.input.onChange(param.value.value)
+              return props.input.onChange(param.value)
             }} />} />
         </FormField>
         <Box pad={{ vertical: 'medium' }}>

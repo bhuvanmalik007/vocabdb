@@ -4,8 +4,12 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { pick } from 'ramda' //eslint-disable-line
 
-const SelectList = ({ lists, addWordsToList }) =>
-  <SelectListForm onSubmit={(formData) => addWordsToList(formData.listId)} lists={[...lists.slice(1)]} />
+const SelectList = ({ lists, addWordsToList }) => {
+  const submit = (formData) => {
+    addWordsToList(formData.listObj.value)
+  }
+  return <SelectListForm onSubmit={submit} lists={[...lists.slice(1)]} />
+}
 
 SelectList.propTypes = {
   lists: PropTypes.array,
