@@ -1,26 +1,39 @@
 import React from 'react'
-import { Form, Segment, Container, Button } from 'semantic-ui-react'
+import Form from 'grommet/components/Form'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
+import Select from 'grommet/components/Select'
+import Box from 'grommet/components/Box'
+import FormField from 'grommet/components/FormField'
+import GrommetButton from 'grommet/components/Button'
+import styled from 'styled-components'
+
+const LowPadButton = styled(GrommetButton)`
+  border-radius: 0px;
+  span {
+    padding: 10px !important;
+  }
+`
 
 let SelectListForm = ({ handleSubmit, pristine, submitting, lists }) => {
   return (
-    <Container>
-      <Segment raised padded className='animated fadeIn'>
-        <Form onSubmit={handleSubmit}>
-          <Form.Field width={7}>
-            <Field name='listId' component='select'>
-              <option />
-              {lists.map((list, index) => <option key={index} value={list.listId}>{list.listName}</option>)}
-            </Field>
-          </Form.Field>
-          <br />
-          <Form.Group>
-            <Button type='submit' disabled={pristine || submitting}>Add!</Button>
-          </Form.Group>
-        </Form>
-      </Segment>
-    </Container>
+    <Box pad='large'>
+      <Form onSubmit={handleSubmit}>
+        <FormField width={7}>
+          <Field name='listId' component={props => <Select
+            label={props.input}
+            options={lists.map((list, index) => ({ value: list.listId, label: list.listName }))}
+            value={props.input.value}
+            onChange={param => {
+              return props.input.onChange(param.value.value)
+            }} />} />
+        </FormField>
+        <Box pad={{ vertical: 'medium' }}>
+          <LowPadButton primary type='submit' disabled={pristine || submitting}
+            label='Add!' fill='false' onClick={pristine || submitting ? undefined : _ => null} />
+        </Box>
+      </Form>
+    </Box>
   )
 }
 
