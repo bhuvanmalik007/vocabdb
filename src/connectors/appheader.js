@@ -19,6 +19,13 @@ const Styledlink = styled(Link)`
   }
 `
 
+const StyledUserInfo = styled(Anchor)`
+  color : #fff !important;
+  &:hover{
+    color: #d1d1d1
+  }
+`
+
 const NotBlackHeader = styled(Header)`
   background-color: #000;
 `
@@ -45,7 +52,7 @@ const AppHeader = ({ showLogin, authenticated, profile, location }) =>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
         pad={{ horizontal: 'medium' }}>
-        <Anchor onClick={() => null}>{profile.nickname}</Anchor>
+        <StyledUserInfo onClick={() => null}>{profile.nickname}</StyledUserInfo>
       </Menu>
     </NotBlackHeader>}
   </div>
