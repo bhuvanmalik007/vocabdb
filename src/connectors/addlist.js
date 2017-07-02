@@ -5,9 +5,13 @@ import PropTypes from 'prop-types'
 import { pick } from 'ramda'
 import { selectedCountReducer, reduceToSenseIds } from '../utils/selectionreducers'
 
-const AddList = ({ createList, multipleSelect, filteredArray }) =>
-  <AddListForm onSubmit={(formData) => createList({ listName: formData.listName,
-    wordIds: multipleSelect && selectedCountReducer(filteredArray) > 0 ? reduceToSenseIds(filteredArray) : [] })} />
+const AddList = ({ createList, multipleSelect, filteredArray }) => {
+  const submit = (formData) => {
+    createList({ listName: formData.listName,
+      wordIds: multipleSelect && selectedCountReducer(filteredArray) > 0 ? reduceToSenseIds(filteredArray) : [] })
+  }
+  return (<AddListForm onSubmit={submit} />)
+}
 
 AddList.propTypes = {
   createList: PropTypes.func,
