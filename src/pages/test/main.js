@@ -202,7 +202,7 @@ export default class Test extends Component {
                   </Box>}
             rightComponent={_ => null}
           />
-          <Box alignSelf='center'>
+          <Box>
             <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
               leftComponent={_ => <IdentityComponent
                 fn={ComposeR(SidebarActions, FlameSidebarAction)()}

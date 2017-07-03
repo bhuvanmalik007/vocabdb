@@ -8,21 +8,6 @@ import SelectList from '../connectors/addwordlistselect'
 import ListSettings from '../connectors/listsettings'
 import SlideShow from '../connectors/slideshow'
 import TestListSelect from '../connectors/testListSelect'
-import styled, { keyframes } from 'styled-components'
-
-const fade = keyframes`
-  from {
-    transform : translateY(10%);
-    opacity : 0;
-  }
-  to {
-    transform : translateY(0%);
-    opacity : 1;
-  }
-`
-const Animatedmodal = styled(Layer)`
-  animation: ${fade} 0.5s;
-`
 
 const modalContentMapper = {
   ADD_LIST: <AddList />,
@@ -33,14 +18,14 @@ const modalContentMapper = {
 }
 
 const ReduxModal = ({ visibility, header, content, showModal, size }) =>
-  <Animatedmodal
+  <Layer
     hidden={!visibility}
     closer
     flush
     onClose={showModal}
   >
     {modalContentMapper[content]}
-  </Animatedmodal>
+  </Layer>
 
 ReduxModal.propTypes = {
   visibility: PropTypes.bool,

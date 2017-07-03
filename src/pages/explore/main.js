@@ -11,8 +11,8 @@ import GrommetSearch from 'grommet/components/Search'
 import FormAdd from 'grommet/components/icons/base/FormAdd'
 import GrommetButton from 'grommet/components/Button'
 import Status from 'grommet/components/icons/Status'
-import Spinning from 'grommet/components/icons/Spinning'
 import Animate from 'grommet/components/Animate'
+import { FoldingCube } from 'better-react-spinkit'
 
 const ShadowBox = styled(Box)`
   background-color: #ffffff;
@@ -27,9 +27,6 @@ const LowPadButton = styled(GrommetButton)`
   span {
     padding: 10px !important;
   }
-`
-const Styledspinning = styled(Spinning)`
-  margin-top : 20px;
 `
 
 const IconButton = props =>
@@ -109,7 +106,9 @@ const ExploreSenses = ({
         <Popup position='right center' trigger={<Icon inverted link name='volume up' size='huge'
           onClick={audio} />} content='Click to hear pronounciation' />
       } */}
-      {isLoading && <Styledspinning size='large' />}
+      {isLoading && <Box full justify='center' align='center'>
+        <FoldingCube size={100} color='#865cd6' />
+      </Box>}
       {words.length !== 0 && !isLoading && <Segment basic>
         <CardsMaker searchResults={words} searchString={searchString}
           addWord={addWord} filterWords={filterWords} pronounciation={pronounciation} />
