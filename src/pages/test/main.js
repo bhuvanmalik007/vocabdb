@@ -123,6 +123,19 @@ export default class Test extends Component {
         <IdentityComponent fn={styled(Box)`
           background-color: #E5E3DF;
           overflowY : auto;
+          &::-webkit-scrollbar-track
+          {
+          	background-color: #fff;
+          }
+          &::-webkit-scrollbar
+          {
+          	width: 10px;
+          	background-color: #F5F5F5;
+          }
+          &::-webkit-scrollbar-thumb
+          {
+          	background-color: #FF576D;
+          }
         `}
           colorIndex='neutral-4'
           size='medium'
