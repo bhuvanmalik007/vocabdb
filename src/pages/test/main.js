@@ -35,6 +35,8 @@ const SidebarActions = () => styled(Box)`
 `
 
 const WhiteHoverCard = styled(Hovercard)`
+  min-height : 300px;
+  margin-bottom : 10px;
   &:hover {
     & > div{
       background-color: #fff;
@@ -120,6 +122,7 @@ export default class Test extends Component {
       <LimitedSplit flex='right' priority='left' separator={false} showOnResponsive='both'>
         <IdentityComponent fn={styled(Box)`
           background-color: #E5E3DF;
+          overflowY : auto;
         `}
           colorIndex='neutral-4'
           size='medium'
