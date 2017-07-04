@@ -50,6 +50,15 @@ export class LandingView extends Component {
           </Box>
         </LandingSection>
         <LandingSection
+          heading='Storage & Organization'
+          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
+            <br /> Gone are the days of writing down words or taking printouts!</span>}
+          color='#f0f0f0' reverse>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <SampleCardMaker />
+          </Box>
+        </LandingSection>
+        <LandingSection
           heading='Explore'
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
@@ -59,15 +68,6 @@ export class LandingView extends Component {
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
           </Box>} style='fade' />
-        </LandingSection>
-        <LandingSection
-          heading='Storage & Organization'
-          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
-            <br /> Gone are the days of writing down words or taking printouts!</span>}
-          color='#f0f0f0' reverse>
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
-            <SampleCardMaker />
-          </Box>
         </LandingSection>
         <LandingSection
           heading='Games'

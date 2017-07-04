@@ -24,11 +24,11 @@ export default props => (
     </Box>
     <Box direction='column' alignSelf='end'>
       <BGTextNoMargin size='small' margin='none'>
-        © {new Date().getFullYear()} Rajat Sharma
+        © {new Date().getFullYear()} VocabDB
       </BGTextNoMargin>
       <BGTextNoMargin size='small' margin='none'>
-        For more details on this <br />
-        Please contact <Anchor href={'mailto:' + MAILID} label={MAILID} /> <br />
+        {/* For more details on this <br />
+        Please contact <Anchor href={'mailto:' + MAILID} label={MAILID} /> <br /> */}
         All Graphics created with <Anchor href='https://logomakr.com' label='Logomakr' />
       </BGTextNoMargin>
     </Box>
