@@ -2,6 +2,10 @@ import Reducer from '../../futils/reducecreator'
 import initialState from './initialstate'
 
 const actionHandlers = {
+  FETCH_MYFLASHCARDS: (state, action) => Object.assign({}, state,
+    { isLoading: true,
+      currentListName: 'all',
+      currentListId: 'all' }),
   INIT_WORDS: (state, action) => Object.assign({}, state, {
     wordsArray: action.payload.data,
     filteredArray: [...action.payload.data],
@@ -50,6 +54,11 @@ const actionHandlers = {
       ...state.filteredArray.slice(action.index + 1)]
   }),
   ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] }),
+  FETCH_LIST_WORDS: (state, action) => Object.assign({}, state,
+    { currentListName: action.payload.listName,
+      currentListId: action.payload.listId,
+      isLoading: true
+    }),
   SET_CURRENT_LIST: (state, action) => Object.assign({}, state,
     { currentListName: action.payload.listName, currentListId: action.payload.listId }),
   DELETE_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.filter(listObj =>

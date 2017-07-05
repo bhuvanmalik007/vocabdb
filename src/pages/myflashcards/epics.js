@@ -64,20 +64,13 @@ const fetchMyListWords = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload }))
   )
 
-const setCurrentListEpic = (action$, store) =>
-  action$.ofType('FETCH_LIST_WORDS')
-  .map(action => ({ type: 'SET_CURRENT_LIST', payload: action.payload }))
-
-const setAllListEpic = (action$, store) =>
-  action$.ofType('FETCH_MYFLASHCARDS')
-  .map(action => ({ type: 'SET_CURRENT_LIST', payload: { listName: 'all', listId: 'all' } }))
-
 const createList = (action$, store) =>
   action$.ofType('CREATE_LIST')
   .mergeMap(action =>
     postRequest(action.payload, '/addlist/', store)
     .flatMap(({ id }) => [{ type: 'ADD_LIST', payload: { listId: id, listName: action.payload.listName } },
-      { type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }
+      { type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true },
+      { type: 'SHOWTOAST', content: 'List successfuly created!' }
     ])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
@@ -89,7 +82,8 @@ const addWordsToList = (action$, store) =>
       listId: action.payload,
       wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray)
     }, '/addlist/', store)
-    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true }])
+    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'TOGGLE_MULTIPLE_SELECT', payload: true },
+  { type: 'SHOWTOAST', content: 'Words successfuly added to list!' }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
@@ -97,7 +91,7 @@ const renameList = (action$, store) =>
   action$.ofType('RENAME_LIST')
   .mergeMap(action =>
     postRequest(action.payload, '/renamelist/', store)
-    .map((payload) => ({ type: 'SHOW_MODAL' }))
+    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'SHOWTOAST', content: 'List successfuly renamed!' }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
@@ -105,11 +99,12 @@ const deleteList = (action$, store) =>
   action$.ofType('DELETE_LIST')
   .mergeMap(action =>
     postRequest({ listIds: [action.payload] }, '/deletelist/', store)
-    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'FETCH_MYFLASHCARDS' }])
+    .flatMap((payload) => [{ type: 'SHOW_MODAL' }, { type: 'FETCH_MYFLASHCARDS' },
+  { type: 'SHOWTOAST', content: 'List successfuly deleted!' }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 
 export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords,
   fetchMyListWords, createList, addWordsToList,
-  renameList, deleteList, deleteFromList, deleteFromAll, setCurrentListEpic, setAllListEpic
+  renameList, deleteList, deleteFromList, deleteFromAll
 ]
