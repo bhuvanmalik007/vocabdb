@@ -1,13 +1,13 @@
 import React from 'react'
-import Layer from 'grommet/components/Layer'
 import PropTypes from 'prop-types'
-import { pick } from 'ramda' //eslint-disable-line
+import { pick } from 'ramda'
 import { connect } from 'react-redux'
 import AddList from '../connectors/addlist'
 import SelectList from '../connectors/addwordlistselect'
 import ListSettings from '../connectors/listsettings'
 import SlideShow from '../connectors/slideshow'
 import TestListSelect from '../connectors/testListSelect'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
 
 const modalContentMapper = {
   ADD_LIST: <AddList />,
@@ -18,14 +18,13 @@ const modalContentMapper = {
 }
 
 const ReduxModal = ({ visibility, header, content, showModal, size }) =>
-  <Layer
-    hidden={!visibility}
-    closer
-    flush
-    onClose={showModal}
+  <Modal
+    isOpen={visibility}
+    isBlocking={false}
+    onDismiss={showModal}
   >
     {modalContentMapper[content]}
-  </Layer>
+  </Modal>
 
 ReduxModal.propTypes = {
   visibility: PropTypes.bool,

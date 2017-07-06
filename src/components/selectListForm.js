@@ -2,11 +2,11 @@ import React from 'react'
 import Form from 'grommet/components/Form'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import Select from 'grommet/components/Select'
 import Box from 'grommet/components/Box'
-import FormField from 'grommet/components/FormField'
 import GrommetButton from 'grommet/components/Button'
 import styled from 'styled-components'
+import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
+import Heading from 'grommet/components/Heading'
 
 const LowPadButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -18,20 +18,17 @@ const LowPadButton = styled(GrommetButton)`
 let SelectListForm = ({ handleSubmit, pristine, submitting, lists }) => {
   return (
     <Box pad='large'>
+      <Heading tag='h3'>Select List to Add Words to</Heading>
       <Form onSubmit={handleSubmit}>
-        <FormField width={7}>
-          <Field name='listObj' component={props => <Select
-            label={props.input.value.label}
-            options={lists.map((list, index) => ({ value: list.listId, label: list.listName }))}
-            value={props.input.value}
-            onChange={param => {
-              return props.input.onChange(param.value)
-            }} />} />
-        </FormField>
-        <Box pad={{ vertical: 'medium' }}>
-          <LowPadButton primary type='submit' disabled={pristine || submitting}
-            label='Add!' fill='false' onClick={pristine || submitting ? undefined : _ => null} />
-        </Box>
+        <Field name='listObj' component={props => <Dropdown
+          label={props.input.value.label}
+          options={lists.map((list, index) => ({ key: list.listId, text: list.listName }))}
+          selectedKey={props.input.value}
+          onChanged={param => {
+            return props.input.onChange(param.key)
+          }} />} />
+        <LowPadButton primary type='submit' disabled={pristine || submitting}
+          label='Add!' fill onClick={pristine || submitting ? undefined : _ => null} />
       </Form>
     </Box>
   )

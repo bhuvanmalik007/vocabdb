@@ -27,6 +27,14 @@ const NotificatonActionHandlers = {
 
 const NotifierInit = { toasted: false, content: '', danger: false }
 
+const UserInfoInit = { infoOpen:false }
+
+const UserInfoActionHandler = {
+  CLOSEINFO: s => ({ infoOpen: false }),
+  OPENINFO: s => ({ infoOpen: true })
+}
+
 export const CoreReducer = Reducer(initialState, ACTION_HANDLERS)
 export const ReduxModalReducer = Reducer(modalInitialState, MODAL_ACTION_HANDLERS)
 export const NotifierReducer = Reducer(NotifierInit, NotificatonActionHandlers)
+export const UserInfoReducer = Reducer(UserInfoInit, UserInfoActionHandler)

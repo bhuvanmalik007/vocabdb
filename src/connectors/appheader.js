@@ -36,7 +36,7 @@ const MontserretTitle = styled(Title)`
   font-family: 'Montserrat', sans-serif;
 `
 
-const AppHeader = ({ showLogin, authenticated, profile, location }) =>
+const AppHeader = ({ showLogin, authenticated, profile, openInfo, location }) =>
   <div>
     {authenticated && <NotBlackHeader justify='between' colorIndex='grey-1'>
       <Box size={{ width: { max: 'xxlarge' } }} direction='row'
@@ -52,7 +52,7 @@ const AppHeader = ({ showLogin, authenticated, profile, location }) =>
       </Box>
       <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'
         pad={{ horizontal: 'medium' }}>
-        <StyledUserInfo onClick={() => null}>{profile.nickname}</StyledUserInfo>
+        <StyledUserInfo onClick={() => openInfo()}>{profile.nickname}</StyledUserInfo>
       </Menu>
     </NotBlackHeader>}
   </div>
@@ -61,7 +61,8 @@ AppHeader.propTypes = {
   showLogin: PropTypes.func,
   authenticated: PropTypes.bool,
   location: PropTypes.object,
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  openInfo: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -69,7 +70,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  routeTo: path => dispatch({ type: 'LOCATION_CHANGE', payload: path })
+  routeTo: path => dispatch({ type: 'LOCATION_CHANGE', payload: path }),
+  openInfo: () => dispatch({ type: 'OPENINFO' })
 })
 
 export default composeR(connect(mapStateToProps, mapDispatchToProps), withRouter)(AppHeader)

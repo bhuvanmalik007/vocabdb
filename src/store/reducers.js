@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
-import { CoreReducer, ReduxModalReducer, NotifierReducer } from '../core/corereducers'
+import { CoreReducer, ReduxModalReducer, NotifierReducer, UserInfoReducer } from '../core/corereducers'
 import { reducer as formReducer } from 'redux-form'
 
 export const makeRootReducer = (asyncReducers) => {
@@ -10,6 +10,7 @@ export const makeRootReducer = (asyncReducers) => {
     location: locationReducer,
     form: formReducer,
     notify: NotifierReducer,
+    userInfo: UserInfoReducer,
     ...asyncReducers
   })
 }

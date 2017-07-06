@@ -21,7 +21,9 @@ const MontserretTitle = styled(Title)`
   color: #fff;
   font-family: 'Montserrat', sans-serif;
 `
-
+const SMenu = styled(Anchor)`
+  color: #fff;
+`
 const LandingHeader = ({ showLogin, authenticated }) =>
   <div>
     {!authenticated && <NotBlackHeader justify='center'>
@@ -30,7 +32,7 @@ const LandingHeader = ({ showLogin, authenticated }) =>
         pad={{ horizontal: 'medium' }} flex='grow'>
         <MontserretTitle>VocabDB</MontserretTitle>
         <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'>
-          <Anchor onClick={() => showLogin()}>Get Started</Anchor>
+          <SMenu onClick={() => showLogin()}>Get Started</SMenu>
         </Menu>
       </Box>
     </NotBlackHeader>}

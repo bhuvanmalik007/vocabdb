@@ -17,7 +17,7 @@ const sampleWords = [
   },
   {
     word: 'Eldritch',
-    meaning: 'lol',
+    meaning: 'weird and sinister or ghostly',
     example: 'an eldritch screech'
   }
 ]

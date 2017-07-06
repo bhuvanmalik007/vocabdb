@@ -1,27 +1,42 @@
 import React from 'react'
-import { Form, Segment, Container, Button } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
+import Box from 'grommet/components/Box'
+import Form from 'grommet/components/Form'
+import FormField from 'grommet/components/FormField'
+import TextInput from 'grommet/components/TextInput'
+import styled from 'styled-components'
+import GrommetButton from 'grommet/components/Button'
+import Heading from 'grommet/components/Heading'
+
+const LowPadButton = styled(GrommetButton)`
+  border-radius: 0px;
+  span {
+    padding: 10px !important;
+  }
+`
+
+const customInput = props => <TextInput
+  placeHolder='Enter New Name for List'
+  onDOMChange={param => props.input.onChange(param.target.value)} /> //eslint-disable-line
 
 const ListSettingsForm = ({ handleSubmit, pristine, submitting, deleteList, currentListId }) => {
   return (
-    <Container>
-      <Segment raised padded className='animated fadeIn'>
-        <Form onSubmit={handleSubmit}>
-          <Form.Field width={7}>
-            <label>Rename List</label>
-            <Field name='listName' type='text' component='input' placeholder='Enter a name for the new list' />
-          </Form.Field>
-          <br />
-          <Form.Group>
-            <Button type='button' color='red' onClick={() => deleteList(currentListId)}>Delete List</Button>
-          </Form.Group>
-          <Form.Group>
-            <Button type='submit' disabled={pristine || submitting}>Rename!</Button>
-          </Form.Group>
-        </Form>
-      </Segment>
-    </Container>
+    <Box pad='medium'>
+      <Heading tag='h3'>List Settings</Heading>
+      <Form onSubmit={handleSubmit}>
+        <FormField>
+          <Field name='listName' component={customInput} />
+        </FormField>
+        <Box pad={{ vertical: 'medium' }}>
+          <LowPadButton primary type='submit' disabled={pristine || submitting}
+            label='Rename!' fill onClick={pristine || submitting ? undefined : _ => null} />
+        </Box>
+        <Box pad={{ vertical: 'medium' }}>
+          <LowPadButton primary label='Delete!' fill onClick={() => deleteList(currentListId)} />
+        </Box>
+      </Form>
+    </Box>
   )
 }
 

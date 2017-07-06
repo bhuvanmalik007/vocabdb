@@ -18,6 +18,6 @@ const ApiErrorEpic = action$ =>
   })
 
 const UnprotectedEpic = action$ =>
-  action$.ofType('UNPROTECTED').do(() => browserHistory.replace('/landing'))
+  action$.ofType('UNPROTECTED').do(() => browserHistory.replace('/landing')).mapTo({ type: 'LOGGEDOUT' })
 
 export default [NotifierEpic, ApiErrorEpic, UnprotectedEpic]

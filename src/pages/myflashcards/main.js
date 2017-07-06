@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { selectedCountReducer, reduceToSenseIds } from '../../utils/selectionreducers'
 import Box from 'grommet/components/Box'
@@ -20,6 +19,7 @@ import Status from 'grommet/components/icons/Status'
 import PlayIcon from 'grommet/components/icons/base/Play'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
+import SettingsOption from 'grommet/components/icons/base/SettingsOption'
 
 const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -167,10 +167,9 @@ export default class MyFlashcards extends Component {
 
           {!this.props.multipleSelect && this.props.currentListId !== 'all' &&
             <Box pad='small'>
-              <Button icon='setting'
+              <IconButton icon={<SettingsOption />}
                 onClick={() =>
-                  this.props.showModal({ header: 'LIST SETTINGS', content: 'LIST_SETTINGS' })}
-              />
+                  this.props.showModal({ header: 'LIST SETTINGS', content: 'LIST_SETTINGS' })} />
             </Box>
           }
 

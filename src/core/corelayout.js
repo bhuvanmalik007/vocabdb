@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import AppHeader from '../connectors/appheader'
 import ReduxModal from '../connectors/reduxmodal'
+import Info from '../connectors/userinfo'
 import Notifier from '../connectors/notifier'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
@@ -17,6 +18,7 @@ const CoreLayout = ({ children, location }) => (
   <HeightLimiter>
     <AppHeader />
     <ReduxModal />
+    <Info />
     <Notifier />
     {children}
   </HeightLimiter>

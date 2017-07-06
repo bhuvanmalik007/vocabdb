@@ -3,28 +3,47 @@
 @import url('https://fonts.googleapis.com/css?family=Crete+Round:400i');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-.auth0-lock.auth0-lock .auth0-lock-badge-bottom{
+.auth0-lock.auth0-lock .auth0-lock-badge-bottom {
   display: none;
 }
 
-.auth0-lock.auth0-lock .auth0-lock-header{
+.auth0-lock.auth0-lock .auth0-lock-header {
   color: #fff !important;
+  border-radius: 0px !important;
 }
 
-.auth0-lock.auth0-lock .auth0-lock-header-bg{
+.auth0-lock-cred-pane .auth0-lock-quiet {
+  border-radius: 0px !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-cred-pane {
+  border-radius: 0px !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-header-bg {
   background: #000 !important;
 }
 
-.auth0-lock.auth0-lock .auth0-lock-widget{
+.auth0-lock.auth0-lock .auth0-lock-widget {
   width: 450px !important;
 }
 
-.auth0-lock-header-bg-blur{
- display: none !important;
+.auth0-lock-header-bg-blur {
+  display: none !important;
 }
 
-.lato-logo{
+.auth0-lock.auth0-lock .auth0-lock-name {
+  font-size: 47px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 33px 10px !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-header-logo {
+  display: none !important;
+}
+
+.lato-logo {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   font-style: italic;
@@ -32,22 +51,22 @@
   font-size: 32px;
 }
 
-.header-texts:hover{
+.header-texts:hover {
   color: #fff;
 }
 
 nav a {
-	position: relative;
-	display: inline-block;
-	margin: 5px 25px;
-	outline: none;
-	color: #fff;
-	text-decoration: none;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-	font-weight: 400;
-	text-shadow: 0 0 1px rgba(255,255,255,0.3);
-	font-size: 1.35em;
+  position: relative;
+  display: inline-block;
+  margin: 5px 25px;
+  outline: none;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+  font-size: 1.35em;
 }
 
 .main-container {
@@ -59,8 +78,8 @@ nav a {
   min-height: 100vh;
 }
 
-.auth0-lock-name{
-  font-family: 'Audiowide', cursive;
+.auth0-lock-name {
+  font-family: 'Open Sans', sans-serif;
   text-transform: capitalize;
 }
 
@@ -74,7 +93,7 @@ nav a {
   align-self: center;
 }
 
-.sliderchange{
+.sliderchange {
   animation: clicked-keyframes 1s;
 }
 
@@ -82,10 +101,12 @@ nav a {
   from {
     opacity: 0.01
   }
-  to {opacity: 1}
+  to {
+    opacity: 1
+  }
 }
 
-.wallpaper{
+.wallpaper {
   background-image: url("./static/hero.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -94,16 +115,40 @@ nav a {
   z-index: 2;
 }
 
-.open-sans{
+.open-sans {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
 }
 
-.montserret{
+.montserret {
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
 }
 
-.grommetux-meter__graphic{
+.grommetux-meter__graphic {
   width: 240px !important;
+}
+
+.grommetux-search:focus {
+  border: 2px solid #865cd6;
+  box-shadow: none;
+}
+
+.grommetux-search__input:focus {
+  border: 2px solid #865cd6;
+  box-shadow: none;
+}
+
+.grommetux-form-field--focus {
+  border-width: 1px;
+  border-color: #865cd6;
+}
+
+.grommetux-select__input {
+  padding: 12px 28px;
+  border-radius: 0px;
+}
+
+.grommet.grommetux-drop {
+  border-radius: 0px !important;
 }

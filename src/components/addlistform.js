@@ -7,6 +7,7 @@ import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
 import GrommetButton from 'grommet/components/Button'
 import styled from 'styled-components'
+import Heading from 'grommet/components/Heading'
 
 const LowPadButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -25,13 +26,14 @@ customInput.propTypes = {
 let AddListForm = ({ handleSubmit, pristine, submitting }) => {
   return (
     <Box pad='large'>
+      <Heading tag='h3'>Create New List</Heading>
       <Form onSubmit={handleSubmit}>
-        <FormField label='Enter List Name'>
+        <FormField>
           <Field name='listName' component={customInput} />
         </FormField>
         <Box pad={{ vertical: 'medium' }}>
           <LowPadButton primary type='submit' disabled={pristine || submitting}
-            label='Create!' fill='false' onClick={pristine || submitting ? undefined : _ => null} />
+            label='Create!' fill onClick={pristine || submitting ? undefined : _ => null} />
         </Box>
       </Form>
     </Box>
