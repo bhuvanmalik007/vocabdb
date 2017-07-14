@@ -1,7 +1,7 @@
 {
-  "name": "Mission-admission",
+  "name": "vocabdb",
   "version": "1.0.0",
-  "description": "Mission-Admission Redux Frontend",
+  "description": "VocabDB Redux Frontend",
   "main": "index.js",
   "engines": {
     "node": ">=4.5.0",
