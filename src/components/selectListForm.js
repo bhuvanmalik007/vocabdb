@@ -3,17 +3,9 @@ import Form from 'grommet/components/Form'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import Box from 'grommet/components/Box'
-import GrommetButton from 'grommet/components/Button'
-import styled from 'styled-components'
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
 import Heading from 'grommet/components/Heading'
-
-const LowPadButton = styled(GrommetButton)`
-  border-radius: 0px;
-  span {
-    padding: 10px !important;
-  }
-`
+import { LowPadButton } from '../pages/myflashcards/localcomponents'
 
 let SelectListForm = ({ handleSubmit, pristine, submitting, lists }) => {
   return (

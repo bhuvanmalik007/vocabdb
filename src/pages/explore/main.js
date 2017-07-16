@@ -1,5 +1,4 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import Columns from 'grommet/components/Columns'
 import Card from 'grommet/components/Card'
@@ -37,8 +36,8 @@ const IconButton = props =>
 const CardsMaker = props =>
   <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 100 }}
     keep={false} visible>
-    <Columns size='medium' justify='center' masonry
-      maxCount={3} responsive>
+    <Columns size='medium' justify='center'
+      maxCount={3} masonry>
       {props.searchResults.map((element, index) =>
         <Card
           key={index}
@@ -86,8 +85,6 @@ const ExploreSenses = ({
 }) => {
   const handleSearchChange = e => {
     updateSearchString(e.target.value)
-    // setLoader()
-    // search(e.target.value)
   }
   return (
     <div className='main-container'>
@@ -100,19 +97,16 @@ const ExploreSenses = ({
           placeholder='Explore new words..'
           value={searchString} />
       </ShadowBox>
-      {/* <audio id='audio' src={results.pronounciation} /> */}
 
-      {/* {results.words.length !== 0 && !isLoading && results.pronounciation &&
-        <Popup position='right center' trigger={<Icon inverted link name='volume up' size='huge'
-          onClick={audio} />} content='Click to hear pronounciation' />
-      } */}
       {isLoading && <Box full justify='center' align='center'>
         <FoldingCube size={100} color='#865cd6' />
       </Box>}
-      {words.length !== 0 && !isLoading && <Segment basic>
+
+      {words.length !== 0 && !isLoading && <Box full>
         <CardsMaker searchResults={words} searchString={searchString}
           addWord={addWord} filterWords={filterWords} pronounciation={pronounciation} />
-      </Segment>}
+      </Box>}
+
       {((words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
     </div>
   )

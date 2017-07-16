@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { pick } from 'ramda' //eslint-disable-line
+import { pick } from 'ramda'
 import Explore from './main'
 
 const mapDispatchToProps = dispatch => ({
@@ -7,7 +7,6 @@ const mapDispatchToProps = dispatch => ({
   search: (payload) => dispatch({ type: 'SEARCH', payload }),
   setLoader: () => dispatch({ type: 'IS_LOADING', bool: true }),
   addWord: (payload) => dispatch({ type: 'SELECT_WORD', payload })
-  // filterWords: (searchString) => dispatch({ type: 'FILTER_WORDS', searchString })
 })
 
 const mapStateToProps = state => ({

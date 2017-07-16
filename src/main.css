@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Audiowide');
 @import url('https://fonts.googleapis.com/css?family=Lato:700i');
-@import url('https://fonts.googleapis.com/css?family=Crete+Round:400i');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom {
   display: none;
 }
@@ -75,7 +74,6 @@ nav a {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  min-height: 100vh;
 }
 
 .auth0-lock-name {

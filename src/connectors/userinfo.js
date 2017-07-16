@@ -39,7 +39,7 @@ const UserInfoPanel = props =>
 UserInfoPanel.propTypes = {
   infoOpen: PropTypes.bool,
   closeInfo: PropTypes.func,
-  profile: PropTypes.obj,
+  profile: PropTypes.object,
   logout: PropTypes.func
 }
 

@@ -4,7 +4,7 @@ import Box from 'grommet/components/Box'
 import Paragraph from 'grommet/components/Paragraph'
 import Anchor from 'grommet/components/Anchor'
 import styled from 'styled-components'
-import { MAILID } from '../constants'
+import { MAILID } from '../constants' //eslint-disable-line
 
 const BGTextNoMargin = styled(Paragraph)`
   background: black;

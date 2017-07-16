@@ -5,16 +5,8 @@ import Box from 'grommet/components/Box'
 import Form from 'grommet/components/Form'
 import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
-import styled from 'styled-components'
-import GrommetButton from 'grommet/components/Button'
 import Heading from 'grommet/components/Heading'
-
-const LowPadButton = styled(GrommetButton)`
-  border-radius: 0px;
-  span {
-    padding: 10px !important;
-  }
-`
+import { LowPadButton } from '../pages/myflashcards/localcomponents'
 
 const customInput = props => <TextInput
   placeHolder='Enter New Name for List'

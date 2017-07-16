@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Animate from 'grommet/components/Animate'
 import Box from 'grommet/components/Box'
-import { Hovercard } from '../myflashcards/main'
+import { Hovercard } from '../myflashcards/localcomponents'
 import Columns from 'grommet/components/Columns'
 import Status from 'grommet/components/icons/Status'
 import Paragraph from 'grommet/components/Paragraph'

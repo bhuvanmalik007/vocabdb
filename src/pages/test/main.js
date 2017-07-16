@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 import Heading from 'grommet/components/Heading'
-import Split from 'grommet/components/Split'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import Close from 'grommet/components/icons/base/Close'
 import TrashIcon from 'grommet/components/icons/base/Trash' //eslint-disable-line
 import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
-import { Hovercard } from '../myflashcards/main'
 import TestCard from './testcard'
 import { TestWordsLens, TotalWordsLens } from './lenses'
 import styled from 'styled-components'
@@ -17,79 +15,11 @@ import IdentityComponent from '../../futils/identitycomponent'
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
-import ComposeR from 'compose-r'
+import ComposeR from '../../futils/composer'
 import EitherComponent from '../../futils/eithercomponent'
-
-const SidebarActions = () => styled(Box)`
-  font-size: 18px;
-  background-color: #FDD835;
-  transition: background-color 0.5s ease;
-  color: #fff;
-  &:hover{
-    background-color: #FBC02D;
-    & > div > div > button > span > svg {
-      fill: #000;
-      stroke: #000;
-    }
-  }
-`
-
-const WhiteHoverCard = styled(Hovercard)`
-  min-height : 300px;
-  margin-bottom : 10px;
-  &:hover {
-    & > div{
-      background-color: #fff;
-    }
-  }
-`
-const LineLink = styled.a`
-  transition: background-color 0.5s ease;
-  color: #FBC02D;
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 5px 5px;
-  &:before {
-    background-color: #FBC02D;
-    content: '';
-    height: 2px;
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: width 0.3s ease-in-out;
-    width: 100%;
-  }
-  &:hover {
-    background-color: #FDD835;
-    color:#fff;
-    &:before {
-      width: 0;
-    }
-  }
-`
-const FlameSidebarAction = x => styled(x)`
-  background-color: #FF576D;
-  &:hover{
-    background-color: #FF324D;
-    & > div > div > button > span > svg {
-      fill: #000;
-      stroke: #000;
-    }
-  }
-`
-
-const LightGreyTestArea = styled(Box)`
-  background-color: #ebeced;
-`
-
-const LimitedSplit = styled(Split)`
-  & > div{
-    height: inherit;
-  }
-`
+import {
+  SidebarActions, WhiteHoverCard, LineLink, FlameSidebarAction, LightGreyTestArea, LimitedSplit
+} from './localcomponents'
 
 export const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
   label: `Correct ${correctWords}`,
@@ -125,16 +55,16 @@ export default class Test extends Component {
           overflowY : auto;
           &::-webkit-scrollbar-track
           {
-          	background-color: #fff;
+           background-color: #fff;
           }
           &::-webkit-scrollbar
           {
-          	width: 10px;
-          	background-color: #F5F5F5;
+           width: 10px;
+           background-color: #F5F5F5;
           }
           &::-webkit-scrollbar-thumb
           {
-          	background-color: #FF576D;
+           background-color: #FF576D;
           }
         `}
           colorIndex='neutral-4'
