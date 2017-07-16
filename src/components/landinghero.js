@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Anchor from 'grommet/components/Anchor'
 import Card from 'grommet/components/Card'
 import Heading from 'grommet/components/Heading'
 import Box from 'grommet/components/Box'
@@ -22,10 +21,7 @@ const LandingHero = props =>
       }
       description={props.desc}
       label={props.label}
-      size='large'
-      link={
-        <Anchor href='#' primary label={props.getStarted} />
-      } />
+      size='large' />
   </Box>
 
 LandingHero.propTypes = {

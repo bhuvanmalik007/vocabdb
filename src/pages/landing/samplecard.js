@@ -6,7 +6,7 @@ import Close from 'grommet/components/icons/base/Close'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import Box from 'grommet/components/Box'
-import { Hovercard } from '../myflashcards/main'
+import { Hovercard } from '../myflashcards/localcomponents'
 
 export default () =>
   <Hovercard

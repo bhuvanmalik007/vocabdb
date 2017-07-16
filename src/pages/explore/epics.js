@@ -1,11 +1,12 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
 import IP from '../../futils/identitypromise'
 import request, { withAuthentication } from '../../futils/requestutil'
+import { MADOFXORD_API, DBINTERCEPTOR_API } from '../../constants'
 
 const postWord = (wordObj, store) => {
   return Observable.from(withAuthentication(store.getState())(
     request,
-    'https://dbinterceptor-f.now.sh/addword/' + store.getState().core.profile.identities[0].user_id,
+    `${DBINTERCEPTOR_API}/addword/` + store.getState().core.profile.identities[0].user_id,
     'POST',
     JSON.stringify(wordObj)))
 }
@@ -15,7 +16,7 @@ const fetchWord = (word, store) => {
   return Observable.from(
     (withAuthentication(store.getState())(
       request,
-      'https://oxfordapi-f.now.sh/search/' + word,
+      `${MADOFXORD_API}/search/` + word,
       'GET'
     )).then(
       result => IP(() => Object.assign({},

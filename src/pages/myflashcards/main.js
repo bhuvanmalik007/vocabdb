@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { selectedCountReducer, reduceToSenseIds } from '../../utils/selectionreducers'
 import Box from 'grommet/components/Box'
-import Card from 'grommet/components/Card'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import Columns from 'grommet/components/Columns'
@@ -11,7 +10,6 @@ import AddIcon from 'grommet/components/icons/base/Add'
 import Multiple from 'grommet/components/icons/base/Multiple'
 import Select from 'grommet/components/Select'
 import GrommetSearch from 'grommet/components/Search'
-import styled from 'styled-components'
 import Volume from 'grommet/components/icons/base/Volume'
 import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
@@ -20,49 +18,7 @@ import PlayIcon from 'grommet/components/icons/base/Play'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
 import SettingsOption from 'grommet/components/icons/base/SettingsOption'
-
-const SharpButton = styled(GrommetButton)`
-  border-radius: 0px;
-  &:active{
-    background-color : #865cd6;
-    color : white;
-  }
-`
-
-const ShadowBox = styled(Box)`
-  background-color: #ffffff;
-  z-index: 3;
-  width: 100%;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.2);
-`
-
-const LowPadButton = styled(GrommetButton)`
-  border-radius: 0px;
-  span {
-    padding: 10px !important;
-  }
-`
-
-export const Hovercard = styled(Card)`
-  transition : all 0.5s ease;
-  &:hover {
-   border: ${props => props.selecting ? `1px solid #865cd6` : `none`};
-   transform: translateY(-2px);
-   box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
-   transition: transform .3s,-webkit-transform .3s;
-  }
-`
-
-const DashButton = props =>
-  <Box pad='medium'>
-    <SharpButton {...props} />
-  </Box>
-
-const IconButton = props =>
-  <Box pad='medium'>
-    <LowPadButton {...props} />
-  </Box>
+import { ShadowBox, DashButton, IconButton, Hovercard } from './localcomponents'
 
 const searchGoogle = word => {
   window.open('http://www.google.com/search?q=' + word, '_blank')

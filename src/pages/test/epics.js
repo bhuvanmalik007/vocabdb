@@ -45,8 +45,11 @@ const fetchTests = (action$, store) =>
 
 const createTest = (action$, store) =>
   action$.ofType('CREATE_TEST')
-    .flatMap((action) => [{ type: 'GET_TEST', payload: { index: 0, listId: action.payload.listId } },
-    { type: 'SHOW_MODAL' }])
+  .map((action) => ({ type: 'GET_TEST', payload: { index: 0, listId: action.payload } }))
+
+const createTestModalClose = (action$, store) =>
+  action$.ofType('CREATE_TEST')
+    .map((payload) => ({ type: 'SHOW_MODAL' }))
 
 const startTest = (action$, store) =>
   action$.ofType('GET_TEST')
@@ -88,4 +91,5 @@ const deleteTest = (action$, store) =>
     .catch(payload => Observable.of({ type: 'API_ERROR', payload: payload.status }))
   )
 
-export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest, deleteTest, setStatus]
+export default [initMapper, fetchLists, fetchTests, startTest, resetTest, createTest,
+  createTestModalClose, deleteTest, setStatus]

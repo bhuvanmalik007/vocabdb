@@ -7,7 +7,7 @@ import Title from 'grommet/components/Title'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router'
-import composeR from 'compose-r'
+import composeR from '../futils/composer'
 import { pick } from 'ramda'
 import styled from 'styled-components'
 

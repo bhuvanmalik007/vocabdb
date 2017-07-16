@@ -1,14 +1,18 @@
-# Mission-admission
+# VocabDB
 
-Env Setup
+### Usage
+
+* Use `a` and `d` to control Slideshow. 🙂
+
+### Env Setup
 
 `npm install -g yarn`
 
-Project Setup
+### Project Setup
 
 `yarn install`
 
-Run and Deployment
+### Run and Deployment
 
 * `yarn deploy:prod` To Deploy to production
 * `yarn start` to run project locally
