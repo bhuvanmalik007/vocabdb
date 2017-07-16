@@ -8,23 +8,16 @@ import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CaretNextIcon from 'grommet/components/icons/base/CaretNext'
-import GrommetButton from 'grommet/components/Button'
-import styled from 'styled-components'
 import AnimateOnChange from 'react-animate-on-change'
-
-const LowPadButton = styled(GrommetButton)`
-  border-radius: 0px;
-  span {
-    padding: 10px !important;
-  }
-`
-const IconButton = props =>
-  <Box pad='medium'>
-    <LowPadButton {...props} />
-  </Box>
+import { IconButton } from '../pages/myflashcards/localcomponents'
+import KeyHandler, { KEYPRESS } from 'react-key-handler'
 
 const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
-  <Box pad='medium' full='true' alignContent='center'>
+  <Box pad='medium' alignContent='center'>
+    <KeyHandler keyEventName={KEYPRESS} keyValue='d'
+      onKeyHandle={() => slideShowIndex + 1 < wordsArray.length && moveSlideshow('+')} />
+    <KeyHandler keyEventName={KEYPRESS} keyValue='a'
+      onKeyHandle={() => slideShowIndex > 0 && moveSlideshow('-')} />
     <AnimateOnChange
       baseClassName='slider'
       animationClassName='sliderchange'
