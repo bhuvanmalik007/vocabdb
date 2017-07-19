@@ -45,7 +45,8 @@ const fetchTests = (action$, store) =>
 
 const createTest = (action$, store) =>
   action$.ofType('CREATE_TEST')
-  .map((action) => ({ type: 'GET_TEST', payload: { index: 0, listId: action.payload } }))
+  .map((action) => ({ type: 'GET_TEST',
+    payload: { index: 0, listId: action.payload.listId } }))
 
 const createTestModalClose = (action$, store) =>
   action$.ofType('CREATE_TEST')

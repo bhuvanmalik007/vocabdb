@@ -13,11 +13,10 @@ let SelectListForm = ({ handleSubmit, pristine, submitting, lists }) => {
       <Heading tag='h3'>Select List to Add Words to</Heading>
       <Form onSubmit={handleSubmit}>
         <Field name='listObj' component={props => <Dropdown
-          label={props.input.value.label}
           options={lists.map((list, index) => ({ key: list.listId, text: list.listName }))}
-          selectedKey={props.input.value}
+          selectedKey={props.input.value.key}
           onChanged={param => {
-            return props.input.onChange(param.key)
+            return props.input.onChange(param)
           }} />} />
         <LowPadButton primary type='submit' disabled={pristine || submitting}
           label='Add!' fill onClick={pristine || submitting ? undefined : _ => null} />

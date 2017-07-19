@@ -11,11 +11,10 @@ let TestListSelectForm = ({ handleSubmit, pristine, submitting, lists }) => {
     <Box pad='large'>
       <Form onSubmit={handleSubmit}>
         <Field name='listObj' component={props => <Dropdown
-          label={props.input.value.label}
-          options={lists.map((list, index) => ({ key: list.listId, text: list.listName }))}
-          selectedKey={props.input.value}
+          options={lists.map((list, index) => ({ key: list.listId, text: list.listName, index }))}
+          selectedKey={props.input.value.key}
           onChanged={param => {
-            return props.input.onChange(param.key)
+            return props.input.onChange(param)
           }} />} />
         <LowPadButton
           primary type='submit' disabled={pristine || submitting}

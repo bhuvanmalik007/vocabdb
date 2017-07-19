@@ -13,14 +13,14 @@ const actionHandlers = {
     leftLoader: false
   }),
   CREATE_TEST: (state, action) => Object.assign({}, state, {
-    savedTests: [action.payload, ...state.savedTests]
+    savedTests: [state.lists[action.payload.index], ...state.savedTests]
   }),
   GET_TEST: (state, action) => Object.assign({}, state, {
     rightLoader: true,
     ongoingTest: true,
     testIndex: action.payload.index,
     listId: action.payload.listId,
-    listName: state.savedTests[action.payload.index].listName
+    listName: state.savedTests[action.payload.index] && state.savedTests[action.payload.index].listName
   }),
   START_TEST: (state, action) => Object.assign({}, state, {
     testWordsArray: action.payload.test.data.wordsToPlay,

@@ -6,7 +6,7 @@ import { pick } from 'ramda' //eslint-disable-line
 
 const SelectList = ({ lists, addWordsToList }) => {
   const submit = (formData) => {
-    addWordsToList(formData.listObj.value)
+    addWordsToList(formData.listObj.key)
   }
   return <SelectListForm onSubmit={submit} lists={[...lists.slice(1)]} />
 }
