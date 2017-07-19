@@ -18,7 +18,7 @@ import PlayIcon from 'grommet/components/icons/base/Play'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
 import SettingsOption from 'grommet/components/icons/base/SettingsOption'
-import { ShadowBox, DashButton, IconButton, Hovercard } from './localcomponents'
+import { ShadowBox, DashButton, IconButton, Hovercard, HelloCard } from './localcomponents'
 
 const searchGoogle = word => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
@@ -28,8 +28,9 @@ const audio = (index) => {
   document.getElementById('audio' + index).play()
 }
 
-const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) =>
-  <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
+const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) => {
+  if (!filteredArray.length) return <HelloCard />
+  return <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
     keep={false} visible>
     <Box pad='medium' full='horizontal'>
       <Columns size='medium' justify='center'
@@ -72,6 +73,7 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
       </Columns>
     </Box>
   </Animate>
+}
 
 CardsMaker.propTypes = {
   deleteFromAll: PropTypes.func,

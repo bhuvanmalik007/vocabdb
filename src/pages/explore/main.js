@@ -12,6 +12,19 @@ import GrommetButton from 'grommet/components/Button'
 import Status from 'grommet/components/icons/Status'
 import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
+import OxfordPng from '../../static/oxford.png'
+import Image from 'grommet/components/Image'
+import Volume from 'grommet/components/icons/base/Volume'
+import VolumeMute from 'grommet/components/icons/base/VolumeMute'
+
+const FixImage = styled(Image)`
+  width: 400px !important;
+`
+
+const LighterHeading = styled(Heading)`
+  padding: 20px;
+  color: rgba(0,0,0,.5);
+`
 
 const ShadowBox = styled(Box)`
   background-color: #ffffff;
@@ -26,6 +39,10 @@ const LowPadButton = styled(GrommetButton)`
   span {
     padding: 10px !important;
   }
+`
+
+const MarginedSearch = styled(GrommetSearch)`
+  margin-right: 30px;
 `
 
 const IconButton = props =>
@@ -88,14 +105,17 @@ const ExploreSenses = ({
   }
   return (
     <div className='main-container'>
-      <ShadowBox justify='center' align='center' direction='row' pad='medium'>
-        <GrommetSearch
+      <audio id='audio' src={pronounciation} />
+      <ShadowBox justify='between' align='center' direction='row' pad='medium'>
+        <MarginedSearch
           inline
           fill
           iconAlign='start'
           onDOMChange={handleSearchChange}
           placeholder='Explore new words..'
           value={searchString} />
+        <GrommetButton icon={pronounciation ? <Volume /> : <VolumeMute />}
+          onClick={() => pronounciation ? document.querySelector('#audio').play() : null} id='VolumeUp' />
       </ShadowBox>
 
       {isLoading && <Box full justify='center' align='center'>
@@ -108,6 +128,11 @@ const ExploreSenses = ({
       </Box>}
 
       {((words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
+
+      {!isLoading && searchString.trim() === '' && <Box full justify='center' align='center'>
+        <LighterHeading>Powered by</LighterHeading>
+        <FixImage src={OxfordPng} size='large' />
+      </Box>}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import GrommetButton from 'grommet/components/Button'
 import Box from 'grommet/components/Box'
@@ -5,6 +6,8 @@ import mediumBoxer from '../../heavyweightcomponents/mediumboxer'
 import propMonger from '../../heavyweightcomponents/propmonger'
 import ComposeR from '../../futils/composer'
 import Card from 'grommet/components/Card'
+import Paragraph from 'grommet/components/Paragraph'
+import Heading from 'grommet/components/Heading'
 
 export const SharpButton = styled(GrommetButton)`
   border-radius: 0px;
@@ -43,3 +46,26 @@ export const Hovercard = ComposeR(propMonger({ swallowProps: ['selecting'] }), s
    transition: transform .3s,-webkit-transform .3s;
   }
 `
+
+export const HelloCard = () =>
+  <Box full justify='center' align='center'>
+    <Hovercard
+      textSize='small'
+      colorIndex='light-1'
+      margin='small'
+      contentPad='medium'
+      direction='column'>
+      <Heading>
+        Hey 👋
+      </Heading>
+      <Paragraph margin='small' size='large'>
+        Welcome to Vocab DB
+      </Paragraph>
+      <Paragraph margin='small' size='large'>
+        This is how your Words will look like
+      </Paragraph>
+      <Paragraph margin='small' size='medium'>
+        So start exploring by selecting Common words from the list!
+      </Paragraph>
+    </Hovercard>
+  </Box>

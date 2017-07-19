@@ -19,6 +19,7 @@ const Unflipped = styled(Box)`
    }
   }
 `
+
 const Flipped = styled(Box)`
   &:hover {
    & > div{
