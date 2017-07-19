@@ -20,7 +20,7 @@ const actionHandlers = {
     ongoingTest: true,
     testIndex: action.payload.index,
     listId: action.payload.listId,
-    listName: state.savedTests[action.payload.index] && state.savedTests[action.payload.index].listName
+    listName: state.savedTests[action.payload.index].listName
   }),
   START_TEST: (state, action) => Object.assign({}, state, {
     testWordsArray: action.payload.test.data.wordsToPlay,

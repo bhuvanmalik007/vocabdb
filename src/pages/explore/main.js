@@ -130,7 +130,7 @@ const ExploreSenses = ({
       {((words.length === 0 && searchString.trim() !== '') && !isLoading) && <h1>No results found</h1>}
 
       {!isLoading && searchString.trim() === '' && <Box full justify='center' align='center'>
-        <LighterHeading>Powered by</LighterHeading>
+        {/* <LighterHeading>Powered by</LighterHeading> */}
         <FixImage src={OxfordPng} size='large' />
       </Box>}
     </div>

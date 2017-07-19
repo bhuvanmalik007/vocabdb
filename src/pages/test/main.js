@@ -99,7 +99,10 @@ export default class Test extends Component {
                     colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}
                     align='center'>
                     <Heading>{test.listName} <Button icon={<Close size='medium' />}
-                      onClick={() => this.props.delete({ index, listId: test.listId })} /></Heading>
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        this.props.delete({ index, listId: test.listId })
+                      }} /></Heading>
                     <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
                       type='spiral' />
                   </WhiteHoverCard>
