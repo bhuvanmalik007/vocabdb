@@ -95,7 +95,7 @@ export default class MyFlashcards extends Component {
   render () {
     return (
       <div className='main-container'>
-        <ShadowBox justify='center' align='center' direction='row' pad='medium'>
+        <ShadowBox justify='center' align='center' direction='row' pad='small' flex='grow'>
 
           <IconButton icon={<AddIcon />} onClick={() =>
             this.props.showModal({ header: 'CREATE NEW LIST', content: 'ADD_LIST' })}
