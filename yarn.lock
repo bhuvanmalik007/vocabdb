@@ -5769,14 +5769,7 @@ rc@^1.0.1, rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-"react-addons-css-transition-group@^15.3.0 || ^16.0.0":
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.5.2.tgz#ea7e0a9f0e1c27ca426da4efd3559915bd42ead2"
-  dependencies:
-    fbjs "^0.8.4"
-    object-assign "^4.1.0"
-
-react-addons-css-transition-group@^15.6.0:
+"react-addons-css-transition-group@^15.3.0 || ^16.0.0", react-addons-css-transition-group@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.6.0.tgz#69887cf6e4874d25cd66e22a699e29f0d648aba0"
   dependencies:
@@ -5838,6 +5831,10 @@ react-key-handler@^0.3.0:
   dependencies:
     exenv "^1.2.0"
     keycodes "^0.2.3"
+
+react-progressbar@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/react-progressbar/-/react-progressbar-1.4.6.tgz#03f5ce9ccf3778b158d192a457684553fae7ddb7"
 
 react-redux@^5.0.1:
   version "5.0.1"

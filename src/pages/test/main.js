@@ -9,7 +9,7 @@ import TrashIcon from 'grommet/components/icons/base/Trash' //eslint-disable-lin
 import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
 import TestCard from './testcard'
-import { TestWordsLens, TotalWordsLens } from './lenses'
+import { TestWordsLens, TestPercentageLens } from './lenses'
 import styled from 'styled-components'
 import IdentityComponent from '../../futils/identitycomponent'
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious'
@@ -20,6 +20,7 @@ import EitherComponent from '../../futils/eithercomponent'
 import {
   SidebarActions, WhiteHoverCard, LineLink, FlameSidebarAction, LightGreyTestArea, LimitedSplit
 } from './localcomponents'
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 
 export const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
   label: `Correct ${correctWords}`,
@@ -137,17 +138,16 @@ export default class Test extends Component {
                     alignContent='center'>
                     <Value value={TestWordsLens(this.props, 'correctWords')}
                       units='words' label='Correct' />
-                    <Meter colorIndex='ok' value={TestWordsLens(this.props, 'correctWords')} onActive={() => null}
-                      max={TotalWordsLens(this.props)} />
+                    <ProgressIndicator
+                      percentComplete={TestPercentageLens(this.props, 'correctWords')} />
                     <Value value={TestWordsLens(this.props, 'incorrectWords')}
                       units='words' label='Incorrect' />
-                    <Meter colorIndex='critical' value={TestWordsLens(this.props, 'incorrectWords')}
-                      onActive={() => null}
-                      max={TotalWordsLens(this.props)} />
+                    <ProgressIndicator
+                      percentComplete={TestPercentageLens(this.props, 'incorrectWords')} />
                     <Value value={TestWordsLens(this.props, 'wordsToPlay')}
                       units='words' label='Remaining' />
-                    <Meter value={TestWordsLens(this.props, 'wordsToPlay')} onActive={() => null}
-                      max={TotalWordsLens(this.props)} />
+                    <ProgressIndicator
+                      percentComplete={TestPercentageLens(this.props, 'wordsToPlay')} />
                   </Box>}
             rightComponent={_ => null}
           />
