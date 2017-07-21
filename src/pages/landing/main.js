@@ -34,8 +34,8 @@ export class LandingView extends Component {
             grommetColor='grey-1-a'
             heading='Giving your vocabulary preparation awesome super powers!'
             desc='Whether youʼre an English major or appearing for exams with English sections like
-            SAT, GMAT, GRE, LSAT etc or any other Entrance Exam,
-            building vocabulary is the first step and also the most important.'
+            SAT, GMAT, GRE, LSAT etc,
+            building vocabulary is the first and most important step.'
             getStarted='Get Started' cardColor='grey-1' justify='end'
             authenticated={this.props.authenticated} />
         </Box>

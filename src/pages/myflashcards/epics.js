@@ -86,7 +86,7 @@ const addWordsToList = (action$, store) =>
       wordIds: reduceToSenseIds(store.getState().wordsState.filteredArray)
     }, '/addlist/', store)
     .flatMap((payload) => [{ type: 'TOGGLE_MULTIPLE_SELECT', payload: true },
-  { type: 'SHOWTOAST', content: 'Words successfuly added to list!' }])
+  { type: 'SHOWTOAST', content: 'Word(s) successfuly added to list!' }])
     .catch(payload => Observable.of({ type: 'API_ERROR' }))
   )
 

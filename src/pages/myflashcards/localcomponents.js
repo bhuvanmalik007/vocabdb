@@ -59,13 +59,13 @@ export const HelloCard = () =>
         Hey 👋
       </Heading>
       <Paragraph margin='small' size='large'>
-        Welcome to Vocab DB
+        This is how your flashcards will look like.
       </Paragraph>
       <Paragraph margin='small' size='large'>
-        This is how your Words will look like
+        Get started by going through some predefined lists prepared by experts or explore and save new words!
       </Paragraph>
       <Paragraph margin='small' size='medium'>
-        So start exploring by selecting Common words from the list!
+        Happy learning!
       </Paragraph>
     </Hovercard>
   </Box>
