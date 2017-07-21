@@ -106,7 +106,7 @@ const ExploreSenses = ({
   return (
     <div className='main-container'>
       <audio id='audio' src={pronounciation} />
-      <ShadowBox justify='between' align='center' direction='row' pad='medium'>
+      <ShadowBox justify='between' align='center' direction='row' pad='medium' flex='grow'>
         <MarginedSearch
           inline
           fill

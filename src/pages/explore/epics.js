@@ -16,7 +16,7 @@ const fetchWord = (word, store) => {
   return Observable.from(
     (withAuthentication(store.getState())(
       request,
-      `${MADOFXORD_API}/search/` + word,
+      `${MADOFXORD_API}/searchv2/` + word,
       'GET'
     )).then(
       result => IP(() => Object.assign({},
