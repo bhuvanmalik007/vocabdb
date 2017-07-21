@@ -42,6 +42,12 @@ export const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) =
   }
 ]
 
+const ColoredMeter = styled(ProgressIndicator)`
+  .progressBar_ef24ad53{
+    background-color: ${props => props.color};
+  }
+`
+
 export default class Test extends Component {
 
   componentDidMount () {
@@ -138,15 +144,15 @@ export default class Test extends Component {
                     alignContent='center'>
                     <Value value={TestWordsLens(this.props, 'correctWords')}
                       units='words' label='Correct' />
-                    <ProgressIndicator
+                    <ColoredMeter color='#8cc800'
                       percentComplete={TestPercentageLens(this.props, 'correctWords')} />
                     <Value value={TestWordsLens(this.props, 'incorrectWords')}
                       units='words' label='Incorrect' />
-                    <ProgressIndicator
+                    <ColoredMeter color='#ff324d'
                       percentComplete={TestPercentageLens(this.props, 'incorrectWords')} />
                     <Value value={TestWordsLens(this.props, 'wordsToPlay')}
                       units='words' label='Remaining' />
-                    <ProgressIndicator
+                    <ColoredMeter color='#0a64a0'
                       percentComplete={TestPercentageLens(this.props, 'wordsToPlay')} />
                   </Box>}
             rightComponent={_ => null}
