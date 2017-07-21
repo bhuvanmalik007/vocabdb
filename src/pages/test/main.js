@@ -191,6 +191,8 @@ export default class Test extends Component {
             leftComponent={_ =>
               <TestCard word={this.props.testWordsArray[this.props.testWordsCounter] &&
               this.props.testWordsArray[this.props.testWordsCounter].word}
+                lexicalCategory={this.props.testWordsArray[this.props.testWordsCounter] &&
+                this.props.testWordsArray[this.props.testWordsCounter].lexicalCategory}
                 meaning={this.props.testWordsArray[this.props.testWordsCounter] &&
                 this.props.testWordsArray[this.props.testWordsCounter].meaning}
                 example={this.props.testWordsArray[this.props.testWordsCounter] &&

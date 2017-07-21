@@ -8,6 +8,7 @@ import Box from 'grommet/components/Box'
 import styled from 'styled-components'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import { StandardTestAnimator } from '../landing/animators'
+import Label from 'grommet/components/Label'
 
 const Unflipped = styled(Box)`
   &:hover {
@@ -72,6 +73,7 @@ const TestCard = props =>
         <Heading>
           {props.word}
         </Heading>
+        {props.lexicalCategory && <Label margin='none'>({props.lexicalCategory})</Label>}
         <Paragraph margin='small' size='large'>
           {props.meaning}
         </Paragraph>

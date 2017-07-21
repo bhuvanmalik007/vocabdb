@@ -19,6 +19,7 @@ import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
 import SettingsOption from 'grommet/components/icons/base/SettingsOption'
 import { ShadowBox, DashButton, IconButton, Hovercard, HelloCard } from './localcomponents'
+import Label from 'grommet/components/Label'
 
 const searchGoogle = word => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
@@ -51,6 +52,7 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
               <Heading>
                 {element.word.word}
               </Heading>
+              {element.word.lexicalCategory && <Label margin='none'>({element.word.lexicalCategory})</Label>}
               <Paragraph margin='small' size='large'>
                 {element.word.meaning}
               </Paragraph>
