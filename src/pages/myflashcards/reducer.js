@@ -4,8 +4,10 @@ import initialState from './initialstate'
 const actionHandlers = {
   FETCH_MYFLASHCARDS: (state, action) => Object.assign({}, state,
     { isLoading: true,
-      currentListName: 'all',
-      currentListId: 'all' }),
+      currentListName: 'ALL',
+      currentListId: 'all',
+      currentListMaster: false
+    }),
   INIT_WORDS: (state, action) => Object.assign({}, state, {
     wordsArray: action.payload.data,
     filteredArray: [...action.payload.data],
@@ -57,6 +59,7 @@ const actionHandlers = {
   FETCH_LIST_WORDS: (state, action) => Object.assign({}, state,
     { currentListName: action.payload.listName,
       currentListId: action.payload.listId,
+      currentListMaster: action.payload.master,
       isLoading: true
     }),
   SET_CURRENT_LIST: (state, action) => Object.assign({}, state,

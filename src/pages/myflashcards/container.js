@@ -17,7 +17,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   ...pick(['wordsArray', 'isLoading', 'multipleSelect', 'searchString',
-    'filteredArray', 'multipleSelect', 'sorted', 'lists', 'currentListId', 'currentListName'], state.wordsState)
+    'filteredArray', 'multipleSelect', 'sorted', 'lists', 'currentListId', 'currentListName',
+    'currentListMaster'], state.wordsState)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

@@ -35,7 +35,8 @@ const audio = (index) => {
   document.getElementById('audio' + index).play()
 }
 
-const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId, deleteFromList }) => {
+const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId,
+  currentListMaster, deleteFromList }) => {
   if (!filteredArray.length) return <HelloCard />
   return <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
     keep={false} visible>
@@ -70,10 +71,10 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
                   <GrommetButton icon={<Volume />} onClick={() => audio(index)} id='VolumeUp' />
                   <audio id={'audio' + index} src={element.word.pronounciation} />
                   <GrommetButton icon={<PlatformGoogle />} onClick={() => searchGoogle(element.word.word)} />
-                  <GrommetButton onClick={() => currentListId === 'all'
+                  {!currentListMaster && <GrommetButton onClick={() => currentListId === 'all'
                     ? deleteFromAll({ senseIds: [element.word.id] })
                     : deleteFromList({ listId: currentListId, senseIds: [element.word.id] })}
-                    icon={<Close />} />
+                    icon={<Close />} />}
                 </div>}
               </Box>
             </Hovercard>
@@ -89,7 +90,8 @@ CardsMaker.propTypes = {
   filteredArray: PropTypes.array,
   multipleSelect: PropTypes.bool,
   select: PropTypes.func,
-  currentListId: PropTypes.string
+  currentListId: PropTypes.string,
+  currentListMaster: PropTypes.bool
 }
 
 export default class MyFlashcards extends Component {
@@ -127,14 +129,17 @@ export default class MyFlashcards extends Component {
               icon='list layout'
               value={this.props.currentListName}
               onChange={(e) => e.value.value === 'all'
-                ? this.props.fetchAll() : this.props.onListChange({ listId: e.value.value, listName: e.value.label })}
+                ? this.props.fetchAll() : this.props.onListChange({
+                  listId: e.value.value, listName: e.value.label, master: e.value.master
+                })}
               options={
-                this.props.lists.map((list, index) => ({ key: index, label: list.listName, value: list.listId }))
+                this.props.lists.map((list, index) =>
+                  ({ key: index, label: list.listName, value: list.listId, master: list.master || false }))
               }
             />
           }
 
-          {!this.props.multipleSelect && this.props.currentListId !== 'all' &&
+          {!this.props.multipleSelect && this.props.currentListId !== 'all' && !this.props.currentListMaster &&
             <Box pad='small'>
               <IconButton icon={<SettingsOption />}
                 onClick={() =>
@@ -158,7 +163,7 @@ export default class MyFlashcards extends Component {
               onClick={this.props.toggleMultipleSelect} />
           </Origin>
 
-          {this.props.multipleSelect &&
+          {this.props.multipleSelect && !this.props.currentListMaster &&
             <DashButton onClick={() => this.props.currentListId === 'all'
               ? this.props.deleteFromAll({ senseIds: reduceToSenseIds(this.props.filteredArray) })
               : this.props.deleteFromList({ listId: this.props.currentListId,
@@ -184,7 +189,8 @@ export default class MyFlashcards extends Component {
           <Box full>
             <CardsMaker filteredArray={this.props.filteredArray} deleteFromAll={this.props.deleteFromAll}
               multipleSelect={this.props.multipleSelect} select={this.props.select}
-              currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList} />
+              currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList}
+              currentListMaster={this.props.currentListMaster} />
           </Box>}
       </div>
     )
@@ -209,5 +215,6 @@ MyFlashcards.propTypes = {
   fetchAll: PropTypes.func,
   showModal: PropTypes.func,
   currentListId: PropTypes.string,
-  currentListName: PropTypes.string
+  currentListName: PropTypes.string,
+  currentListMaster: PropTypes.bool
 }
