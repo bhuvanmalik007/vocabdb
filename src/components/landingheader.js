@@ -32,7 +32,7 @@ const LandingHeader = ({ showLogin, authenticated }) =>
         pad={{ horizontal: 'medium' }} flex='grow'>
         <MontserretTitle>VocabDB</MontserretTitle>
         <Menu label='Label' inline direction='row' flex='grow' align='end' justify='end'>
-          <SMenu onClick={() => showLogin()}>Get Started</SMenu>
+          <SMenu onClick={() => showLogin()}>Sign in/Sign up</SMenu>
         </Menu>
       </Box>
     </NotBlackHeader>}
