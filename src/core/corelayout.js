@@ -6,7 +6,6 @@ import Info from '../connectors/userinfo'
 import Notifier from '../connectors/notifier'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
-import { Tooltip } from 'redux-tooltip'
 
 const HeightLimiter = styled.div`
   min-height: 100vh;
@@ -21,7 +20,6 @@ const CoreLayout = ({ children, location }) => (
     <ReduxModal />
     <Info />
     <Notifier />
-    <Tooltip name='tooltip' />
     {children}
   </HeightLimiter>
 )

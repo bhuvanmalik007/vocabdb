@@ -8,6 +8,7 @@ import { updateLocation } from './location'
 import { createEpicMiddleware } from 'redux-observable'
 import persistState from 'redux-localstorage'
 import 'rxjs'
+import { middleware as tooltip } from 'redux-tooltip'
 
 const epicMiddleware = createEpicMiddleware(createRootEpic(), {
   dependencies: { history:browserHistory }
@@ -19,7 +20,8 @@ export default(initialState = {}) => {
   // ======================================================
   const middleware = [
     epicMiddleware,
-    thunk
+    thunk,
+    tooltip
   ]
 
   // ======================================================

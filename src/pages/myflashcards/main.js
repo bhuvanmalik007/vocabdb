@@ -21,6 +21,11 @@ import SettingsOption from 'grommet/components/icons/base/SettingsOption'
 import { ShadowBox, DashButton, IconButton, Hovercard, HelloCard } from './localcomponents'
 import Label from 'grommet/components/Label'
 import { Origin, Tooltip } from 'redux-tooltip'
+import styled from 'styled-components'
+
+const PaddedTooltip = styled(Tooltip)`
+  top: 170px !important;
+`
 
 const searchGoogle = word => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
@@ -100,7 +105,8 @@ export default class MyFlashcards extends Component {
       <div className='main-container'>
         <ShadowBox justify='center' align='center' direction='row' pad='small' flex='grow'>
 
-          <Origin name='tooltip' place='left' content='Create new list'>
+          <PaddedTooltip name='tooltip' place='bottom' />
+          <Origin name='tooltip' place='left' content='Create new list' delay={1000} delayOn='show' >
             <IconButton icon={<AddIcon />} onClick={() =>
               this.props.showModal({ header: 'CREATE NEW LIST', content: 'ADD_LIST' })}
             />
@@ -147,8 +153,10 @@ export default class MyFlashcards extends Component {
             </Box>
           }
 
-          <IconButton icon={<Multiple />} primary={this.props.multipleSelect}
-            onClick={this.props.toggleMultipleSelect} />
+          <Origin name='tooltip' place='left' content='Multiple select' delay={1000} delayOn='show' >
+            <IconButton icon={<Multiple />} primary={this.props.multipleSelect}
+              onClick={this.props.toggleMultipleSelect} />
+          </Origin>
 
           {this.props.multipleSelect &&
             <DashButton onClick={() => this.props.currentListId === 'all'

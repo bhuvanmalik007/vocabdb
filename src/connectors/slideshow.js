@@ -10,13 +10,14 @@ import CaretBackIcon from 'grommet/components/icons/base/CaretBack'
 import CaretNextIcon from 'grommet/components/icons/base/CaretNext'
 import AnimateOnChange from 'react-animate-on-change'
 import { IconButton } from '../pages/myflashcards/localcomponents'
-import KeyHandler, { KEYPRESS } from 'react-key-handler'
+import KeyHandler, { KEYDOWN } from 'react-key-handler'
+import Label from 'grommet/components/Label'
 
 const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
   <Box pad='medium' alignContent='center'>
-    <KeyHandler keyEventName={KEYPRESS} keyValue='d'
+    <KeyHandler keyEventName={KEYDOWN} keyValue='ArrowRight'
       onKeyHandle={() => slideShowIndex + 1 < wordsArray.length && moveSlideshow('+')} />
-    <KeyHandler keyEventName={KEYPRESS} keyValue='a'
+    <KeyHandler keyEventName={KEYDOWN} keyValue='ArrowLeft'
       onKeyHandle={() => slideShowIndex > 0 && moveSlideshow('-')} />
     <AnimateOnChange
       baseClassName='slider'
@@ -31,6 +32,8 @@ const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
         <Heading>
           {wordsArray[slideShowIndex].word.word}
         </Heading>
+        {wordsArray[slideShowIndex].word.lexicalCategory &&
+          <Label margin='none'>({wordsArray[slideShowIndex].word.lexicalCategory})</Label>}
         <Paragraph margin='small' size='large'>
           {wordsArray[slideShowIndex].word.meaning}
         </Paragraph>
