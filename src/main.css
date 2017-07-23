@@ -175,6 +175,28 @@ nav a {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .notifier-enter {
 }
 
@@ -187,4 +209,8 @@ nav a {
 
 .notifier-leave.notifier-leave-active {
   animation: slideInOut 1s forwards;
+}
+
+.test-buttons {
+  animation: slideInLeft 1s forwards;
 }

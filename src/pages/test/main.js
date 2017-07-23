@@ -13,7 +13,6 @@ import { TestWordsLens, TestPercentageLens } from './lenses'
 import styled from 'styled-components'
 import IdentityComponent from '../../futils/identitycomponent'
 import LinkPrevious from 'grommet/components/icons/base/LinkPrevious'
-import Animate from 'grommet/components/Animate'
 import { FoldingCube } from 'better-react-spinkit'
 import ComposeR from '../../futils/composer'
 import EitherComponent from '../../futils/eithercomponent'
@@ -103,15 +102,18 @@ export default class Test extends Component {
               {
                 this.props.savedTests.map((test, index) =>
                   <WhiteHoverCard key={index}
-                    colorIndex='light-1' onClick={() => this.props.getTest({ index, listId: test.listId })}
-                    align='center'>
+                    colorIndex='light-1'
+                    onClick={() => this.props.getTest({ index, listId: test.listId })}
+                    align='center'
+                  >
                     <Heading>{test.listName} <Button icon={<Close size='medium' />}
                       onClick={(e) => {
                         e.stopPropagation()
                         this.props.delete({ index, listId: test.listId })
                       }} /></Heading>
                     <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
-                      type='spiral' />
+                      type='spiral'
+                    />
                   </WhiteHoverCard>
                 )
               }
@@ -127,10 +129,7 @@ export default class Test extends Component {
               justify='center'
               align='center'
               onClick={() => this.props.goBack()}>
-              <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
-                keep>
-                <Button icon={<LinkPrevious size='medium' colorIndex='light-1' />} />
-              </Animate>
+              <Button icon={<LinkPrevious size='medium' colorIndex='light-1' />} />
             </IdentityComponent>}
             rightComponent={_ => null} />
           <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
@@ -139,22 +138,27 @@ export default class Test extends Component {
           />
           <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={
-                _ =>
-                  <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }}
-                    alignContent='center'>
-                    <Value value={TestWordsLens(this.props, 'correctWords')}
-                      units='words' label='Correct' />
-                    <ColoredMeter color='#8cc800'
-                      percentComplete={TestPercentageLens(this.props, 'correctWords')} />
-                    <Value value={TestWordsLens(this.props, 'incorrectWords')}
-                      units='words' label='Incorrect' />
-                    <ColoredMeter color='#ff324d'
-                      percentComplete={TestPercentageLens(this.props, 'incorrectWords')} />
-                    <Value value={TestWordsLens(this.props, 'wordsToPlay')}
-                      units='words' label='Remaining' />
-                    <ColoredMeter color='#0a64a0'
-                      percentComplete={TestPercentageLens(this.props, 'wordsToPlay')} />
-                  </Box>}
+              _ => <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }}
+                alignContent='center'
+                   >
+                <Value value={TestWordsLens(this.props, 'correctWords')}
+                  units='words' label='Correct'
+                />
+                <ColoredMeter color='#8cc800'
+                  percentComplete={TestPercentageLens(this.props, 'correctWords')}
+                />
+                <Value value={TestWordsLens(this.props, 'incorrectWords')}
+                  units='words' label='Incorrect'
+                />
+                <ColoredMeter color='#ff324d'
+                  percentComplete={TestPercentageLens(this.props, 'incorrectWords')}
+                />
+                <Value value={TestWordsLens(this.props, 'wordsToPlay')}
+                  units='words' label='Remaining'
+                />
+                <ColoredMeter color='#0a64a0'
+                  percentComplete={TestPercentageLens(this.props, 'wordsToPlay')} />
+              </Box>}
             rightComponent={_ => null}
           />
           <Box>
@@ -168,10 +172,7 @@ export default class Test extends Component {
                 align='center'
                 alignSelf='end'
                 onClick={() => this.props.reset(this.props.listId)}>
-                <Animate enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
-                  keep>
-                  <Button icon={<RefreshIcon size='large' colorIndex='light-1' />} />
-                </Animate>
+                <Button icon={<RefreshIcon size='large' colorIndex='light-1' />} />
               </IdentityComponent>}
               rightComponent={_ => null}
             />
