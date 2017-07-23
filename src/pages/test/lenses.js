@@ -1,7 +1,9 @@
-export const TestWordsLens = (props, property) => props.savedTests[props.testIndex][property]
-export const TestPercentageLens = (props, property) =>
-  (props.savedTests[props.testIndex][property] / TotalWordsLens(props))
-export const TotalWordsLens = props =>
-  props.savedTests[props.testIndex].correctWords +
-  props.savedTests[props.testIndex].incorrectWords +
-  props.savedTests[props.testIndex].wordsToPlay
+export const TestWordsLens = (props, property, index) =>
+  props.savedTests[index][property]
+
+export const TestPercentageLens = (props, property, index) =>
+  (props.savedTests[index][property] / TotalWordsLens(props, index))
+export const TotalWordsLens = (props, index) =>
+  props.savedTests[index].correctWords +
+  props.savedTests[index].incorrectWords +
+  props.savedTests[index].wordsToPlay

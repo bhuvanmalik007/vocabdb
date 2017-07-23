@@ -21,21 +21,24 @@ import {
 } from './localcomponents'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 
-export const CreateGameStatSeries = (correctWords, incorrectWords, totalWords) => [{
+export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => [{
   label: `Correct ${correctWords}`,
   value: correctWords,
+  max: (correctWords + incorrectWords + wordsToPlay),
   colorIndex: 'ok',
-  onClick: () => null
+  onClick: () => console.log(correctWords + incorrectWords + wordsToPlay)
 },
   {
     label: `Incorrect ${incorrectWords}`,
     value: incorrectWords,
+    max: (correctWords + incorrectWords + wordsToPlay),
     colorIndex: 'critical',
     onClick: () => null
   },
   {
-    label: `Remaining ${totalWords}`,
-    value: totalWords,
+    label: `Remaining ${wordsToPlay}`,
+    value: wordsToPlay,
+    max: (correctWords + incorrectWords + wordsToPlay),
     colorIndex: 'warning',
     onClick: () => null
   }
@@ -104,16 +107,35 @@ export default class Test extends Component {
                   <WhiteHoverCard key={index}
                     colorIndex='light-1'
                     onClick={() => this.props.getTest({ index, listId: test.listId })}
-                    align='center'
-                  >
-                    <Heading>{test.listName} <Button icon={<Close size='medium' />}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        this.props.delete({ index, listId: test.listId })
-                      }} /></Heading>
-                    <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
-                      type='spiral'
-                    />
+                    stretch contentPad='medium' >
+                    <Box direction='column' justify='center' align='center' >
+                      <Button icon={<Close size='small' />}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          this.props.delete({ index, listId: test.listId })
+                        }} />
+                      <Heading tag='h4' strong>{test.listName}</Heading>
+                    </Box>
+                    {/* <Heading align='center' tag='h3' truncate strong>{test.listName} <Button icon={<Close size='small' />}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          this.props.delete({ index, listId: test.listId })
+                        }} />
+                      </Heading> */}
+                      <Value size='small' value={TestWordsLens(this.props, 'correctWords', index)}
+                      units='word(s)' label='Correct' />
+                    <ColoredMeter color='#8cc800'
+                      percentComplete={TestPercentageLens(this.props, 'correctWords', index)} />
+                    <Value size='small' value={TestWordsLens(this.props, 'incorrectWords', index)}
+                      units='word(s)' label='Incorrect' />
+                    <ColoredMeter color='#ff324d'
+                      percentComplete={TestPercentageLens(this.props, 'incorrectWords', index)} />
+                    <Value size='small' value={TestWordsLens(this.props, 'wordsToPlay', index)}
+                      units='word(s)' label='Remaining' />
+                    <ColoredMeter color='#0a64a0'
+                      percentComplete={TestPercentageLens(this.props, 'wordsToPlay', index)} />
+                    {/* <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
+                    type='spiral' /> */}
                   </WhiteHoverCard>
                 )
               }
@@ -138,26 +160,19 @@ export default class Test extends Component {
           />
           <EitherComponent conditionerFn={() => this.props.ongoingTest && !this.props.leftLoader}
             leftComponent={
-              _ => <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }}
-                alignContent='center'
-                   >
-                <Value value={TestWordsLens(this.props, 'correctWords')}
-                  units='words' label='Correct'
-                />
+              _ => <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }} alignContent='center' >
+                <Value value={TestWordsLens(this.props, 'correctWords', this.props.testIndex)}
+                  units='word(s)' label='Correct' />
                 <ColoredMeter color='#8cc800'
-                  percentComplete={TestPercentageLens(this.props, 'correctWords')}
-                />
-                <Value value={TestWordsLens(this.props, 'incorrectWords')}
-                  units='words' label='Incorrect'
-                />
+                  percentComplete={TestPercentageLens(this.props, 'correctWords', this.props.testIndex)} />
+                <Value value={TestWordsLens(this.props, 'incorrectWords', this.props.testIndex)}
+                  units='word(s)' label='Incorrect' />
                 <ColoredMeter color='#ff324d'
-                  percentComplete={TestPercentageLens(this.props, 'incorrectWords')}
-                />
-                <Value value={TestWordsLens(this.props, 'wordsToPlay')}
-                  units='words' label='Remaining'
-                />
+                  percentComplete={TestPercentageLens(this.props, 'incorrectWords', this.props.testIndex)} />
+                <Value value={TestWordsLens(this.props, 'wordsToPlay', this.props.testIndex)}
+                  units='word(s)' label='Remaining' />
                 <ColoredMeter color='#0a64a0'
-                  percentComplete={TestPercentageLens(this.props, 'wordsToPlay')} />
+                  percentComplete={TestPercentageLens(this.props, 'wordsToPlay', this.props.testIndex)} />
               </Box>}
             rightComponent={_ => null}
           />
