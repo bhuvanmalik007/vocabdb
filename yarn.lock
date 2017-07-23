@@ -1096,6 +1096,10 @@ bl@~1.1.2:
   dependencies:
     readable-stream "~2.0.5"
 
+blacklist@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/blacklist/-/blacklist-1.1.4.tgz#b2dd09d6177625b2caa69835a37b28995fa9a2f2"
+
 blob@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.4.tgz#bcf13052ca54463f30f9fc7e95b9a47630a94921"
@@ -1999,6 +2003,10 @@ domhandler@^2.3.0:
   resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-2.3.0.tgz#2de59a0822d5027fabff6f032c2b25a2a8abe738"
   dependencies:
     domelementtype "1"
+
+dompurify@^0.8.4:
+  version "0.8.9"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-0.8.9.tgz#fcec021f917b51f42a78af71d7875a7ba514fd64"
 
 domutils@1.1:
   version "1.1.6"
@@ -3715,6 +3723,10 @@ is-date-object@^1.0.1:
 is-decimal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-decimal/-/is-decimal-1.0.0.tgz#940579b6ea63c628080a69e62bda88c8470b4fe0"
+
+is-dom@^1.0.5:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/is-dom/-/is-dom-1.0.9.tgz#483832d52972073de12b9fe3f60320870da8370d"
 
 is-dotfile@^1.0.0:
   version "1.0.2"
@@ -5832,10 +5844,6 @@ react-key-handler@^0.3.0:
     exenv "^1.2.0"
     keycodes "^0.2.3"
 
-react-progressbar@^1.4.6:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/react-progressbar/-/react-progressbar-1.4.6.tgz#03f5ce9ccf3778b158d192a457684553fae7ddb7"
-
 react-redux@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.1.tgz#84a41bd4cdd180452bb6922bc79ad25bd5abb7c4"
@@ -6025,6 +6033,14 @@ redux-observable@^0.14.1:
 redux-thunk@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
+
+redux-tooltip@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/redux-tooltip/-/redux-tooltip-0.7.2.tgz#59d51bc0e65b67a0e6137a50aa2b4e851652d78f"
+  dependencies:
+    blacklist "^1.1.4"
+    dompurify "^0.8.4"
+    is-dom "^1.0.5"
 
 redux@^3.6.0:
   version "3.6.0"

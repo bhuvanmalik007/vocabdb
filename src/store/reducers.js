@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import locationReducer from './location'
 import { CoreReducer, ReduxModalReducer, NotifierReducer, UserInfoReducer } from '../core/corereducers'
 import { reducer as formReducer } from 'redux-form'
+import { reducer as tooltip } from 'redux-tooltip'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -11,6 +12,7 @@ export const makeRootReducer = (asyncReducers) => {
     form: formReducer,
     notify: NotifierReducer,
     userInfo: UserInfoReducer,
+    tooltip,
     ...asyncReducers
   })
 }

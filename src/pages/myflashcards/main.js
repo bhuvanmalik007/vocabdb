@@ -20,6 +20,7 @@ import { FoldingCube } from 'better-react-spinkit'
 import SettingsOption from 'grommet/components/icons/base/SettingsOption'
 import { ShadowBox, DashButton, IconButton, Hovercard, HelloCard } from './localcomponents'
 import Label from 'grommet/components/Label'
+import { Origin, Tooltip } from 'redux-tooltip'
 
 const searchGoogle = word => {
   window.open('http://www.google.com/search?q=' + word, '_blank')
@@ -99,9 +100,11 @@ export default class MyFlashcards extends Component {
       <div className='main-container'>
         <ShadowBox justify='center' align='center' direction='row' pad='small' flex='grow'>
 
-          <IconButton icon={<AddIcon />} onClick={() =>
-            this.props.showModal({ header: 'CREATE NEW LIST', content: 'ADD_LIST' })}
-          />
+          <Origin name='tooltip' place='left' content='Create new list'>
+            <IconButton icon={<AddIcon />} onClick={() =>
+              this.props.showModal({ header: 'CREATE NEW LIST', content: 'ADD_LIST' })}
+            />
+          </Origin>
 
           {this.props.multipleSelect &&
             <DashButton label='ADD TO A LIST'
