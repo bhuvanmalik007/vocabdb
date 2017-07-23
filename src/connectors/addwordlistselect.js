@@ -8,7 +8,7 @@ const SelectList = ({ lists, addWordsToList }) => {
   const submit = (formData) => {
     addWordsToList(formData.listObj.key)
   }
-  return <SelectListForm onSubmit={submit} lists={[...lists.slice(1)]} />
+  return <SelectListForm onSubmit={submit} lists={[...lists.slice(1).filter(list => !list.master)]} />
 }
 
 SelectList.propTypes = {
