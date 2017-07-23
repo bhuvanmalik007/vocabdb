@@ -28,7 +28,9 @@ const actionHandlers = {
     rightLoader: false
   }),
   GO_BACK: (state) => Object.assign({}, state, {
-    ongoingTest: false
+    ongoingTest: false,
+    revealed: false,
+    testWordsCounter: 0
   }),
   REVEAL: (state) => Object.assign({}, state, {
     revealed: true
