@@ -55,7 +55,8 @@ const actionHandlers = {
       },
       ...state.filteredArray.slice(action.index + 1)]
   }),
-  ADD_LIST: (state, action) => Object.assign({}, state, { lists: [...state.lists, action.payload] }),
+  ADD_LIST: (state, action) => Object.assign({},
+    state, { lists: [state.lists[0], action.payload, ...state.lists.slice(1)] }),
   FETCH_LIST_WORDS: (state, action) => Object.assign({}, state,
     { currentListName: action.payload.listName,
       currentListId: action.payload.listId,
@@ -68,7 +69,8 @@ const actionHandlers = {
     listObj.listId !== action.payload) }),
   RENAME_LIST: (state, action) => Object.assign({}, state, { lists: state.lists.map(listObj =>
     listObj.listId === action.payload.listId
-    ? { listName: action.payload.newName, listId: listObj.listId } : listObj) }),
+    ? { listName: action.payload.newName, listId: listObj.listId } : listObj),
+    currentListName: action.payload.newName }),
   SLIDESHOW_MOVER: (state, action) => Object.assign({}, state, {
     slideShowIndex: action.payload === '+' ? (state.slideShowIndex + 1) : (state.slideShowIndex - 1) })
 }
