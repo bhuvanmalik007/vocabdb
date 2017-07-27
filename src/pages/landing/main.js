@@ -42,7 +42,7 @@ export class LandingView extends Component {
         <LandingSection
           heading='Flashcards'
           text='Store words as flashcards complete with meaning, example
-          sentences, pronunciation & personal notes!'
+          sentence, pronunciation & personal notes!'
           color='#f1f3f4'
           reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
