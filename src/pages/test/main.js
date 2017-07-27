@@ -6,7 +6,6 @@ import Heading from 'grommet/components/Heading'
 import RefreshIcon from 'grommet/components/icons/base/Refresh'
 import Close from 'grommet/components/icons/base/Close'
 import TrashIcon from 'grommet/components/icons/base/Trash' //eslint-disable-line
-import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
 import TestCard from './testcard'
 import { TestWordsLens, TestPercentageLens } from './lenses'
@@ -20,6 +19,13 @@ import {
   SidebarActions, WhiteHoverCard, LineLink, FlameSidebarAction, LightGreyTestArea, LimitedSplit
 } from './localcomponents'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+
+export const LowPadButton = styled(Button)`
+  border-radius: 0px;
+  span {
+    padding: 10px !important;
+  }
+`
 
 export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => [{
   label: `Correct ${correctWords}`,
@@ -48,6 +54,19 @@ const ColoredMeter = styled(ProgressIndicator)`
   .progressBar_ef24ad53{
     background-color: ${props => props.color};
   }
+`
+
+const AlmostHeadingLikeParagraph = styled.p`
+  font-size: 20px;
+  font-weight: bold;
+  align-self: center;
+  margin-bottom: 0px;
+`
+const NoMarginBottomBox = styled(Box)`
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 40px;
 `
 
 export default class Test extends Component {
@@ -104,38 +123,43 @@ export default class Test extends Component {
             leftComponent={_ => <Box pad='medium'>
               {
                 this.props.savedTests.map((test, index) =>
-                  <WhiteHoverCard key={index}
+                  <WhiteHoverCard
+                    key={index}
                     colorIndex='light-1'
                     onClick={() => this.props.getTest({ index, listId: test.listId })}
-                    stretch contentPad='medium' >
-                    <Box direction='column' justify='center' align='center' >
-                      <Button icon={<Close size='small' />}
+                    stretch
+                    contentPad='medium'
+                  >
+                    <NoMarginBottomBox
+                      direction='row' full='horizontal' justify='between'
+                      alignItems='baseline'
+                    >
+                      <AlmostHeadingLikeParagraph>{test.listName}</AlmostHeadingLikeParagraph>
+                      <LowPadButton icon={<Close size='small' />}
+                        alignSelf='end'
                         onClick={(e) => {
                           e.stopPropagation()
                           this.props.delete({ index, listId: test.listId })
                         }} />
-                      <Heading tag='h4' strong>{test.listName}</Heading>
-                    </Box>
-                    {/* <Heading align='center' tag='h3' truncate strong>{test.listName} <Button icon={<Close size='small' />}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          this.props.delete({ index, listId: test.listId })
-                        }} />
-                      </Heading> */}
-                      <Value size='small' value={TestWordsLens(this.props, 'correctWords', index)}
-                      units='word(s)' label='Correct' />
+                    </NoMarginBottomBox>
+                    <Value size='small'
+                      value={TestWordsLens(this.props, 'correctWords', index)} units='word(s)' label='Correct'
+                    />
                     <ColoredMeter color='#8cc800'
-                      percentComplete={TestPercentageLens(this.props, 'correctWords', index)} />
-                    <Value size='small' value={TestWordsLens(this.props, 'incorrectWords', index)}
-                      units='word(s)' label='Incorrect' />
+                      percentComplete={TestPercentageLens(this.props, 'correctWords', index)}
+                    />
+                    <Value size='small'
+                      value={TestWordsLens(this.props, 'incorrectWords', index)} units='word(s)' label='Incorrect'
+                    />
                     <ColoredMeter color='#ff324d'
-                      percentComplete={TestPercentageLens(this.props, 'incorrectWords', index)} />
-                    <Value size='small' value={TestWordsLens(this.props, 'wordsToPlay', index)}
-                      units='word(s)' label='Remaining' />
+                      percentComplete={TestPercentageLens(this.props, 'incorrectWords', index)}
+                    />
+                    <Value size='small'
+                      value={TestWordsLens(this.props, 'wordsToPlay', index)} units='word(s)' label='Remaining'
+                    />
                     <ColoredMeter color='#0a64a0'
-                      percentComplete={TestPercentageLens(this.props, 'wordsToPlay', index)} />
-                    {/* <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
-                    type='spiral' /> */}
+                      percentComplete={TestPercentageLens(this.props, 'wordsToPlay', index)}
+                    />
                   </WhiteHoverCard>
                 )
               }
