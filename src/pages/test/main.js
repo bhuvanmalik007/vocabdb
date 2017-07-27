@@ -66,7 +66,6 @@ const NoMarginBottomBox = styled(Box)`
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  padding-bottom: 40px;
 `
 
 export default class Test extends Component {
@@ -130,6 +129,7 @@ export default class Test extends Component {
                     onClick={() => this.props.getTest({ index, listId: test.listId })}
                     stretch
                     contentPad='medium'
+                    justify='around'
                   >
                     <NoMarginBottomBox
                       direction='row' full='horizontal' justify='between'
@@ -137,7 +137,7 @@ export default class Test extends Component {
                     >
                       <AlmostHeadingLikeParagraph>{test.listName}</AlmostHeadingLikeParagraph>
                       <LowPadButton icon={<Close size='small' />}
-                        alignSelf='end'
+                        alignSelf='center'
                         onClick={(e) => {
                           e.stopPropagation()
                           this.props.delete({ index, listId: test.listId })
