@@ -72,6 +72,7 @@ const NoMarginBottomBox = styled(Box)`
 export default class Test extends Component {
 
   componentDidMount () {
+    ga('send', 'test') // eslint-disable-line
     this.props.initTestState()
   }
 

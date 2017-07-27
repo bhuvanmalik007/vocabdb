@@ -14,7 +14,8 @@ export default () =>
     colorIndex='light-1'
     margin='small'
     contentPad='medium'
-    direction='column'>
+    direction='column'
+  >
     <Heading>
       vocabulary
     </Heading>
