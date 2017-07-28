@@ -8,6 +8,7 @@ import Heading from 'grommet/components/Heading'
 import { Persona, PersonaSize } from 'office-ui-fabric-react/lib/Persona'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import styled from 'styled-components'
+import Anchor from 'grommet/components/Anchor'
 
 const VocabDBButton = styled(PrimaryButton)`
   width: 300px;
@@ -16,6 +17,7 @@ const VocabDBButton = styled(PrimaryButton)`
     background-color: #501eb4 !important;
   }
 `
+const mail = () => window.open('mailTo:vocabdbedu@gmail.com', '_self')
 
 const UserInfoPanel = props =>
   <Panel
@@ -24,6 +26,9 @@ const UserInfoPanel = props =>
     onDismiss={() => props.closeInfo()}
   >
     <Box full justify='center' align='center'>
+      <Heading>Give us a shout, we'll be listening</Heading>
+      <Heading tag='h3' margin='large'>Send us feedback at <Anchor
+        onClick={mail}>vocabdbedu@gmail.com</Anchor></Heading>
       <Persona
         imageUrl={props.profile.picture}
         size={PersonaSize.extraLarge}

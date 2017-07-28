@@ -27,8 +27,8 @@ export default props => (
         © {new Date().getFullYear()} VocabDB
       </BGTextNoMargin>
       <BGTextNoMargin size='small' margin='none'>
-        {/* For more details on this <br />
-        Please contact <Anchor href={'mailto:' + MAILID} label={MAILID} /> <br /> */}
+        For more details <br />
+        Please contact <Anchor href={'mailto:' + MAILID} label={MAILID} /> <br />
         All Graphics created with <Anchor href='https://logomakr.com' label='Logomakr' />
       </BGTextNoMargin>
     </Box>
