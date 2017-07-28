@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
   sort: () => dispatch({ type: 'SORT_WORDS' }),
   onListChange: (payload) => dispatch({ type: 'FETCH_LIST_WORDS', payload }),
   fetchAll: () => dispatch({ type: 'FETCH_MYFLASHCARDS' }),
-  showModal: (payload) => dispatch({ type: 'SHOW_MODAL', payload })
+  showModal: (payload) => dispatch({ type: 'SLIDESHOW', payload })
 })
 
 const mapStateToProps = state => ({
