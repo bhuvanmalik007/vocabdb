@@ -61,7 +61,7 @@ export class LandingView extends Component {
         <LandingSection
           heading='Games'
           text={<span>Master those lists you created or the predefined ones by playing word games!</span>}
-          color='#f0f0f0'>
+          color='#f1f3f4'>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <TestResults />
           </Box>
