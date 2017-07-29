@@ -59,6 +59,14 @@ export class LandingView extends Component {
           </Box>
         </LandingSection>
         <LandingSection
+          heading='Games'
+          text={<span>Master those lists you created or the predefined ones by playing word games!</span>}
+          color='#f0f0f0'>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <TestResults />
+          </Box>
+        </LandingSection>
+        <LandingSection
           heading='Explore'
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
@@ -68,14 +76,6 @@ export class LandingView extends Component {
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
           </Box>} style='fade' />
-        </LandingSection>
-        <LandingSection
-          heading='Games'
-          text={<span>Master those lists you created by playing word games!</span>}
-          color='#f0f0f0'>
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
-            <TestResults />
-          </Box>
         </LandingSection>
         <LandingFooter />
       </GrommetApp>

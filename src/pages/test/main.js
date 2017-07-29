@@ -27,30 +27,32 @@ export const LowPadButton = styled(Button)`
   }
 `
 
-export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => [{
-  label: `Correct ${correctWords}`,
-  value: correctWords,
-  max: (correctWords + incorrectWords + wordsToPlay),
-  colorIndex: 'ok',
-  onClick: () => console.log(correctWords + incorrectWords + wordsToPlay)
-},
-  {
-    label: `Incorrect ${incorrectWords}`,
-    value: incorrectWords,
-    max: (correctWords + incorrectWords + wordsToPlay),
-    colorIndex: 'critical',
-    onClick: () => null
+export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => {
+  const a = ((correctWords / (correctWords + incorrectWords + wordsToPlay)) * 100)
+  const b = ((wordsToPlay / (correctWords + incorrectWords + wordsToPlay)) * 100)
+  return [{
+    label: `Correct ${correctWords}`,
+    value: a,
+    colorIndex: 'ok',
+    onClick: () => console.log(a)
   },
-  {
-    label: `Remaining ${wordsToPlay}`,
-    value: wordsToPlay,
-    max: (correctWords + incorrectWords + wordsToPlay),
-    colorIndex: 'warning',
-    onClick: () => null
-  }
-]
+    {
+      label: `Incorrect ${incorrectWords}`,
+      value: incorrectWords,
+      max: (correctWords + incorrectWords + wordsToPlay),
+      colorIndex: 'critical',
+      onClick: () => null
+    },
+    {
+      label: `Remaining ${wordsToPlay}`,
+      value: b,
+      colorIndex: 'warning',
+      onClick: () => console.log(((wordsToPlay / (correctWords + incorrectWords + wordsToPlay)) * 100))
+    }
+  ]
+}
 
-const ColoredMeter = styled(ProgressIndicator)`
+export const ColoredMeter = styled(ProgressIndicator)`
   .progressBar_ef24ad53{
     background-color: ${props => props.color};
   }
