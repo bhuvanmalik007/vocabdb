@@ -27,31 +27,6 @@ export const LowPadButton = styled(Button)`
   }
 `
 
-export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => {
-  const a = ((correctWords / (correctWords + incorrectWords + wordsToPlay)) * 100)
-  const b = ((wordsToPlay / (correctWords + incorrectWords + wordsToPlay)) * 100)
-  return [{
-    label: `Correct ${correctWords}`,
-    value: a,
-    colorIndex: 'ok',
-    onClick: () => console.log(a)
-  },
-    {
-      label: `Incorrect ${incorrectWords}`,
-      value: incorrectWords,
-      max: (correctWords + incorrectWords + wordsToPlay),
-      colorIndex: 'critical',
-      onClick: () => null
-    },
-    {
-      label: `Remaining ${wordsToPlay}`,
-      value: b,
-      colorIndex: 'warning',
-      onClick: () => console.log(((wordsToPlay / (correctWords + incorrectWords + wordsToPlay)) * 100))
-    }
-  ]
-}
-
 export const ColoredMeter = styled(ProgressIndicator)`
   .progressBar_ef24ad53{
     background-color: ${props => props.color};
