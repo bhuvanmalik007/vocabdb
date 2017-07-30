@@ -121,8 +121,7 @@ const deleteListModalClose = (action$, store) =>
 
 const openSlideShow = (action$, store) =>
   action$.ofType('SLIDESHOW')
-    .flatMap((action) => [{ type: 'SHOW_MODAL', payload: action.payload },
-  { type: 'SHOWTOAST', content: 'Use arrow keys to move slideshow' }])
+    .map((action) => ({ type: 'SHOW_MODAL', payload: action.payload }))
 
 export default [initMapper, fetchMyFlashcards, fetchMyLists, deleteWords,
   fetchMyListWords, createList, createListModalClose, addWordsToList, addWordsToListModalClose,
