@@ -14,14 +14,15 @@ import Image from 'grommet/components/Image'
 import { StandardLandingAnimator } from './animators'
 import { LandingSection } from './sectioncomponents'
 import TestResults from './testresults'
+import WOW from 'wowjs'
 
 const FixImage = styled(Image)`
   width: 800px !important;
 `
 
 export class LandingView extends Component {
-
   componentDidMount () {
+    new WOW.WOW().init()
     this.props.prepareLockAuth(this.props.router)
   }
 
@@ -40,22 +41,14 @@ export class LandingView extends Component {
             authenticated={this.props.authenticated} />
         </Box>
         <LandingSection
+          className='wow slideInLeft'
           heading='Flashcards'
           text='Store words as flashcards complete with meaning, example
           sentence, pronunciation & personal notes!'
-          color='#f1f3f4'
+          color='#eee'
           reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <StandardLandingAnimator component={<SampleCard />} style='slide-right' />
-          </Box>
-        </LandingSection>
-        <LandingSection
-          heading='Storage & Organization'
-          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
-            <br /> Gone are the days of writing down words or taking printouts!</span>}
-          color='#f0f0f0' reverse>
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
-            <SampleCardMaker />
           </Box>
         </LandingSection>
         <LandingSection
@@ -63,16 +56,24 @@ export class LandingView extends Component {
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
           color='#fff'
-          tcolor='#000'
         >
           <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
           </Box>} style='fade' />
         </LandingSection>
         <LandingSection
+          heading='Storage & Organization'
+          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
+            <br /> Gone are the days of writing down words or taking printouts!</span>}
+          color='#eee' reverse>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <SampleCardMaker />
+          </Box>
+        </LandingSection>
+        <LandingSection
           heading='Games'
           text={<span>Master those lists you created by playing word games!</span>}
-          color='#f0f0f0'>
+          color='#F5F5F5'>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <TestResults />
           </Box>

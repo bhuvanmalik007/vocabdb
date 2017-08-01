@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Animate from 'grommet/components/Animate'
 import Box from 'grommet/components/Box'
 import { Hovercard } from '../myflashcards/localcomponents'
 import Columns from 'grommet/components/Columns'
@@ -64,37 +63,34 @@ export default class SampleCardMaker extends Component {
 
   render () {
     return <Box pad='small'>
-      <Animate enter={{ 'animation': 'slide-up', 'duration': 1000, 'delay': 100 }}
-        keep visible='scroll'>
-        <SampleTextInput
-          value={this.state.searchText}
-          placeHolder='Search Words'
-          onDOMChange={(e) => this.onSearch(e.target.value)} />
-        <Columns size='small' justify='start' pad='none'
-          maxCount={2} masonry>
-          {this.state.filteredArray.map((element, index) =>
-            <Box pad='none' key={index}>
-              <Hovercard
-                size='small'
-                textSize='small'
-                colorIndex='light-1'
-                margin='small'
-                contentPad='medium'
-                direction='column'>
-                <Box align='end'>
-                  {element.hasOwnProperty('selected') && element.selected &&
-                    <Status value='ok' />}
-                </Box>
-                <Heading tag='h2'>
-                  {element.word}
-                </Heading>
-                <Paragraph margin='small' size='large'>
-                  {element.meaning}
-                </Paragraph>
-              </Hovercard>
-            </Box>)}
-        </Columns>
-      </Animate>
+      <SampleTextInput
+        value={this.state.searchText}
+        placeHolder='Search Words'
+        onDOMChange={(e) => this.onSearch(e.target.value)} />
+      <Columns size='small' justify='start' pad='none'
+        maxCount={2} masonry>
+        {this.state.filteredArray.map((element, index) =>
+          <Box pad='none' key={index}>
+            <Hovercard
+              size='small'
+              textSize='small'
+              colorIndex='light-1'
+              margin='small'
+              contentPad='medium'
+              direction='column'>
+              <Box align='end'>
+                {element.hasOwnProperty('selected') && element.selected &&
+                  <Status value='ok' />}
+              </Box>
+              <Heading tag='h2'>
+                {element.word}
+              </Heading>
+              <Paragraph margin='small' size='large'>
+                {element.meaning}
+              </Paragraph>
+            </Hovercard>
+          </Box>)}
+      </Columns>
     </Box>
   }
 }
