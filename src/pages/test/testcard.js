@@ -64,7 +64,7 @@ const TestCard = props =>
         </Paragraph>
       </Unflipped>
     </StandardTestAnimator>}
-    {props.revealedCondition && <StandardTestAnimator style='slide-left'><Flipped
+    {props.revealedCondition && <StandardTestAnimator ><Flipped
       colorIndex='light-1'
       margin='small'
       size='medium'

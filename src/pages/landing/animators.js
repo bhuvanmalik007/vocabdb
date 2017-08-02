@@ -1,22 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ScrollAnimation from 'react-animate-on-scroll'
 
-export const StandardLandingAnimator = ({ component, style }) =>
-  <div>
+export const StandardLandingAnimator = ({ component, animation }) =>
+  <ScrollAnimation animateIn={animation} offset='1000'>
     {component}
-  </div>
+  </ScrollAnimation>
 
 StandardLandingAnimator.propTypes = {
   component: PropTypes.element,
-  style: PropTypes.string
+  animation: PropTypes.string
 }
 
-export const StandardTestAnimator = ({ children, style }) =>
-  <div>
+export const StandardTestAnimator = ({ children }) =>
+  <ScrollAnimation animateIn='slideInRight' offset='1000'>
     {children}
-  </div>
+  </ScrollAnimation>
 
 StandardTestAnimator.propTypes = {
-  children: PropTypes.element,
-  style: PropTypes.string
+  children: PropTypes.element
 }

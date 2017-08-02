@@ -111,6 +111,7 @@ nav a {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 2;
+  box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);;
 }
 
 .open-sans {

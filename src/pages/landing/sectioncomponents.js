@@ -10,6 +10,9 @@ export const LandingSection = ({ children, heading, text, color, reverse }) =>
   <IdentityComponent
     fn={styled(Section)`
       background-color: ${props => props.color};
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+      overflow: hidden;
     `}
     justify='center'
     color={color}

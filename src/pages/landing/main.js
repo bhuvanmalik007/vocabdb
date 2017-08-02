@@ -14,15 +14,12 @@ import Image from 'grommet/components/Image'
 import { StandardLandingAnimator } from './animators'
 import { LandingSection } from './sectioncomponents'
 import TestResults from './testresults'
-import WOW from 'wowjs'
-
 const FixImage = styled(Image)`
   width: 800px !important;
 `
 
 export class LandingView extends Component {
   componentDidMount () {
-    new WOW.WOW().init()
     this.props.prepareLockAuth(this.props.router)
   }
 
@@ -41,14 +38,13 @@ export class LandingView extends Component {
             authenticated={this.props.authenticated} />
         </Box>
         <LandingSection
-          className='wow slideInLeft'
           heading='Flashcards'
           text='Store words as flashcards complete with meaning, example
           sentence, pronunciation & personal notes!'
           color='#eee'
           reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
-            <StandardLandingAnimator component={<SampleCard />} style='slide-right' />
+            <StandardLandingAnimator animation='zoomIn' component={<SampleCard />} />
           </Box>
         </LandingSection>
         <LandingSection
@@ -57,14 +53,15 @@ export class LandingView extends Component {
           Dictionaries™'
           color='#fff'
         >
-          <StandardLandingAnimator component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
+          <StandardLandingAnimator animation='flipInY' component={<Box pad={{ horizontal: 'large' }}
+            direction='column' justify='end'>
             <FixImage src={OxfordPng} size='large' />
-          </Box>} style='fade' />
+          </Box>} />
         </LandingSection>
         <LandingSection
           heading='Storage & Organization'
           text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
-            <br /> Gone are the days of writing down words or taking printouts!</span>}
+            <br /> <br />Gone are the days of writing down words or taking printouts!</span>}
           color='#eee' reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
