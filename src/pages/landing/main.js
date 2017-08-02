@@ -26,7 +26,7 @@ export class LandingView extends Component {
   render () {
     return (
       <GrommetApp centered={false}>
-        <Box>
+        <Box >
           <LandingHeader showLogin={() => this.props.showLogin()} authenticated={this.props.authenticated} />
           <LandingHero image={HeroImage}
             grommetColor='grey-1-a'
