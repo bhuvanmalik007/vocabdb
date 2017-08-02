@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+html{
+  -webkit-transform: translate3d(0,0,0);
+}
 .auth0-lock.auth0-lock .auth0-lock-badge-bottom {
   display: none;
 }
@@ -111,7 +114,7 @@ nav a {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 2;
-  box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);;
+  box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);
 }
 
 .open-sans {
