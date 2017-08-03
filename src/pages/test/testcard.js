@@ -114,7 +114,8 @@ TestCard.propTypes = {
   onIncorrect: PT.func,
   hiddenCondition: PT.bool,
   revealedCondition: PT.bool,
-  completedCondition: PT.bool
+  completedCondition: PT.bool,
+  lexicalCategory: PT.string
 }
 
 export default TestCard
