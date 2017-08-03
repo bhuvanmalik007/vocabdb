@@ -12,7 +12,6 @@ import { StandardLandingAnimator } from './animators'
 const SampleTextInput = styled(TextInput)`
   margin-left: 10px;
   width: 72%;
-  color: #aaa;
   border: 3px solid #aaa;
   border-radius: 0px;
   &:focus{
@@ -83,7 +82,8 @@ export default class SampleCardMaker extends Component {
                 colorIndex='light-1'
                 margin='small'
                 contentPad='medium'
-                direction='column'>
+                direction='column'
+              >
                 <Box align='end'>
                   {element.hasOwnProperty('selected') && element.selected &&
                     <Status value='ok' />}
@@ -98,6 +98,6 @@ export default class SampleCardMaker extends Component {
             </Box>)}
         </Columns>
       </Box>
-    } animation='slideInLeft' />
+    } animation='slideInUp' />
   }
 }
