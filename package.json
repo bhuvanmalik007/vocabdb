@@ -78,6 +78,7 @@
   "author": "Rajat Sharma <rajatsharma034@gmail.com> (http://web.rajatsharma.rocks)",
   "license": "MIT",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "auth0-lock": "^10.16.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
@@ -110,6 +111,7 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.6.0",
     "react-animate-on-change": "^0.2.1",
+    "react-animate-on-scroll": "^1.2.1",
     "react-dom": "^15.0.0",
     "react-key-handler": "^0.3.0",
     "react-redux": "^5.0.1",

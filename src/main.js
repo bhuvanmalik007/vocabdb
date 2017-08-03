@@ -4,6 +4,7 @@ import createStore from './store/createStore'
 import CoreProvider from './core/coreprovider'
 import '../node_modules/grommet/grommet.min.css'
 import './main.css'
+import '../node_modules/animate.css/animate.min.css'
 
 // ========================================================
 // Store Instantiation

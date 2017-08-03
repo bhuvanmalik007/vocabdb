@@ -1,27 +1,22 @@
 import React from 'react'
-import Animate from 'grommet/components/Animate'
 import PropTypes from 'prop-types'
+import ScrollAnimation from 'react-animate-on-scroll'
 
-export const StandardLandingAnimator = ({ component, style }) =>
-  <Animate
-    enter={{ 'animation': style, 'duration': 1000, 'delay': 100 }}
-    keep visible='scroll'>
+export const StandardLandingAnimator = ({ component, animation }) =>
+  <ScrollAnimation animateIn={animation} offset='1000'>
     {component}
-  </Animate>
+  </ScrollAnimation>
 
 StandardLandingAnimator.propTypes = {
   component: PropTypes.element,
-  style: PropTypes.string
+  animation: PropTypes.string
 }
 
-export const StandardTestAnimator = ({ children, style }) =>
-  <Animate
-    enter={{ 'animation': style, 'duration': 500, 'delay': 100 }}
-    keep>
+export const StandardTestAnimator = ({ children }) =>
+  <ScrollAnimation animateIn='slideInRight' offset='1000'>
     {children}
-  </Animate>
+  </ScrollAnimation>
 
 StandardTestAnimator.propTypes = {
-  children: PropTypes.element,
-  style: PropTypes.string
+  children: PropTypes.element
 }

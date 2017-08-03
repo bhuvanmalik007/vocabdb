@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Animate from 'grommet/components/Animate'
 import Box from 'grommet/components/Box'
 import { Hovercard } from '../myflashcards/localcomponents'
 import Columns from 'grommet/components/Columns'
@@ -8,12 +7,17 @@ import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
 import TextInput from 'grommet/components/TextInput'
 import styled from 'styled-components'
+import { StandardLandingAnimator } from './animators'
 
 const SampleTextInput = styled(TextInput)`
   margin-left: 10px;
+  width: 72%;
+  color: #aaa;
+  border: 3px solid #aaa;
   border-radius: 0px;
   &:focus{
-    border-color: #865cd6 !important;
+    border: 3px solid #865cd6 !important;
+    padding: 11px 23px !important;
   }
 `
 
@@ -63,9 +67,8 @@ export default class SampleCardMaker extends Component {
   }
 
   render () {
-    return <Box pad='small'>
-      <Animate enter={{ 'animation': 'slide-up', 'duration': 1000, 'delay': 100 }}
-        keep visible='scroll'>
+    return <StandardLandingAnimator component={
+      <Box pad='small'>
         <SampleTextInput
           value={this.state.searchText}
           placeHolder='Search Words'
@@ -94,7 +97,7 @@ export default class SampleCardMaker extends Component {
               </Hovercard>
             </Box>)}
         </Columns>
-      </Animate>
-    </Box>
+      </Box>
+    } animation='slideInLeft' />
   }
 }
