@@ -46,7 +46,16 @@ export class LandingView extends Component {
           reverse
         >
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
-            <StandardLandingAnimator animation='slide-left' component={<SampleCard />} />
+            <StandardLandingAnimator animation='slideInLeft' component={<SampleCard />} />
+          </Box>
+        </LandingSection>
+        <LandingSection
+          heading='Games'
+          text={<span>Master those lists you created or the predefined ones by playing word games!</span>}
+          color='#f1f3f4'
+        >
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <TestResults />
           </Box>
         </LandingSection>
         <LandingSection
@@ -55,7 +64,7 @@ export class LandingView extends Component {
           Dictionaries™'
           color='#fff'
         >
-          <StandardLandingAnimator animation='slide-right'
+          <StandardLandingAnimator animation='fadeIn'
             component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
               <FixImage src={OxfordPng} size='large' />
             </Box>}
@@ -69,15 +78,6 @@ export class LandingView extends Component {
         >
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
-          </Box>
-        </LandingSection>
-        <LandingSection
-          heading='Games'
-          text={<span>Master those lists you created by playing word games!</span>}
-          color='#F5F5F5'
-        >
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
-            <TestResults />
           </Box>
         </LandingSection>
         <LandingFooter />

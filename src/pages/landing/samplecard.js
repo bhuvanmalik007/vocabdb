@@ -5,6 +5,7 @@ import PlatformGoogle from 'grommet/components/icons/base/PlatformGoogle'
 import Close from 'grommet/components/icons/base/Close'
 import Paragraph from 'grommet/components/Paragraph'
 import Heading from 'grommet/components/Heading'
+import Label from 'grommet/components/Label'
 import Box from 'grommet/components/Box'
 import { Hovercard } from '../myflashcards/localcomponents'
 
@@ -19,6 +20,7 @@ export default () =>
     <Heading>
       vocabulary
     </Heading>
+    <Label margin='none'>(Noun)</Label>
     <Paragraph margin='small' size='large'>
       the body of words used in a particular language
     </Paragraph>

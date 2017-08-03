@@ -48,6 +48,7 @@ const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
       <IconButton icon={<CaretNextIcon />}
         onClick={() => slideShowIndex + 1 < wordsArray.length && moveSlideshow('+')} />
     </Box>
+    <Label size='small' align='end'>*Use arrow keys to navigate</Label>
   </Box>
 
 SlideShow.propTypes = {

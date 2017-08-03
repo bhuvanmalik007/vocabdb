@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-const propMonger = ({ swallowProps = [] } = {}) => (WrappedComponent) => {
+const propMonger = ({ swallowProps = [] } = {}) => WrappedComponent => {
   const Wrapper = ({ children, ...props }) => {
     swallowProps.forEach(propName => {
       delete props[propName]
