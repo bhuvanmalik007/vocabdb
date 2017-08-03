@@ -42,18 +42,25 @@ export class LandingView extends Component {
           heading='Flashcards'
           text='Store words as flashcards complete with meaning, example
           sentence, pronunciation & personal notes!'
-          color='#eee'
-          reverse
-        >
+          color='#f1f3f4'
+          reverse>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
             <StandardLandingAnimator animation='slideInLeft' component={<SampleCard />} />
           </Box>
         </LandingSection>
         <LandingSection
+          heading='Storage & Organization'
+          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
+            <br /> <br />Gone are the days of writing down words or taking printouts!</span>}
+          color='#f0f0f0' reverse>
+          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
+            <SampleCardMaker />
+          </Box>
+        </LandingSection>
+        <LandingSection
           heading='Games'
           text={<span>Master those lists you created or the predefined ones by playing word games!</span>}
-          color='#f1f3f4'
-        >
+          color='#f1f3f4'>
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <TestResults />
           </Box>
@@ -62,24 +69,14 @@ export class LandingView extends Component {
           heading='Explore'
           text='Explore new words and make them your own with a simple search powered by Oxford
           Dictionaries™'
-          color='#fff'
-        >
+          color='#fff'>
           <StandardLandingAnimator animation='fadeIn'
             component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
               <FixImage src={OxfordPng} size='large' />
             </Box>}
           />
         </LandingSection>
-        <LandingSection
-          heading='Storage & Organization'
-          text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
-            <br /> <br />Gone are the days of writing down words or taking printouts!</span>}
-          color='#eee' reverse
-        >
-          <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
-            <SampleCardMaker />
-          </Box>
-        </LandingSection>
+
         <LandingFooter />
       </GrommetApp>
     )
