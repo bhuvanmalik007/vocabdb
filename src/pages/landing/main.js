@@ -14,6 +14,7 @@ import Image from 'grommet/components/Image'
 import { StandardLandingAnimator } from './animators'
 import { LandingSection } from './sectioncomponents'
 import TestResults from './testresults'
+
 const FixImage = styled(Image)`
   width: 800px !important;
 `
@@ -42,9 +43,10 @@ export class LandingView extends Component {
           text='Store words as flashcards complete with meaning, example
           sentence, pronunciation & personal notes!'
           color='#eee'
-          reverse>
+          reverse
+        >
           <Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
-            <StandardLandingAnimator animation='zoomIn' component={<SampleCard />} />
+            <StandardLandingAnimator animation='slide-left' component={<SampleCard />} />
           </Box>
         </LandingSection>
         <LandingSection
@@ -53,16 +55,18 @@ export class LandingView extends Component {
           Dictionaries™'
           color='#fff'
         >
-          <StandardLandingAnimator animation='flipInY' component={<Box pad={{ horizontal: 'large' }}
-            direction='column' justify='end'>
-            <FixImage src={OxfordPng} size='large' />
-          </Box>} />
+          <StandardLandingAnimator animation='slide-right'
+            component={<Box pad={{ horizontal: 'large' }} direction='column' justify='end'>
+              <FixImage src={OxfordPng} size='large' />
+            </Box>}
+          />
         </LandingSection>
         <LandingSection
           heading='Storage & Organization'
           text={<span>Search your words, sort them from A-Z or segregate them into lists. You have all the powers!
             <br /> <br />Gone are the days of writing down words or taking printouts!</span>}
-          color='#eee' reverse>
+          color='#eee' reverse
+        >
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <SampleCardMaker />
           </Box>
@@ -70,7 +74,8 @@ export class LandingView extends Component {
         <LandingSection
           heading='Games'
           text={<span>Master those lists you created by playing word games!</span>}
-          color='#F5F5F5'>
+          color='#F5F5F5'
+        >
           <Box pad={{ horizontal: 'large' }} direction='column' justify='start' basis='1/2'>
             <TestResults />
           </Box>
