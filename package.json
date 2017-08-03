@@ -10,7 +10,7 @@
   "scripts": {
     "live": "gh-pages -d dist",
     "clean": "rimraf dist",
-    "auto": "git add . && git commit -m \"Changelogs at `date +'%Y-%m-%d %H:%M'`\" && git push origin master",
+    "auto": "git add . && git commit -m \"Changelogs at `date +'%Y-%m-%d %H:%M'`\" && git push origin landing-demo",
     "compile": "better-npm-run compile",
     "lint": "eslint bin build config server src tests",
     "lint:fix": "npm run lint -- --fix",
