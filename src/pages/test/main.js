@@ -44,7 +44,7 @@ export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) 
   }
 ]
 
-const ColoredMeter = styled(ProgressIndicator)`
+export const ColoredMeter = styled(ProgressIndicator)`
   .progressBar_ef24ad53{
     background-color: ${props => props.color};
   }
@@ -118,20 +118,20 @@ export default class Test extends Component {
                     </Box>
                     {/* <Heading align='center' tag='h3' truncate strong>{test.listName} <Button icon={<Close size='small' />}
                         onClick={(e) => {
-                          e.stopPropagation()
-                          this.props.delete({ index, listId: test.listId })
+                      e.stopPropagation()
+                      this.props.delete({ index, listId: test.listId })
                         }} />
-                      </Heading> */}
-                      <Value size='small' value={TestWordsLens(this.props, 'correctWords', index)}
-                      units='word(s)' label='Correct' />
+                    </Heading> */}
+                    <Value size='small' value={TestWordsLens(this.props, 'correctWords', index)}
+                    units='word(s)' label='Correct' />
                     <ColoredMeter color='#8cc800'
                       percentComplete={TestPercentageLens(this.props, 'correctWords', index)} />
                     <Value size='small' value={TestWordsLens(this.props, 'incorrectWords', index)}
-                      units='word(s)' label='Incorrect' />
+                    units='word(s)' label='Incorrect' />
                     <ColoredMeter color='#ff324d'
                       percentComplete={TestPercentageLens(this.props, 'incorrectWords', index)} />
                     <Value size='small' value={TestWordsLens(this.props, 'wordsToPlay', index)}
-                      units='word(s)' label='Remaining' />
+                    units='word(s)' label='Remaining' />
                     <ColoredMeter color='#0a64a0'
                       percentComplete={TestPercentageLens(this.props, 'wordsToPlay', index)} />
                     {/* <Meter series={CreateGameStatSeries(test.correctWords, test.incorrectWords, test.wordsToPlay)}
@@ -162,15 +162,15 @@ export default class Test extends Component {
             leftComponent={
               _ => <Box justify='center' pad={{ horizontal: 'large', vertical: 'medium' }} alignContent='center' >
                 <Value value={TestWordsLens(this.props, 'correctWords', this.props.testIndex)}
-                  units='word(s)' label='Correct' />
+                units='word(s)' label='Correct' />
                 <ColoredMeter color='#8cc800'
                   percentComplete={TestPercentageLens(this.props, 'correctWords', this.props.testIndex)} />
                 <Value value={TestWordsLens(this.props, 'incorrectWords', this.props.testIndex)}
-                  units='word(s)' label='Incorrect' />
+                units='word(s)' label='Incorrect' />
                 <ColoredMeter color='#ff324d'
                   percentComplete={TestPercentageLens(this.props, 'incorrectWords', this.props.testIndex)} />
                 <Value value={TestWordsLens(this.props, 'wordsToPlay', this.props.testIndex)}
-                  units='word(s)' label='Remaining' />
+                units='word(s)' label='Remaining' />
                 <ColoredMeter color='#0a64a0'
                   percentComplete={TestPercentageLens(this.props, 'wordsToPlay', this.props.testIndex)} />
               </Box>}

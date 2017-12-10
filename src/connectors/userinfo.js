@@ -25,12 +25,12 @@ const UserInfoPanel = props =>
     type={PanelType.smallFluid}
     onDismiss={() => props.closeInfo()}
   >
-    <Box full justify='center' align='center'>
+    {props.profile && <Box full justify='center' align='center'>
       <Heading>Give us a shout, we'll be listening</Heading>
       <Heading tag='h3' margin='large'>Send us feedback at <Anchor
         onClick={mail}>vocabdbedu@gmail.com</Anchor></Heading>
       <Persona
-        imageUrl={props.profile.picture}
+        imageUrl={props.profile && props.profile.picture}
         size={PersonaSize.extraLarge}
       />
       <Heading>{props.profile.nickname}</Heading>
@@ -38,7 +38,7 @@ const UserInfoPanel = props =>
         text='Logout'
         onClick={() => props.logout()}
       />
-    </Box>
+    </Box>}
   </Panel>
 
 UserInfoPanel.propTypes = {
