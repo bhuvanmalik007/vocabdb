@@ -36,8 +36,8 @@ const audio = (index) => {
 }
 
 const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, currentListId,
-  currentListMaster, deleteFromList, wordsArray }) => {
-  if (!filteredArray.length && !wordsArray.length) return <HelloCard />
+  currentListMaster, deleteFromList }) => {
+  if (!filteredArray.length) return <HelloCard />
   return <Animate enter={{ 'animation': 'fade', 'duration': 1000, 'delay': 0 }}
     keep={false} visible>
     <Box pad='medium' full='horizontal'>
@@ -88,7 +88,6 @@ CardsMaker.propTypes = {
   deleteFromAll: PropTypes.func,
   deleteFromList: PropTypes.func,
   filteredArray: PropTypes.array,
-  wordsArray: PropTypes.array,
   multipleSelect: PropTypes.bool,
   select: PropTypes.func,
   currentListId: PropTypes.string,
@@ -124,7 +123,7 @@ export default class MyFlashcards extends Component {
           }
 
           {!this.props.multipleSelect &&
-            <Select
+            <Select stretch
               placeHolder='Select List'
               className='icon'
               icon='list layout'
@@ -191,7 +190,7 @@ export default class MyFlashcards extends Component {
             <CardsMaker filteredArray={this.props.filteredArray} deleteFromAll={this.props.deleteFromAll}
               multipleSelect={this.props.multipleSelect} select={this.props.select}
               currentListId={this.props.currentListId} deleteFromList={this.props.deleteFromList}
-              currentListMaster={this.props.currentListMaster} wordsArray={this.props.wordsArray} />
+              currentListMaster={this.props.currentListMaster} />
           </Box>}
       </div>
     )
@@ -217,6 +216,5 @@ MyFlashcards.propTypes = {
   showModal: PropTypes.func,
   currentListId: PropTypes.string,
   currentListName: PropTypes.string,
-  currentListMaster: PropTypes.bool,
-  wordsArray: PropTypes.array
+  currentListMaster: PropTypes.bool
 }
