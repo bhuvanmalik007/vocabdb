@@ -1,12 +1,12 @@
 import { injectReducer } from '../../store/reducers'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 // Sync route definition
 export default(store) => ({
   path:'landing',
   getComponent (nextState, cb) {
     if (store.getState().core.authenticated) {
-      browserHistory.replace('/myflashcards')
+      hashHistory.replace('myflashcards')
       return
     }
     /*  Webpack - use 'require.ensure' to create a split point

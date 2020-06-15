@@ -1,4 +1,4 @@
-import browserHistory from 'react-router/lib/browserHistory'
+import hashHistory from 'react-router/lib/hashHistory'
 // import hashHistory from 'react-router/lib/hashHistory'
 
 // ------------------------------------
@@ -26,7 +26,7 @@ export const updateLocation = ({ dispatch }) => {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = browserHistory.getCurrentLocation()
+const initialState = hashHistory.getCurrentLocation()
 // const initialState = hashHistory.getCurrentLocation()
 
 export default function locationReducer (state = initialState, action) {

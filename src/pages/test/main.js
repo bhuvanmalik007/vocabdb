@@ -20,6 +20,7 @@ import {
   SidebarActions, WhiteHoverCard, LineLink, FlameSidebarAction, LightGreyTestArea, LimitedSplit
 } from './localcomponents'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+import supportV2 from '../../utils/supportV2Api'
 
 export const CreateGameStatSeries = (correctWords, incorrectWords, wordsToPlay) => [{
   label: `Correct ${correctWords}`,
@@ -208,7 +209,7 @@ export default class Test extends Component {
               <TestCard word={this.props.testWordsArray[this.props.testWordsCounter] &&
               this.props.testWordsArray[this.props.testWordsCounter].word}
                 lexicalCategory={this.props.testWordsArray[this.props.testWordsCounter] &&
-                this.props.testWordsArray[this.props.testWordsCounter].lexicalCategory}
+                supportV2(this.props.testWordsArray[this.props.testWordsCounter].lexicalCategory)}
                 meaning={this.props.testWordsArray[this.props.testWordsCounter] &&
                 this.props.testWordsArray[this.props.testWordsCounter].meaning}
                 example={this.props.testWordsArray[this.props.testWordsCounter] &&

@@ -12,6 +12,7 @@ import AnimateOnChange from 'react-animate-on-change'
 import { IconButton } from '../pages/myflashcards/localcomponents'
 import KeyHandler, { KEYDOWN } from 'react-key-handler'
 import Label from 'grommet/components/Label'
+import supportV2 from '../utils/supportV2Api'
 
 const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
   <Box pad='medium' alignContent='center'>
@@ -33,7 +34,7 @@ const SlideShow = ({ wordsArray, slideShowIndex, moveSlideshow }) =>
           {wordsArray[slideShowIndex].word.word}
         </Heading>
         {wordsArray[slideShowIndex].word.lexicalCategory &&
-          <Label margin='none'>({wordsArray[slideShowIndex].word.lexicalCategory})</Label>}
+          <Label margin='none'>({supportV2(wordsArray[slideShowIndex].word.lexicalCategory)})</Label>}
         <Paragraph margin='small' size='large'>
           {wordsArray[slideShowIndex].word.meaning}
         </Paragraph>

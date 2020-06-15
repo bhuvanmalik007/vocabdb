@@ -1,5 +1,5 @@
 import { injectReducer } from '../../store/reducers'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import { AuthenticatedLens } from '../../core/lenses'
 
 // Sync route definition
@@ -7,7 +7,7 @@ export default(store) => ({
   path:'explore',
   getComponent (nextState, cb) {
     if (!AuthenticatedLens(store)) {
-      browserHistory.replace('/landing')
+      hashHistory.replace('/landing')
       return
     }
     /*  Webpack - use 'require.ensure' to create a split point

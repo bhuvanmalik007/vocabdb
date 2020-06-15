@@ -10,6 +10,6 @@ export const OnAuthFunction = router => dispatch => Lock.on('authenticated', fun
     }
     dispatch({ type: 'AUTHENTICATED', pld: { profile, idToken: authResult.idToken } })
     Lock.hide()
-    router.push({ pathname: '/myflashcards' })
+    router.push({ pathname: '/#/myflashcards' })
   })
 })

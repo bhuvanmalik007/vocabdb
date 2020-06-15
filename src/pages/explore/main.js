@@ -17,6 +17,7 @@ import Image from 'grommet/components/Image'
 import Volume from 'grommet/components/icons/base/Volume'
 import VolumeMute from 'grommet/components/icons/base/VolumeMute'
 import Label from 'grommet/components/Label'
+import supportV2 from '../../utils/supportV2Api'
 
 const FixImage = styled(Image)`
   width: 400px !important;
@@ -72,7 +73,7 @@ const CardsMaker = props =>
           <Heading>
             {element.word}
           </Heading>
-          <Label margin='none'>({element.lexicalCategory})</Label>
+          <Label margin='none'>({supportV2(element.lexicalCategory)})</Label>
           <Paragraph margin='small' size='large'>
             {element.meaning}
           </Paragraph>

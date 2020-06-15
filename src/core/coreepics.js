@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable' //eslint-disable-line
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 const NotifierEpic = action$ =>
   action$.ofType('SHOWTOAST').delay(2500).mapTo({ type: 'HIDETOAST' })
@@ -18,6 +18,6 @@ const ApiErrorEpic = action$ =>
   })
 
 const UnprotectedEpic = action$ =>
-  action$.ofType('UNPROTECTED').do(() => browserHistory.replace('/landing')).mapTo({ type: 'LOGGEDOUT' })
+  action$.ofType('UNPROTECTED').do(() => hashHistory.replace('/landing')).mapTo({ type: 'LOGGEDOUT' })
 
 export default [NotifierEpic, ApiErrorEpic, UnprotectedEpic]
