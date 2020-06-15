@@ -1,3 +1,3 @@
-export const DBINTERCEPTOR_API = 'http://localhost:8000'
-export const MADOFXORD_API = 'http://localhost:8001'
+export const DBINTERCEPTOR_API = 'https://dbinterceptor-f.herokuapp.com'
+export const MADOFXORD_API = 'https://oxfordapif.herokuapp.com'
 export const MAILID = 'vocabdbedu@gmail.com'
