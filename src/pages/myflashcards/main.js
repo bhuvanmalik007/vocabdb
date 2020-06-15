@@ -60,7 +60,6 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
               <Heading>
                 {element.word.word}
               </Heading>
-              {console.log(element.word.lexicalCategory, typeof element.word.lexicalCategory)}
               {element.word.lexicalCategory && <Label margin='none'>({supportV2(element.word.lexicalCategory)})</Label>}
               <Paragraph margin='small' size='large'>
                 {element.word.meaning}
