@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 // import { hashHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import createRootEpic from './epics'
@@ -11,7 +11,7 @@ import 'rxjs'
 import { middleware as tooltip } from 'redux-tooltip'
 
 const epicMiddleware = createEpicMiddleware(createRootEpic(), {
-  dependencies: { history:browserHistory }
+  dependencies: { history:hashHistory }
 })
 
 export default(initialState = {}) => {
@@ -57,7 +57,7 @@ export default(initialState = {}) => {
   store.asyncReducers = {}
   // store.sagas = []
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
+  store.unsubscribeHistory = hashHistory.listen(updateLocation(store))
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
