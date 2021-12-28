@@ -22,6 +22,7 @@ import { ShadowBox, DashButton, IconButton, Hovercard, HelloCard } from './local
 import Label from 'grommet/components/Label'
 import { Origin, Tooltip } from 'redux-tooltip'
 import styled from 'styled-components'
+import supportV2 from '../../utils/supportV2Api'
 
 const PaddedTooltip = styled(Tooltip)`
   top: 170px !important;
@@ -59,7 +60,7 @@ const CardsMaker = ({ deleteFromAll, filteredArray, multipleSelect, select, curr
               <Heading>
                 {element.word.word}
               </Heading>
-              {element.word.lexicalCategory && <Label margin='none'>({element.word.lexicalCategory})</Label>}
+              {element.word.lexicalCategory && <Label margin='none'>({supportV2(element.word.lexicalCategory)})</Label>}
               <Paragraph margin='small' size='large'>
                 {element.word.meaning}
               </Paragraph>

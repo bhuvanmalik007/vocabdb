@@ -12,7 +12,7 @@ export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,
   indexRoute: {
-    onEnter: (nextState, replace) => replace('/landing')
+    onEnter: (nextState, replace) => replace('landing')
   },
   childRoutes: [
     Landing(store),
